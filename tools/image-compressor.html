@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compressor - Compress Image Online Free | PixTools</title>
+    <meta name="description" content="Compress image online free without losing quality. Reduce image file size (JPG, PNG, WebP) directly in your browser. 100% private, no upload required.">
+    <link rel="canonical" href="https://pixtools.github.io/tools/image-compressor.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pixtools.github.io/tools/image-compressor.html">
+    <meta property="og:title" content="Image Compressor - Reduce Image File Size Online">
+    <meta property="og:description" content="High-quality image compression in your browser. Fast, secure, and offline-capable.">
+    <meta property="og:image" content="https://pixtools.github.io/assets/og-compressor.jpg">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "PixTools Image Compressor",
+      "url": "https://pixtools.github.io/tools/image-compressor.html",
+      "description": "An online tool to compress image file sizes using the browser's Canvas API.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Is it safe to compress images on PixTools?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! PixTools processes all images locally in your browser. Your files are never uploaded to our servers, making it 100% private and secure."
+        }
+      }, {
+        "@type": "Question",
+        "name": "What image formats are supported for compression?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our compressor supports the most popular web formats including JPEG (JPG), PNG, and WebP."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Will compressing my image reduce its quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Compression typically involves a trade-off. However, our tool allows you to adjust the quality slider to find the perfect balance between file size and visual clarity."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Can I use this image compressor offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, once the page is loaded, the tool works entirely offline as all processing happens using your browser's built-in APIs."
+        }
+      }]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" class="logo">
+                    <i class="ri-image-2-fill"></i>
+                    PixTools
+                </a>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+                        <i class="ri-moon-line"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section style="padding: 2rem 0;">
+            <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
+            <h1>Image Compressor</h1>
+            <p style="color: var(--text-secondary);">Reduce image file size while maintaining visual quality. Processed entirely in your browser.</p>
+        </section>
+
+        <div class="tool-layout">
+            <div class="tool-main">
+                <div id="drop-zone" class="upload-area">
+                    <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
+                    <h3>Drag & Drop your image here</h3>
+                    <p>or click to browse from your device</p>
+                    <input type="file" id="file-input" hidden accept="image/*">
+                </div>
+
+                <div id="preview-container" class="preview-container" style="display: none;">
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span>Original</span>
+                            <span id="original-size">0 KB</span>
+                        </div>
+                        <div class="preview-content">
+                            <img id="original-preview" src="" alt="Original Preview">
+                        </div>
+                    </div>
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span>Compressed</span>
+                            <span id="compressed-size">0 KB</span>
+                        </div>
+                        <div class="preview-content">
+                            <img id="compressed-preview" src="" alt="Compressed Preview">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="tool-sidebar">
+                <div class="controls-card">
+                    <!-- DELETED: Quality slider removed per requirements -->
+
+                    <div class="control-group">
+                        <label>Target Format</label>
+                        <select id="format">
+                            <option value="image/jpeg">JPEG (Optimized)</option>
+                            <option value="image/webp">WebP (Superior)</option>
+                            <option value="image/png">PNG (Lossless)</option>
+                        </select>
+                    </div>
+
+                    <button id="download-btn" class="btn btn-primary" disabled>
+                        <i class="ri-download-2-line"></i> Download Compressed
+                    </button>
+                    
+                    <button id="reset-btn" class="btn btn-secondary" style="margin-top: 1rem; display: none;">
+                        <i class="ri-restart-line"></i> Reset and Upload New
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <section class="faq-section">
+            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>Is this image compressor free to use?</h3>
+                <p>Yes, PixTools Image Compressor is completely free with no limits on the number of images you can process.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does it reduce image dimensions?</h3>
+                <p>No, this tool only reduces the file size by optimizing the image data. To change dimensions, use our <a href="image-resizer.html" style="color: var(--accent-primary); font-weight: 600;">Image Resizer</a>.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the best format for small file size?</h3>
+                <p>WebP generally offers the best compression for the web, often resulting in file sizes 25-34% smaller than JPEG at equivalent quality.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is my data safe?</h3>
+                <p>Absolutely. We use the Canvas API to process images locally. No data is sent to any server.</p>
+            </div>
+        </section>
+
+        <section style="padding: 4rem 0; border-top: 1px solid var(--border-color);">
+            <h3>Related Tools</h3>
+            <div class="tool-grid" style="padding-top: 2rem;">
+                <a href="image-resizer.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-aspect-ratio-line"></i></div>
+                    <h4>Image Resizer</h4>
+                    <p>Change dimensions quickly.</p>
+                </a>
+                <a href="image-to-webp.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-windy-line"></i></div>
+                    <h4>Image to WebP</h4>
+                    <p>Next-gen web format.</p>
+                </a>
+                <a href="image-cropper.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-crop-2-line"></i></div>
+                    <h4>Image Cropper</h4>
+                    <p>Perfect for social media.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 PixTools. All images processed locally.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="image-compressor.js"></script>
+</body>
+</html>
