@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PNG - Convert Image to PNG Free | Resizur</title>
+    <meta name="description" content="Convert any image format to high-quality PNG online. Support for JPG, WebP, GIF and more. 100% private, no upload required.">
+    <link rel="canonical" href="https://pixtools.github.io/tools/image-to-png.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pixtools.github.io/tools/image-to-png.html">
+    <meta property="og:title" content="Image to PNG - Online Converter">
+    <meta property="og:description" content="Convert your images to PNG format directly in your browser. Fast, secure, and offline-capable.">
+    <meta property="og:image" content="https://pixtools.github.io/assets/og-png.jpg">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png">
+    <link rel="manifest" href="../Favicon-Images/site.webmanifest">
+    <link rel="shortcut icon" href="../Favicon-Images/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Resizur Image to PNG",
+      "url": "https://pixtools.github.io/tools/image-to-png.html",
+      "description": "An online tool to convert images to PNG format using the browser's Canvas API.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Why convert to PNG?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PNG is a lossless format that supports transparency, making it ideal for logos and graphics."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Will my images be uploaded?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, Resizur processes everything locally in your browser. Your images never leave your computer."
+        }
+      }, {
+        "@type": "Question",
+        "name": "What formats can I convert?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can convert JPG, WebP, BMP, and GIF to PNG."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is it free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it is 100% free with no limits."
+        }
+      }]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+                    <img 
+                        src="../Images/logo.png" 
+                        alt="Resizur Logo" 
+                        style="height:48px; width:48px; object-fit:contain;"
+                    />
+                    <span style="font-weight:700; font-size:1.8rem; color:#2563EB;">Resizur</span>
+                </a>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+                        <i class="ri-moon-line"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section style="padding: 2rem 0;">
+            <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
+            <h1>Image to PNG</h1>
+            <p style="color: var(--text-secondary);">Convert any image to high-quality PNG with transparency support.</p>
+        </section>
+
+        <div class="tool-layout">
+            <div class="tool-main">
+                <div id="drop-zone" class="upload-area">
+                    <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
+                    <h3>Drag & Drop your image here</h3>
+                    <p>or click to browse from your device</p>
+                    <input type="file" id="file-input" hidden accept="image/*">
+                </div>
+
+                <div id="preview-container" class="preview-container" style="display: none;">
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span id="original-format">Original</span>
+                            <span id="original-size">0 KB</span>
+                        </div>
+                        <div class="preview-content">
+                            <img id="original-preview" src="" alt="Original Preview">
+                        </div>
+                    </div>
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span>Output (PNG)</span>
+                            <span id="output-size">0 KB</span>
+                        </div>
+                        <div class="preview-content">
+                            <img id="output-preview" src="" alt="PNG Preview">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="tool-sidebar">
+                <div class="controls-card">
+                    <button id="download-btn" class="btn btn-primary" disabled>
+                        <i class="ri-download-2-line"></i> Download PNG
+                    </button>
+                    
+                    <button id="reset-btn" class="btn btn-secondary" style="margin-top: 1rem; display: none;">
+                        <i class="ri-restart-line"></i> Reset and Upload New
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <section class="faq-section">
+            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>Is this conversion lossless?</h3>
+                <p>Yes, PNG is a lossless format, so the quality of the image is preserved during conversion.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I convert WebP to PNG?</h3>
+                <p>Absolutely. Just upload your WebP file and download it as a PNG.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does it support transparency?</h3>
+                <p>Yes, if the source image has transparency, it will be maintained in the PNG output.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Where are my files stored?</h3>
+                <p>They are not stored anywhere. All processing is done in your browser's memory and deleted when you close the tab.</p>
+            </div>
+        </section>
+
+        <section style="padding: 4rem 0; border-top: 1px solid var(--border-color);">
+            <h3>Related Tools</h3>
+            <div class="tool-grid" style="padding-top: 2rem;">
+                <a href="image-to-jpg.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-file-image-line"></i></div>
+                    <h4>Image to JPG</h4>
+                    <p>Convert to compatible JPG.</p>
+                </a>
+                <a href="image-to-webp.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-windy-line"></i></div>
+                    <h4>Image to WebP</h4>
+                    <p>Optimized for web use.</p>
+                </a>
+                <a href="image-compressor.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-contract-up-down-line"></i></div>
+                    <h4>Image Compressor</h4>
+                    <p>Reduce file size easily.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Resizur. All images processed locally.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="image-to-png.js"></script>
+</body>
+</html>

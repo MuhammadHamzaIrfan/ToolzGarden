@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to JPG - Convert Image to JPG Free | Resizur</title>
+    <meta name="description" content="Convert any image format to compatible JPG online. Support for PNG, WebP, GIF and more. 100% private, no upload required.">
+    <link rel="canonical" href="https://pixtools.github.io/tools/image-to-jpg.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pixtools.github.io/tools/image-to-jpg.html">
+    <meta property="og:title" content="Image to JPG - Online Converter">
+    <meta property="og:description" content="Convert your images to JPG format directly in your browser. Fast, secure, and offline-capable.">
+    <meta property="og:image" content="https://pixtools.github.io/assets/og-jpg.jpg">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png">
+    <link rel="manifest" href="../Favicon-Images/site.webmanifest">
+    <link rel="shortcut icon" href="../Favicon-Images/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Resizur Image to JPG",
+      "url": "https://pixtools.github.io/tools/image-to-jpg.html",
+      "description": "An online tool to convert images to JPG format using the browser's Canvas API.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Why convert to JPG?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JPG is the most widely compatible image format, perfect for sharing and web use where file size is important."
+        }
+      }, {
+        "@type": "Question",
+        "name": "What happens to transparent backgrounds?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JPG does not support transparency. Our tool automatically fills transparent areas with a clean white background."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is my privacy protected?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all processing happens in your browser. No images are uploaded to any server."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is it free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Resizur is completely free for everyone."
+        }
+      }]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+                    <img 
+                        src="../Images/logo.png" 
+                        alt="Resizur Logo" 
+                        style="height:48px; width:48px; object-fit:contain;"
+                    />
+                    <span style="font-weight:700; font-size:1.8rem; color:#2563EB;">Resizur</span>
+                </a>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+                        <i class="ri-moon-line"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section style="padding: 2rem 0;">
+            <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
+            <h1>Image to JPG</h1>
+            <p style="color: var(--text-secondary);">Convert any image format to standard JPG with white background padding.</p>
+        </section>
+
+        <div class="tool-layout">
+            <div class="tool-main">
+                <div id="drop-zone" class="upload-area">
+                    <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
+                    <h3>Drag & Drop your image here</h3>
+                    <p>or click to browse from your device</p>
+                    <input type="file" id="file-input" hidden accept="image/*">
+                </div>
+
+                <div id="preview-container" class="preview-container" style="display: none;">
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span id="original-format">Original</span>
+                            <span id="original-size">0 KB</span>
+                        </div>
+                        <div class="preview-content">
+                            <img id="original-preview" src="" alt="Original Preview">
+                        </div>
+                    </div>
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span>Output (JPG)</span>
+                            <span id="output-size">0 KB</span>
+                        </div>
+                        <div class="preview-content">
+                            <img id="output-preview" src="" alt="JPG Preview">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="tool-sidebar">
+                <div class="controls-card">
+                    <button id="download-btn" class="btn btn-primary" disabled>
+                        <i class="ri-download-2-line"></i> Download JPG
+                    </button>
+                    
+                    <button id="reset-btn" class="btn btn-secondary" style="margin-top: 1rem; display: none;">
+                        <i class="ri-restart-line"></i> Reset and Upload New
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <section class="faq-section">
+            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>Does JPG reduce quality?</h3>
+                <p>JPG uses lossy compression, but our tool uses a high quality setting (92%) to ensure the difference is barely noticeable while keeping file size small.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I convert PNG to JPG?</h3>
+                <p>Yes, this is the most common use case. Transparent areas will be filled with white.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the file size limit?</h3>
+                <p>There is no hard limit, but performance depends on your device's memory since all processing is local.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is it mobile friendly?</h3>
+                <p>Yes, Resizur works perfectly on smartphones and tablets.</p>
+            </div>
+        </section>
+
+        <section style="padding: 4rem 0; border-top: 1px solid var(--border-color);">
+            <h3>Related Tools</h3>
+            <div class="tool-grid" style="padding-top: 2rem;">
+                <a href="image-to-png.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-file-image-line"></i></div>
+                    <h4>Image to PNG</h4>
+                    <p>Convert with transparency.</p>
+                </a>
+                <a href="image-to-webp.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-windy-line"></i></div>
+                    <h4>Image to WebP</h4>
+                    <p>Next-gen web optimization.</p>
+                </a>
+                <a href="image-compressor.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-contract-up-down-line"></i></div>
+                    <h4>Image Compressor</h4>
+                    <p>Shrink images instantly.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Resizur. All images processed locally.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="image-to-jpg.js"></script>
+</body>
+</html>

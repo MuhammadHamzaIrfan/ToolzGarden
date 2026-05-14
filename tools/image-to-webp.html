@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to WebP - Convert Image to WebP Free | Resizur</title>
+    <meta name="description" content="Convert any image format to WebP online for better web performance. Support for PNG, JPG, GIF and more. 100% private, no upload required.">
+    <link rel="canonical" href="https://pixtools.github.io/tools/image-to-webp.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pixtools.github.io/tools/image-to-webp.html">
+    <meta property="og:title" content="Image to WebP - Online Converter">
+    <meta property="og:description" content="Convert your images to WebP format directly in your browser. Fast, secure, and offline-capable.">
+    <meta property="og:image" content="https://pixtools.github.io/assets/og-webp.jpg">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png">
+    <link rel="manifest" href="../Favicon-Images/site.webmanifest">
+    <link rel="shortcut icon" href="../Favicon-Images/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Resizur Image to WebP",
+      "url": "https://pixtools.github.io/tools/image-to-webp.html",
+      "description": "An online tool to convert images to WebP format using the browser's Canvas API.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Why use WebP?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "WebP provides superior lossless and lossy compression for images on the web, making sites load faster."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is WebP supported by all browsers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Modern browsers like Chrome, Firefox, Safari, and Edge all support WebP format."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is my privacy safe?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. All processing is done locally in your browser. No files are ever sent to our servers."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Can I convert PNG with transparency to WebP?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, WebP supports transparency just like PNG but with much smaller file sizes."
+        }
+      }]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+                    <img 
+                        src="../Images/logo.png" 
+                        alt="Resizur Logo" 
+                        style="height:48px; width:48px; object-fit:contain;"
+                    />
+                    <span style="font-weight:700; font-size:1.8rem; color:#2563EB;">Resizur</span>
+                </a>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+                        <i class="ri-moon-line"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section style="padding: 2rem 0;">
+            <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
+            <h1>Image to WebP</h1>
+            <p style="color: var(--text-secondary);">Convert any image format to high-performance WebP for the modern web.</p>
+        </section>
+
+        <div class="tool-layout">
+            <div class="tool-main">
+                <div id="drop-zone" class="upload-area">
+                    <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
+                    <h3>Drag & Drop your image here</h3>
+                    <p>or click to browse from your device</p>
+                    <input type="file" id="file-input" hidden accept="image/*">
+                </div>
+
+                <div id="preview-container" class="preview-container" style="display: none;">
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span id="original-format">Original</span>
+                            <span id="original-size">0 KB</span>
+                        </div>
+                        <div class="preview-content">
+                            <img id="original-preview" src="" alt="Original Preview">
+                        </div>
+                    </div>
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span>Output (WebP)</span>
+                            <span id="output-size">0 KB</span>
+                        </div>
+                        <div class="preview-content">
+                            <img id="output-preview" src="" alt="WebP Preview">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="tool-sidebar">
+                <div class="controls-card">
+                    <button id="download-btn" class="btn btn-primary" disabled>
+                        <i class="ri-download-2-line"></i> Download WebP
+                    </button>
+                    
+                    <button id="reset-btn" class="btn btn-secondary" style="margin-top: 1rem; display: none;">
+                        <i class="ri-restart-line"></i> Reset and Upload New
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <section class="faq-section">
+            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>What is WebP?</h3>
+                <p>WebP is a modern image format that provides superior lossless and lossy compression for images on the web.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I convert JPG to WebP?</h3>
+                <p>Yes, converting JPG to WebP can significantly reduce the file size of your images without a noticeable loss in quality.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is it secure?</h3>
+                <p>Yes, we value your privacy. All processing is done on your machine, and your images are never uploaded.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is it free?</h3>
+                <p>Yes, Resizur's Image to WebP tool is completely free to use.</p>
+            </div>
+        </section>
+
+        <section style="padding: 4rem 0; border-top: 1px solid var(--border-color);">
+            <h3>Related Tools</h3>
+            <div class="tool-grid" style="padding-top: 2rem;">
+                <a href="image-to-png.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-file-image-line"></i></div>
+                    <h4>Image to PNG</h4>
+                    <p>High-quality conversion.</p>
+                </a>
+                <a href="image-to-jpg.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-file-image-line"></i></div>
+                    <h4>Image to JPG</h4>
+                    <p>Widely compatible JPG.</p>
+                </a>
+                <a href="image-compressor.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-contract-up-down-line"></i></div>
+                    <h4>Image Compressor</h4>
+                    <p>Optimize image sizes.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Resizur. All images processed locally.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="image-to-webp.js"></script>
+</body>
+</html>

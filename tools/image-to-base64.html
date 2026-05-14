@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Base64 - Convert Image to Base64 Online | Resizur</title>
+    <meta name="description" content="Convert your images to Base64 strings online easily. Perfect for developers needing data URIs for CSS or HTML. 100% private.">
+    <link rel="canonical" href="https://pixtools.github.io/tools/image-to-base64.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pixtools.github.io/tools/image-to-base64.html">
+    <meta property="og:title" content="Image to Base64 - Online Converter">
+    <meta property="og:description" content="Convert your images to Base64 strings directly in your browser. Fast, secure, and offline-capable.">
+    <meta property="og:image" content="https://pixtools.github.io/assets/og-base64.jpg">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png">
+    <link rel="manifest" href="../Favicon-Images/site.webmanifest">
+    <link rel="shortcut icon" href="../Favicon-Images/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Resizur Image to Base64",
+      "url": "https://pixtools.github.io/tools/image-to-base64.html",
+      "description": "An online tool to convert images to Base64 strings using the browser's FileReader API.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What is Base64?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64 is a way to represent binary data (like images) as a string of text characters. This is useful for embedding images directly into HTML or CSS files."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How is this useful?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It eliminates the need for separate image files, reducing HTTP requests and making it easier to share snippets of code that include images."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is my data secure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, everything happens locally. We don't see or store your images or the generated Base64 strings."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Is there a limit on image size?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Base64 strings are about 33% larger than the original binary data. Large images will result in very long strings which may slow down your browser or editor."
+        }
+      }]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+                    <img 
+                        src="../Images/logo.png" 
+                        alt="Resizur Logo" 
+                        style="height:48px; width:48px; object-fit:contain;"
+                    />
+                    <span style="font-weight:700; font-size:1.8rem; color:#2563EB;">Resizur</span>
+                </a>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+                        <i class="ri-moon-line"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section style="padding: 2rem 0;">
+            <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
+            <h1>Image to Base64</h1>
+            <p style="color: var(--text-secondary);">Convert your images into text-based data URIs for direct embedding.</p>
+        </section>
+
+        <div class="tool-layout">
+            <div class="tool-main">
+                <div id="drop-zone" class="upload-area">
+                    <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
+                    <h3>Drag & Drop your image here</h3>
+                    <p>or click to browse from your device</p>
+                    <input type="file" id="file-input" hidden accept="image/*">
+                </div>
+
+                <div id="output-container" class="preview-container" style="display: none; grid-template-columns: 1fr;">
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span>Base64 String</span>
+                            <span id="char-count">0 characters</span>
+                        </div>
+                        <div class="preview-content" style="height: auto; padding: 0;">
+                            <textarea id="base64-output" readonly style="width: 100%; height: 300px; padding: 1rem; border: none; background: var(--bg-secondary); color: var(--text-primary); font-family: monospace; font-size: 0.8rem; resize: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="tool-sidebar">
+                <div class="controls-card">
+                    <button id="copy-btn" class="btn btn-primary" disabled>
+                        <i class="ri-clipboard-line"></i> Copy to Clipboard
+                    </button>
+                    
+                    <button id="download-txt-btn" class="btn btn-secondary" style="margin-top: 1rem;" disabled>
+                        <i class="ri-file-text-line"></i> Download as .txt
+                    </button>
+
+                    <button id="reset-btn" class="btn btn-secondary" style="margin-top: 1rem; display: none;">
+                        <i class="ri-restart-line"></i> Reset and Upload New
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <section class="faq-section">
+            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>What is a Data URI?</h3>
+                <p>A data URI is a string that represents an entire file. It starts with `data:image/png;base64,...` and can be used in HTML `src` attributes or CSS `background-image` properties.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is Base64 good for SEO?</h3>
+                <p>Using a few small Base64 images can improve load speed by reducing requests. However, too many can increase the total size of your HTML, which could be negative for SEO if not balanced correctly.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Which formats are supported?</h3>
+                <p>All image formats supported by your browser can be converted to Base64.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I convert images back from Base64?</h3>
+                <p>Yes, any Base64 converter or even a simple browser address bar can turn a Base64 string back into an image.</p>
+            </div>
+        </section>
+
+        <section style="padding: 4rem 0; border-top: 1px solid var(--border-color);">
+            <h3>Related Tools</h3>
+            <div class="tool-grid" style="padding-top: 2rem;">
+                <a href="image-to-png.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-file-image-line"></i></div>
+                    <h4>Image to PNG</h4>
+                    <p>Clean lossless conversion.</p>
+                </a>
+                <a href="image-compressor.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-contract-up-down-line"></i></div>
+                    <h4>Image Compressor</h4>
+                    <p>Optimize file size.</p>
+                </a>
+                <a href="bulk-downloader.html" class="tool-card">
+                    <div class="tool-icon"><i class="ri-download-cloud-2-line"></i></div>
+                    <h4>Bulk Downloader</h4>
+                    <p>Process multiple files.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Resizur. All processing done in-browser.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="image-to-base64.js"></script>
+</body>
+</html>

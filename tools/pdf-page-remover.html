@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Page Remover - Free Online Tool | ToolzGarden</title>
+    <meta name="description" content="Remove PDF pages.">
+    <link rel="canonical" href="https://pixtools.github.io/tools/pdf-page-remover.html">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- PDF.js for reading PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <!-- jsPDF for creating PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- PDF-lib for merging/splitting -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is it private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% private." } },
+        { "@type": "Question", "name": "Is it free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely free." } },
+        { "@type": "Question", "name": "Does it work offline?", "acceptedAnswer": { "@type": "Answer", "text": "Yes." } },
+        { "@type": "Question", "name": "Any uploads needed?", "acceptedAnswer": { "@type": "Answer", "text": "No uploads needed." } }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+                    <img src="../Images/logo.png" alt="Logo" style="height:48px; width:48px; object-fit:contain;"/>
+                    <span style="font-weight:700; font-size:1.8rem; color:#2563EB;">ToolzGarden</span>
+                </a>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+                        <i class="ri-moon-line"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section style="padding: 2rem 0;">
+            <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
+            <h1>PDF Page Remover</h1>
+            <p style="color: var(--text-secondary);">Delete specific pages from PDF.</p>
+        </section>
+
+        <div class="tool-layout">
+            <div class="tool-main">
+                <div id="drop-zone" class="upload-area"><div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div><h3>Upload PDF</h3><input type="file" id="file-input" hidden accept=".pdf"></div><div id="pages-grid" style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;"></div>
+            </div>
+            <aside class="tool-sidebar">
+                <div class="controls-card">
+                    <button id="download-btn" class="btn btn-primary" disabled><i class="ri-download-2-line"></i> Download PDF</button>
+                    <button id="reset-btn" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">
+                        <i class="ri-restart-line"></i> Reset Inputs
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <section class="faq-section">
+            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item"><h3>Is it private?</h3><p>Yes, 100% private. Processing happens in your browser.</p></div>
+            <div class="faq-item"><h3>Is it free?</h3><p>Yes, completely free to use without limits.</p></div>
+            <div class="faq-item"><h3>Does it work offline?</h3><p>Yes, once loaded you can use it without internet.</p></div>
+            <div class="faq-item"><h3>Any uploads needed?</h3><p>No, your files stay on your device.</p></div>
+        </section>
+
+        <section style="padding: 4rem 0; border-top: 1px solid var(--border-color);">
+            <h3>Related Tools</h3>
+            <div class="tool-grid" style="padding-top: 2rem;">
+                <a href="pdf-compress.html" class="tool-card"><div class="tool-icon"><i class="ri-file-pdf-line"></i></div><h4>PDF Compress</h4><p>Reduce PDF size.</p></a>
+                <a href="word-counter.html" class="tool-card"><div class="tool-icon"><i class="ri-text"></i></div><h4>Word Counter</h4><p>Count words.</p></a>
+                <a href="json-formatter.html" class="tool-card"><div class="tool-icon"><i class="ri-braces-line"></i></div><h4>JSON Formatter</h4><p>Format JSON.</p></a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom"><p>&copy; 2024 ToolzGarden. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+    <script src="pdf-page-remover.js"></script>
+</body>
+</html>

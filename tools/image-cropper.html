@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Cropper - Crop Image Online | Resizur</title>
+    <meta name="description" content="Crop images online for free. Select specific areas of your photos easily. 100% private, all processing in-browser.">
+    <link rel="canonical" href="https://pixtools.github.io/tools/image-cropper.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pixtools.github.io/tools/image-cropper.html">
+    <meta property="og:title" content="Image Cropper - Online Tool">
+    <meta property="og:description" content="Crop your images with precision in your browser. Fast, secure, and offline-capable.">
+    <meta property="og:image" content="https://pixtools.github.io/assets/og-cropper.jpg">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png">
+    <link rel="manifest" href="../Favicon-Images/site.webmanifest">
+    <link rel="shortcut icon" href="../Favicon-Images/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .crop-wrapper {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            user-select: none;
+        }
+        #crop-canvas-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: crosshair;
+        }
+        .crop-info {
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+
+    <!-- WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Resizur Image Cropper",
+      "url": "https://pixtools.github.io/tools/image-cropper.html",
+      "description": "An online tool to crop images using the browser's Canvas API.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+                    <img 
+                        src="../Images/logo.png" 
+                        alt="Resizur Logo" 
+                        style="height:48px; width:48px; object-fit:contain;"
+                    />
+                    <span style="font-weight:700; font-size:1.8rem; color:#2563EB;">Resizur</span>
+                </a>
+                <div class="nav-actions">
+                    <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+                        <i class="ri-moon-line"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section style="padding: 2rem 0;">
+            <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
+            <h1>Image Cropper</h1>
+            <p style="color: var(--text-secondary);">Select the perfect area of your image. Drag to select, click crop to apply.</p>
+        </section>
+
+        <div class="tool-layout">
+            <div class="tool-main">
+                <div id="drop-zone" class="upload-area">
+                    <div class="upload-icon"><i class="ri-upload-cloud-2-line"></i></div>
+                    <h3>Drag & Drop your image here</h3>
+                    <p>or click to browse from your device</p>
+                    <input type="file" id="file-input" hidden accept="image/*">
+                </div>
+
+                <div id="preview-container" class="preview-container" style="display: none; grid-template-columns: 1fr;">
+                    <div class="preview-box">
+                        <div class="preview-header">
+                            <span>Editor (Drag to Select Area)</span>
+                            <span id="crop-dims">0 x 0</span>
+                        </div>
+                        <div class="preview-content" style="height: auto; padding: 2rem; background: var(--bg-tertiary);">
+                            <div class="crop-wrapper" id="crop-wrapper">
+                                <img id="original-preview" src="" alt="To Crop" style="max-height: 500px;">
+                                <canvas id="crop-canvas-overlay"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-box" id="result-box" style="display: none;">
+                        <div class="preview-header">
+                            <span>Cropped Result</span>
+                            <span id="final-dims">0 x 0</span>
+                        </div>
+                        <div class="preview-content">
+                            <img id="output-preview" src="" alt="Cropped Preview">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="tool-sidebar">
+                <div class="controls-card">
+                    <button id="crop-btn" class="btn btn-primary" disabled>
+                        <i class="ri-crop-2-line"></i> Apply Crop
+                    </button>
+
+                    <button id="download-btn" class="btn btn-primary" disabled style="margin-top: 1rem;">
+                        <i class="ri-download-2-line"></i> Download Cropped
+                    </button>
+                    
+                    <button id="reset-btn" class="btn btn-secondary" style="margin-top: 1rem; display: none;">
+                        <i class="ri-restart-line"></i> Reset and Upload New
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <section class="faq-section">
+            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I crop an image?</h3>
+                <p>Upload your image, then click and drag your mouse over the area you want to keep. Click "Apply Crop" to see the result.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the output format?</h3>
+                <p>By default, cropped images are saved as high-quality PNG to preserve detail.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I crop to specific aspect ratios?</h3>
+                <p>Currently, you can freely select any area. We are working on adding fixed aspect ratio presets soon!</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is it secure?</h3>
+                <p>Yes, all image data remains on your computer. No data is sent to our servers.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Resizur. All images processed locally.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="image-cropper.js"></script>
+</body>
+</html>

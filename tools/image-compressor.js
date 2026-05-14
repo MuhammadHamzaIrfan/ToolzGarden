@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         originalImage.onload = () => {
             // dropZone.style.display = 'none'; // Keep it but disable it
             previewContainer.style.display = 'grid';
+            setTimeout(() => previewContainer.classList.add('visible'), 10);
             
             // Problem 3: Enforce one image at a time lock
             dropZone.style.pointerEvents = 'none';
@@ -133,10 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     downloadBtn.addEventListener('click', () => {
-        const fileName = `pixtools-compressed-${Date.now()}.jpg`;
+        const fileName = `resizur-compressed-${Date.now()}.jpg`;
         fetch(compressedPreview.src)
             .then(res => res.blob())
             .then(blob => downloadBlob(blob, fileName));
+            
+        // Animation 7: Download Success State
+        const originalText = downloadBtn.innerHTML;
+        downloadBtn.innerHTML = '<i class="ri-check-line"></i> Downloaded';
+        downloadBtn.style.background = '#16a34a';
+        setTimeout(() => {
+            downloadBtn.innerHTML = originalText;
+            downloadBtn.style.background = '';
+        }, 2000);
     });
 
     // Problem 3: Reset functionality
@@ -150,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dropZone.style.pointerEvents = 'auto';
         dropZone.style.opacity = '1';
         previewContainer.style.display = 'none';
+        previewContainer.classList.remove('visible');
         downloadBtn.disabled = true;
         resetBtn.style.display = 'none'; // Hide itself
         
