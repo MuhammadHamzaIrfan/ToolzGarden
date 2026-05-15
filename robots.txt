@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://muhammadhamzairfan.github.io/ToolzGarden/sitemap.xml
+Sitemap: https://toolzgarden.com/sitemap.xml
