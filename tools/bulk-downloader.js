@@ -1,5 +1,5 @@
 /* 
-  Resizur - Bulk Downloader Logic
+  ToolzGarden - Bulk Downloader Logic
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const content = await zip.generateAsync({ type: 'blob' });
-        const zipName = `resizur-bulk-${Date.now()}.zip`;
+        const zipName = `toolzgarden-bulk-${Date.now()}.zip`;
         const link = document.createElement('a');
         link.href = URL.createObjectURL(content);
         link.download = zipName;

@@ -1,5 +1,5 @@
 /* 
-  PixTools - Image Compressor Logic
+  ToolzGarden - Image Compressor Logic
   Handles file upload, live compression, and preview updates.
 */
 
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     downloadBtn.addEventListener('click', () => {
-        const fileName = `resizur-compressed-${Date.now()}.jpg`;
+        const fileName = `toolzgarden-compressed-${Date.now()}.jpg`;
         fetch(compressedPreview.src)
             .then(res => res.blob())
             .then(blob => downloadBlob(blob, fileName));

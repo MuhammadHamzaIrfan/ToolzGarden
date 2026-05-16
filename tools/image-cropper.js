@@ -1,5 +1,5 @@
 /* 
-  Resizur - Image Cropper Logic
+  ToolzGarden - Image Cropper Logic
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners ---
 
     downloadBtn.addEventListener('click', () => {
-        const fileName = `resizur-cropped-${Date.now()}.png`;
+        const fileName = `toolzgarden-cropped-${Date.now()}.png`;
         const link = document.createElement('a');
         link.href = outputPreview.src;
         link.download = fileName;

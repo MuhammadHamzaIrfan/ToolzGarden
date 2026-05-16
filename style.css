@@ -1,6 +1,6 @@
 /* 
-  PixTools - Main Stylesheet
-  Core design system for the Image Tools Website
+  ToolzGarden - Main Stylesheet
+  Core design system for the Tools Website
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -80,6 +80,31 @@ nav {
     justify-content: space-between;
     align-items: center;
     height: 4.5rem;
+    position: relative;
+}
+
+.nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-primary);
 }
 
 .logo {
@@ -205,7 +230,7 @@ nav {
     font-size: 0.95rem;
 }
 
-/* Why PixTools Section */
+/* Why ToolzGarden Section */
 .why-section {
     padding: 4rem 0;
     background: var(--bg-secondary);
@@ -731,3 +756,269 @@ header {
   max-width: 400px;
 }
 
+/* =========================================
+   Advertisement & Placements
+   ========================================= */
+
+.ad-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.modern-ad-placeholder {
+    background-color: var(--bg-secondary);
+    border: 1px dashed var(--border-color);
+    border-radius: 12px; /* Rounded ad boxes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    /* Prevents layout shift (CLS) by reserving space before ad loads */
+    min-height: 90px;
+    width: 100%;
+    transition: var(--transition);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.modern-ad-placeholder:hover {
+    border-color: var(--text-secondary);
+}
+
+.modern-ad-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 0, 0, 0.03) 10px,
+        rgba(0, 0, 0, 0.03) 20px
+    );
+    z-index: 0;
+}
+
+[data-theme="dark"] .modern-ad-placeholder::before {
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.03) 10px,
+        rgba(255, 255, 255, 0.03) 20px
+    );
+}
+
+.modern-ad-placeholder .ad-label {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.75rem;
+    border-radius: 0 0 6px 6px;
+    border: 1px solid var(--border-color);
+    border-top: none;
+    z-index: 1;
+}
+
+/* Specific Ad Placements (Reserved Dimensions) */
+#left-ad, #right-ad,
+#left-ad-compressor, #right-ad-compressor,
+#left-ad-resizer, #right-ad-resizer,
+#left-ad-cropper, #right-ad-cropper,
+#left-ad-png, #right-ad-png,
+#left-ad-jpg, #right-ad-jpg,
+#left-ad-webp, #right-ad-webp,
+#left-ad-base64, #right-ad-base64,
+#left-ad-bulk, #right-ad-bulk,
+#left-ad-pdfcompress, #right-ad-pdfcompress,
+#left-ad-pdfmerge, #right-ad-pdfmerge,
+#left-ad-pdfsplit, #right-ad-pdfsplit,
+#left-ad-pdftoimg, #right-ad-pdftoimg,
+#left-ad-imgtopdf, #right-ad-imgtopdf,
+#left-ad-pdfremover, #right-ad-pdfremover,
+#left-ad-wordcount, #right-ad-wordcount,
+#left-ad-charcount, #right-ad-charcount,
+#left-ad-caseconv, #right-ad-caseconv,
+#left-ad-textreverser, #right-ad-textreverser,
+#left-ad-removedup, #right-ad-removedup,
+#left-ad-slug, #right-ad-slug,
+#left-ad-jsonformat, #right-ad-jsonformat,
+#left-ad-jsonmin, #right-ad-jsonmin,
+#left-ad-base64enc, #right-ad-base64enc,
+#left-ad-urlenc, #right-ad-urlenc,
+#left-ad-htmlenc, #right-ad-htmlenc {
+    width: 100%;
+    max-width: 200px;
+    min-height: 600px;
+    height: auto;
+}
+
+/* 3-Column Desktop Layout */
+.full-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+}
+
+.center-main-content {
+    flex: 1;
+    min-width: 0; /* Prevent flex blowout */
+    max-width: 1100px; /* Center content dominant and flexible */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style the sections inside the center content to look like cards */
+.center-main-content > .hero,
+.center-main-content > .why-section {
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.side-ad-container {
+    width: 200px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 5.5rem;
+    max-height: calc(100vh - 5.5rem);
+    overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    /* Tablet: Hide left ad, show right ad */
+    .left-side-ad {
+        display: none;
+    }
+    .full-page-wrapper {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 1024px) {
+    .side-ad-container {
+        display: none; /* Auto hide sidebar ads on mobile */
+    }
+}
+
+/* Contact Page Styles */
+.contact-wrapper {
+  max-width: 600px;
+  margin: 3rem auto;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 2.5rem;
+}
+
+.contact-wrapper h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.contact-wrapper p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group textarea {
+  height: 140px;
+  resize: vertical;
+}
+
+/* About Page Features Grid */
+.why-section {
+    padding: 4rem 0;
+    background: var(--bg-secondary);
+    border-radius: 1.5rem;
+    margin: 2rem 0;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--bg-primary);
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.feature-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}

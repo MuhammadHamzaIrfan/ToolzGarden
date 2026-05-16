@@ -1,5 +1,5 @@
 /* 
-  Resizur - Image to PNG Logic
+  ToolzGarden - Image to PNG Logic
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners ---
 
     downloadBtn.addEventListener('click', () => {
-        const fileName = `resizur-converted-${Date.now()}.png`;
+        const fileName = `toolzgarden-converted-${Date.now()}.png`;
         const link = document.createElement('a');
         link.href = outputPreview.src;
         link.download = fileName;

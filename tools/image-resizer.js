@@ -1,5 +1,5 @@
 /* 
-  Resizur - Image Resizer Logic
+  ToolzGarden - Image Resizer Logic
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     downloadBtn.addEventListener('click', () => {
-        const fileName = `resizur-resized-${Date.now()}.png`;
+        const fileName = `toolzgarden-resized-${Date.now()}.png`;
         const link = document.createElement('a');
         link.href = resizedPreview.src;
         link.download = fileName;

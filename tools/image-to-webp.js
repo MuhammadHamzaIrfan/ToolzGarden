@@ -1,5 +1,5 @@
 /* 
-  Resizur - Image to WebP Logic
+  ToolzGarden - Image to WebP Logic
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners ---
 
     downloadBtn.addEventListener('click', () => {
-        const fileName = `resizur-converted-${Date.now()}.webp`;
+        const fileName = `toolzgarden-converted-${Date.now()}.webp`;
         const link = document.createElement('a');
         link.href = outputPreview.src;
         link.download = fileName;

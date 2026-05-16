@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
+    <meta name="monetag" content="d46bd40402d818087fa1cf861eae8c44" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      ToolzGarden - Free Online Image Tools | All-in-One Image Processor
+      ToolzGarden - Free Online Tools | Image, PDF, Text & File Tools
     </title>
     <link rel="icon" type="image/png" href="Images/logo.png" />
     <link
@@ -36,7 +37,7 @@
     <meta name="theme-color" content="#ffffff" />
     <meta
       name="description"
-      content="ToolzGarden offers free, fast, and 100% private online image tools. Compress, resize, crop, and convert images to PNG, JPG, or WebP without uploading to any server."
+      content="ToolzGarden offers free online tools for images, PDFs, text and files. Compress, convert, merge, format and more. No signup. No upload. 100% private."
     />
     <link rel="canonical" href="https://toolzgarden.com/" />
 
@@ -76,6 +77,13 @@
     />
     <link rel="stylesheet" href="./style.css" />
 
+    <!-- Google AdSense -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+    <!-- Google Analytics -->
+    <!-- Paste your GA4 code here -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
       {
@@ -92,6 +100,20 @@
           "priceCurrency": "USD"
         },
         "featureList": "Image Compression, Image Resizing, Format Conversion, Image Cropping, Base64 Conversion"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ToolzGarden",
+        "url": "https://toolzgarden.com",
+        "description": "Free online tools for images, PDFs, text and files. No signup required.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolzgarden.com/?search={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
     </script>
   </head>
@@ -118,6 +140,35 @@
               >ToolzGarden</span
             >
           </a>
+          <div
+            class="nav-links"
+            style="
+              display: flex;
+              gap: 1rem;
+              align-items: center;
+              margin-right: auto;
+              margin-left: 2rem;
+            "
+          >
+            <a
+              href="about.html"
+              style="
+                text-decoration: none;
+                font-weight: 500;
+                color: var(--text-primary);
+              "
+              >About</a
+            >
+            <a
+              href="contact.html"
+              style="
+                text-decoration: none;
+                font-weight: 500;
+                color: var(--text-primary);
+              "
+              >Contact</a
+            >
+          </div>
           <div class="nav-actions">
             <button
               id="theme-toggle"
@@ -131,327 +182,589 @@
       </div>
     </header>
 
-    <main>
-      <section class="hero">
+    <div class="full-page-wrapper">
+      <!-- LEFT AD SIDEBAR -->
+      <aside class="side-ad-container left-side-ad">
+        <div id="left-ad" class="modern-ad-placeholder">
+          <span class="ad-label">ADVERTISEMENT</span>
+          <!-- Paste left ad unit ID here later -->
+        </div>
+      </aside>
+
+      <main class="center-main-content">
+        <section class="hero">
+          <div class="container">
+            <span class="badge-private"
+              ><i class="ri-shield-check-fill"></i> 100% Private, No
+              Upload</span
+            >
+            <h1>
+              Powerful Image Tools,
+              <span style="color: var(--accent-primary)">Offline First</span>
+            </h1>
+            <p>
+              Simple, fast, and secure. All image processing happens directly in
+              your browser. Your data never leaves your device.
+            </p>
+
+            <div class="search-container">
+              <i class="ri-search-line search-icon"></i>
+              <input
+                type="text"
+                id="tool-search"
+                class="search-input"
+                placeholder="Search for a tool (e.g., compressor, png)..."
+              />
+            </div>
+          </div>
+        </section>
+
         <div class="container">
-          <span class="badge-private"
-            ><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span
-          >
-          <h1>
-            Powerful Image Tools,
-            <span style="color: var(--accent-primary)">Offline First</span>
-          </h1>
-          <p>
-            Simple, fast, and secure. All image processing happens directly in
-            your browser. Your data never leaves your device.
-          </p>
-
-          <div class="search-container">
-            <i class="ri-search-line search-icon"></i>
-            <input
-              type="text"
-              id="tool-search"
-              class="search-input"
-              placeholder="Search for a tool (e.g., compressor, png)..."
-            />
-          </div>
-        </div>
-      </section>
-
-      <section class="container">
-        <!-- Category Tabs -->
-        <div class="category-tabs">
-          <button class="cat-tab" data-category="image">
-            <i class="ri-image-line"></i> Image Tools
-          </button>
-          <button class="cat-tab" data-category="pdf">
-            <i class="ri-file-pdf-line"></i> PDF Tools
-          </button>
-          <button class="cat-tab coming-soon" data-category="video">
-            <i class="ri-video-line"></i> Video Tools
-            <span class="soon-badge">Coming Soon</span>
-          </button>
-          <button class="cat-tab" data-category="text">
-            <i class="ri-text"></i> Text Tools
-          </button>
-          <button class="cat-tab" data-category="file">
-            <i class="ri-folder-line"></i> File Tools
-          </button>
-        </div>
-
-        <!-- Initial Placeholder Panel -->
-        <div class="placeholder-panel" id="initial-placeholder-panel">
-          <div class="icon-glow">
-            <i class="ri-cursor-line"></i>
-          </div>
-          <h3>Select a Category</h3>
-          <p>Choose a category above to explore our tools.</p>
-        </div>
-
-        <!-- Coming Soon Panel (hidden by default) -->
-        <div class="placeholder-panel" id="coming-soon-panel" style="display:none;">
-          <div class="icon-glow">
-            <i class="ri-tools-line"></i>
-          </div>
-          <h3>Work in Progress</h3>
-          <p>We are building this category. Check back soon.</p>
-        </div>
-
-        <div class="tool-grid" style="display:none;">
-          <!-- Tool: Image Compressor -->
-          <a
-            href="tools/image-compressor.html"
-            class="tool-card"
-            data-category="image"
-          >
-            <div class="tool-icon">
-              <i class="ri-contract-up-down-line"></i>
+          <section class="content-section">
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+              <button class="cat-tab" data-category="image">
+                <i class="ri-image-line"></i> Image Tools
+              </button>
+              <button class="cat-tab" data-category="pdf">
+                <i class="ri-file-pdf-line"></i> PDF Tools
+              </button>
+              <button class="cat-tab coming-soon" data-category="video">
+                <i class="ri-video-line"></i> Video Tools
+                <span class="soon-badge">Coming Soon</span>
+              </button>
+              <button class="cat-tab" data-category="text">
+                <i class="ri-text"></i> Text Tools
+              </button>
+              <button class="cat-tab" data-category="file">
+                <i class="ri-folder-line"></i> File Tools
+              </button>
             </div>
-            <h3>Image Compressor</h3>
-            <p>
-              Reduce image file size while maintaining quality. Support for JPG,
-              PNG, and WebP.
-            </p>
-          </a>
 
-          <!-- Tool: Image Resizer -->
-          <a
-            href="tools/image-resizer.html"
-            class="tool-card"
-            data-category="image"
-          >
-            <div class="tool-icon"><i class="ri-aspect-ratio-line"></i></div>
-            <h3>Image Resizer</h3>
-            <p>
-              Change image dimensions by pixels or percentage. Maintain aspect
-              ratio easily.
-            </p>
-          </a>
-
-          <!-- Tool: Image Cropper -->
-          <a
-            href="tools/image-cropper.html"
-            class="tool-card"
-            data-category="image"
-          >
-            <div class="tool-icon"><i class="ri-crop-2-line"></i></div>
-            <h3>Image Cropper</h3>
-            <p>
-              Crop images to specific dimensions or ratios with an interactive
-              interface.
-            </p>
-          </a>
-
-          <!-- Tool: To PNG -->
-          <a
-            href="tools/image-to-png.html"
-            class="tool-card"
-            data-category="image"
-          >
-            <div class="tool-icon"><i class="ri-file-image-line"></i></div>
-            <h3>Image to PNG</h3>
-            <p>
-              Convert any image format to high-quality PNG with transparency
-              support.
-            </p>
-          </a>
-
-          <!-- Tool: To JPG -->
-          <a
-            href="tools/image-to-jpg.html"
-            class="tool-card"
-            data-category="image"
-          >
-            <div class="tool-icon"><i class="ri-file-image-line"></i></div>
-            <h3>Image to JPG</h3>
-            <p>
-              Convert images to the widely compatible JPG format with quality
-              control.
-            </p>
-          </a>
-
-          <!-- Tool: To WebP -->
-          <a
-            href="tools/image-to-webp.html"
-            class="tool-card"
-            data-category="image"
-          >
-            <div class="tool-icon"><i class="ri-windy-line"></i></div>
-            <h3>Image to WebP</h3>
-            <p>
-              Convert images to WebP for superior compression and web
-              performance.
-            </p>
-          </a>
-
-          <!-- Tool: To Base64 -->
-          <a
-            href="tools/image-to-base64.html"
-            class="tool-card"
-            data-category="image"
-          >
-            <div class="tool-icon"><i class="ri-code-line"></i></div>
-            <h3>Image to Base64</h3>
-            <p>
-              Convert images to Base64 strings for easy embedding in CSS or
-              HTML.
-            </p>
-          </a>
-
-          <!-- Tool: Bulk Downloader -->
-          <a
-            href="tools/bulk-downloader.html"
-            class="tool-card"
-            data-category="image"
-          >
-            <div class="tool-icon">
-              <i class="ri-download-cloud-2-line"></i>
+            <!-- Initial Placeholder Panel -->
+            <div class="placeholder-panel" id="initial-placeholder-panel">
+              <div class="icon-glow">
+                <i class="ri-cursor-line"></i>
+              </div>
+              <h3>Select a Category</h3>
+              <p>Choose a category above to explore our tools.</p>
             </div>
-            <h3>Bulk Downloader</h3>
-            <p>
-              Process multiple images and download them all at once in a single
-              ZIP file.
-            </p>
-          </a>
 
-          <!-- PDF Tools -->
-          <a href="tools/pdf-compress.html" class="tool-card" data-category="pdf">
-            <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
-            <h3>PDF Compress</h3>
-            <p>Reduce PDF file size while maintaining quality.</p>
-          </a>
-          <a href="tools/pdf-merge.html" class="tool-card" data-category="pdf">
-            <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
-            <h3>PDF Merge</h3>
-            <p>Combine multiple PDFs into a single file.</p>
-          </a>
-          <a href="tools/pdf-split.html" class="tool-card" data-category="pdf">
-            <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
-            <h3>PDF Split</h3>
-            <p>Extract specific pages from your PDF document.</p>
-          </a>
-          <a href="tools/pdf-to-image.html" class="tool-card" data-category="pdf">
-            <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
-            <h3>PDF to Image</h3>
-            <p>Convert PDF pages into high-quality PNG images.</p>
-          </a>
-          <a href="tools/image-to-pdf.html" class="tool-card" data-category="pdf">
-            <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
-            <h3>Image to PDF</h3>
-            <p>Combine your JPG and PNG images into a PDF.</p>
-          </a>
-          <a href="tools/pdf-page-remover.html" class="tool-card" data-category="pdf">
-            <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
-            <h3>PDF Page Remover</h3>
-            <p>Delete specific pages from your PDF file.</p>
-          </a>
+            <!-- Coming Soon Panel (hidden by default) -->
+            <div
+              class="placeholder-panel"
+              id="coming-soon-panel"
+              style="display: none"
+            >
+              <div class="icon-glow">
+                <i class="ri-tools-line"></i>
+              </div>
+              <h3>Work in Progress</h3>
+              <p>We are building this category. Check back soon.</p>
+            </div>
 
-          <!-- Text Tools -->
-          <a href="tools/word-counter.html" class="tool-card" data-category="text">
-            <div class="tool-icon"><i class="ri-text"></i></div>
-            <h3>Word Counter</h3>
-            <p>Count words, characters, sentences and reading time.</p>
-          </a>
-          <a href="tools/character-counter.html" class="tool-card" data-category="text">
-            <div class="tool-icon"><i class="ri-text"></i></div>
-            <h3>Character Counter</h3>
-            <p>Advanced character counting with limits.</p>
-          </a>
-          <a href="tools/case-converter.html" class="tool-card" data-category="text">
-            <div class="tool-icon"><i class="ri-text"></i></div>
-            <h3>Case Converter</h3>
-            <p>Instantly convert text to uppercase, lowercase, and more.</p>
-          </a>
-          <a href="tools/text-reverser.html" class="tool-card" data-category="text">
-            <div class="tool-icon"><i class="ri-text"></i></div>
-            <h3>Text Reverser</h3>
-            <p>Reverse text or flip characters upside down.</p>
-          </a>
-          <a href="tools/remove-duplicates.html" class="tool-card" data-category="text">
-            <div class="tool-icon"><i class="ri-text"></i></div>
-            <h3>Remove Duplicates</h3>
-            <p>Clean up your lists by removing duplicate lines.</p>
-          </a>
-          <a href="tools/text-to-slug.html" class="tool-card" data-category="text">
-            <div class="tool-icon"><i class="ri-text"></i></div>
-            <h3>Text to Slug</h3>
-            <p>Create clean, SEO-friendly URL slugs from text.</p>
-          </a>
+            <div class="tool-grid" style="display: none">
+              <!-- Tool: Image Compressor -->
+              <a
+                href="tools/image-compressor.html"
+                class="tool-card"
+                data-category="image"
+              >
+                <div class="tool-icon">
+                  <i class="ri-contract-up-down-line"></i>
+                </div>
+                <h3>Image Compressor</h3>
+                <p>
+                  Reduce image file size while maintaining quality. Support for
+                  JPG, PNG, and WebP.
+                </p>
+              </a>
 
-          <!-- File Tools -->
-          <a href="tools/json-formatter.html" class="tool-card" data-category="file">
-            <div class="tool-icon"><i class="ri-braces-line"></i></div>
-            <h3>JSON Formatter</h3>
-            <p>Format and beautify JSON data instantly.</p>
-          </a>
-          <a href="tools/json-minifier.html" class="tool-card" data-category="file">
-            <div class="tool-icon"><i class="ri-braces-line"></i></div>
-            <h3>JSON Minifier</h3>
-            <p>Compress JSON by removing whitespace.</p>
-          </a>
-          <a href="tools/base64-encoder.html" class="tool-card" data-category="file">
-            <div class="tool-icon"><i class="ri-braces-line"></i></div>
-            <h3>Base64 Encoder</h3>
-            <p>Encode text or files to Base64 format and decode back.</p>
-          </a>
-          <a href="tools/url-encoder.html" class="tool-card" data-category="file">
-            <div class="tool-icon"><i class="ri-braces-line"></i></div>
-            <h3>URL Encoder</h3>
-            <p>Safely encode and decode URL strings.</p>
-          </a>
-          <a href="tools/html-encoder.html" class="tool-card" data-category="file">
-            <div class="tool-icon"><i class="ri-braces-line"></i></div>
-            <h3>HTML Encoder</h3>
-            <p>Convert special characters to HTML entities.</p>
-          </a>
+              <!-- Tool: Image Resizer -->
+              <a
+                href="tools/image-resizer.html"
+                class="tool-card"
+                data-category="image"
+              >
+                <div class="tool-icon">
+                  <i class="ri-aspect-ratio-line"></i>
+                </div>
+                <h3>Image Resizer</h3>
+                <p>
+                  Change image dimensions by pixels or percentage. Maintain
+                  aspect ratio easily.
+                </p>
+              </a>
+
+              <!-- Tool: Image Cropper -->
+              <a
+                href="tools/image-cropper.html"
+                class="tool-card"
+                data-category="image"
+              >
+                <div class="tool-icon"><i class="ri-crop-2-line"></i></div>
+                <h3>Image Cropper</h3>
+                <p>
+                  Crop images to specific dimensions or ratios with an
+                  interactive interface.
+                </p>
+              </a>
+
+              <!-- Tool: To PNG -->
+              <a
+                href="tools/image-to-png.html"
+                class="tool-card"
+                data-category="image"
+              >
+                <div class="tool-icon"><i class="ri-file-image-line"></i></div>
+                <h3>Image to PNG</h3>
+                <p>
+                  Convert any image format to high-quality PNG with transparency
+                  support.
+                </p>
+              </a>
+
+              <!-- Tool: To JPG -->
+              <a
+                href="tools/image-to-jpg.html"
+                class="tool-card"
+                data-category="image"
+              >
+                <div class="tool-icon"><i class="ri-file-image-line"></i></div>
+                <h3>Image to JPG</h3>
+                <p>
+                  Convert images to the widely compatible JPG format with
+                  quality control.
+                </p>
+              </a>
+
+              <!-- Tool: To WebP -->
+              <a
+                href="tools/image-to-webp.html"
+                class="tool-card"
+                data-category="image"
+              >
+                <div class="tool-icon"><i class="ri-windy-line"></i></div>
+                <h3>Image to WebP</h3>
+                <p>
+                  Convert images to WebP for superior compression and web
+                  performance.
+                </p>
+              </a>
+
+              <!-- Tool: To Base64 -->
+              <a
+                href="tools/image-to-base64.html"
+                class="tool-card"
+                data-category="image"
+              >
+                <div class="tool-icon"><i class="ri-code-line"></i></div>
+                <h3>Image to Base64</h3>
+                <p>
+                  Convert images to Base64 strings for easy embedding in CSS or
+                  HTML.
+                </p>
+              </a>
+
+              <!-- Tool: Bulk Downloader -->
+              <a
+                href="tools/bulk-downloader.html"
+                class="tool-card"
+                data-category="image"
+              >
+                <div class="tool-icon">
+                  <i class="ri-download-cloud-2-line"></i>
+                </div>
+                <h3>Bulk Downloader</h3>
+                <p>
+                  Process multiple images and download them all at once in a
+                  single ZIP file.
+                </p>
+              </a>
+
+              <!-- PDF Tools -->
+              <a
+                href="tools/pdf-compress.html"
+                class="tool-card"
+                data-category="pdf"
+              >
+                <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
+                <h3>PDF Compress</h3>
+                <p>Reduce PDF file size while maintaining quality.</p>
+              </a>
+              <a
+                href="tools/pdf-merge.html"
+                class="tool-card"
+                data-category="pdf"
+              >
+                <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
+                <h3>PDF Merge</h3>
+                <p>Combine multiple PDFs into a single file.</p>
+              </a>
+              <a
+                href="tools/pdf-split.html"
+                class="tool-card"
+                data-category="pdf"
+              >
+                <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
+                <h3>PDF Split</h3>
+                <p>Extract specific pages from your PDF document.</p>
+              </a>
+              <a
+                href="tools/pdf-to-image.html"
+                class="tool-card"
+                data-category="pdf"
+              >
+                <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
+                <h3>PDF to Image</h3>
+                <p>Convert PDF pages into high-quality PNG images.</p>
+              </a>
+              <a
+                href="tools/image-to-pdf.html"
+                class="tool-card"
+                data-category="pdf"
+              >
+                <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
+                <h3>Image to PDF</h3>
+                <p>Combine your JPG and PNG images into a PDF.</p>
+              </a>
+              <a
+                href="tools/pdf-page-remover.html"
+                class="tool-card"
+                data-category="pdf"
+              >
+                <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
+                <h3>PDF Page Remover</h3>
+                <p>Delete specific pages from your PDF file.</p>
+              </a>
+
+              <!-- Text Tools -->
+              <a
+                href="tools/word-counter.html"
+                class="tool-card"
+                data-category="text"
+              >
+                <div class="tool-icon"><i class="ri-text"></i></div>
+                <h3>Word Counter</h3>
+                <p>Count words, characters, sentences and reading time.</p>
+              </a>
+              <a
+                href="tools/character-counter.html"
+                class="tool-card"
+                data-category="text"
+              >
+                <div class="tool-icon"><i class="ri-text"></i></div>
+                <h3>Character Counter</h3>
+                <p>Advanced character counting with limits.</p>
+              </a>
+              <a
+                href="tools/case-converter.html"
+                class="tool-card"
+                data-category="text"
+              >
+                <div class="tool-icon"><i class="ri-text"></i></div>
+                <h3>Case Converter</h3>
+                <p>Instantly convert text to uppercase, lowercase, and more.</p>
+              </a>
+              <a
+                href="tools/text-reverser.html"
+                class="tool-card"
+                data-category="text"
+              >
+                <div class="tool-icon"><i class="ri-text"></i></div>
+                <h3>Text Reverser</h3>
+                <p>Reverse text or flip characters upside down.</p>
+              </a>
+              <a
+                href="tools/remove-duplicates.html"
+                class="tool-card"
+                data-category="text"
+              >
+                <div class="tool-icon"><i class="ri-text"></i></div>
+                <h3>Remove Duplicates</h3>
+                <p>Clean up your lists by removing duplicate lines.</p>
+              </a>
+              <a
+                href="tools/text-to-slug.html"
+                class="tool-card"
+                data-category="text"
+              >
+                <div class="tool-icon"><i class="ri-text"></i></div>
+                <h3>Text to Slug</h3>
+                <p>Create clean, SEO-friendly URL slugs from text.</p>
+              </a>
+
+              <!-- File Tools -->
+              <a
+                href="tools/json-formatter.html"
+                class="tool-card"
+                data-category="file"
+              >
+                <div class="tool-icon"><i class="ri-braces-line"></i></div>
+                <h3>JSON Formatter</h3>
+                <p>Format and beautify JSON data instantly.</p>
+              </a>
+              <a
+                href="tools/json-minifier.html"
+                class="tool-card"
+                data-category="file"
+              >
+                <div class="tool-icon"><i class="ri-braces-line"></i></div>
+                <h3>JSON Minifier</h3>
+                <p>Compress JSON by removing whitespace.</p>
+              </a>
+              <a
+                href="tools/base64-encoder.html"
+                class="tool-card"
+                data-category="file"
+              >
+                <div class="tool-icon"><i class="ri-braces-line"></i></div>
+                <h3>Base64 Encoder</h3>
+                <p>Encode text or files to Base64 format and decode back.</p>
+              </a>
+              <a
+                href="tools/url-encoder.html"
+                class="tool-card"
+                data-category="file"
+              >
+                <div class="tool-icon"><i class="ri-braces-line"></i></div>
+                <h3>URL Encoder</h3>
+                <p>Safely encode and decode URL strings.</p>
+              </a>
+              <a
+                href="tools/html-encoder.html"
+                class="tool-card"
+                data-category="file"
+              >
+                <div class="tool-icon"><i class="ri-braces-line"></i></div>
+                <h3>HTML Encoder</h3>
+                <p>Convert special characters to HTML entities.</p>
+              </a>
+            </div>
+          </section>
         </div>
-      </section>
+        <!-- End of container -->
 
-      <section class="why-section">
-        <div class="container">
-          <div class="section-title">
-            <h2>Why use ToolzGarden?</h2>
-            <p class="section-desc">
-              The smartest way to handle your image tasks
-            </p>
-          </div>
-          <div class="features-grid">
-            <div class="feature-item">
-              <i class="ri-shield-user-line feature-icon"></i>
-              <h3>100% Private</h3>
-              <p>
-                Your images are processed locally. They are never uploaded to
-                our servers.
+        <section
+          class="seo-content-section"
+          style="
+            padding: 4rem 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+          "
+        >
+          <div class="container" style="max-width: 800px; margin: 0 auto">
+            <div style="margin-bottom: 3rem">
+              <h2
+                style="
+                  font-size: 2rem;
+                  margin-bottom: 1.5rem;
+                  color: var(--text-primary);
+                "
+              >
+                Why Use ToolzGarden?
+              </h2>
+              <p style="margin-bottom: 1rem; line-height: 1.7">
+                In an era where data privacy is paramount, ToolzGarden was built
+                with a core philosophy: your files belong to you. We utilize
+                modern browser-based processing technologies, meaning that when
+                you use our image compressors, PDF splitters, or JSON
+                formatters, the computations happen locally on your own machine.
+                Your sensitive documents, personal photos, and proprietary code
+                snippets are never uploaded to any remote server, guaranteeing
+                absolute privacy and security.
+              </p>
+              <p style="margin-bottom: 1rem; line-height: 1.7">
+                Beyond unmatched privacy, ToolzGarden is committed to being
+                completely free with no hidden costs. We don't believe in
+                holding your converted files hostage behind paywalls,
+                subscription models, or annoying watermarks. What you see is
+                exactly what you get—a comprehensive suite of professional-grade
+                tools accessible to everyone at zero cost.
+              </p>
+              <p style="margin-bottom: 1rem; line-height: 1.7">
+                Our platform offers an extensive variety of tools to cover all
+                your digital needs. From image optimization (like compressing,
+                resizing, and converting to WebP) to document manipulation (such
+                as merging PDFs or extracting pages) and developer utilities
+                (JSON minifying, Base64 encoding), ToolzGarden functions as a
+                Swiss Army knife for your daily digital workflows.
+              </p>
+              <p style="margin-bottom: 1rem; line-height: 1.7">
+                Finally, speed and ease of use are at the forefront of the
+                ToolzGarden experience. Because no files are uploaded to or
+                downloaded from a server, the processing speed is practically
+                instantaneous, limited only by your own device's hardware. The
+                intuitive, dark-mode-friendly interface ensures that you can
+                complete your tasks efficiently without navigating through
+                cluttered menus or intrusive pop-ups.
               </p>
             </div>
-            <div class="feature-item">
-              <i class="ri-flashlight-line feature-icon"></i>
-              <h3>Lightning Fast</h3>
-              <p>
-                No upload/download waiting time. Processing is nearly instant in
-                your browser.
-              </p>
+
+            <div style="margin-bottom: 3rem">
+              <h2
+                style="
+                  font-size: 2rem;
+                  margin-bottom: 1.5rem;
+                  color: var(--text-primary);
+                "
+              >
+                How It Works
+              </h2>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  gap: 2rem;
+                "
+              >
+                <div style="text-align: center">
+                  <div
+                    style="
+                      height: 60px;
+                      width: 60px;
+                      background: var(--bg-primary);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      margin: 0 auto 1rem;
+                      font-size: 1.5rem;
+                      color: var(--accent-primary);
+                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                    "
+                  >
+                    <i class="ri-upload-cloud-2-line"></i>
+                  </div>
+                  <h4 style="margin-bottom: 0.5rem">Step 1: Upload or Paste</h4>
+                  <p style="font-size: 0.9rem">
+                    Select your file, drag and drop it, or simply paste your
+                    text directly into the tool interface.
+                  </p>
+                </div>
+                <div style="text-align: center">
+                  <div
+                    style="
+                      height: 60px;
+                      width: 60px;
+                      background: var(--bg-primary);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      margin: 0 auto 1rem;
+                      font-size: 1.5rem;
+                      color: var(--accent-primary);
+                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                    "
+                  >
+                    <i class="ri-settings-4-line"></i>
+                  </div>
+                  <h4 style="margin-bottom: 0.5rem">Step 2: Choose Settings</h4>
+                  <p style="font-size: 0.9rem">
+                    Configure your preferences such as compression level,
+                    dimensions, or specific format requirements.
+                  </p>
+                </div>
+                <div style="text-align: center">
+                  <div
+                    style="
+                      height: 60px;
+                      width: 60px;
+                      background: var(--bg-primary);
+                      border-radius: 50%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      margin: 0 auto 1rem;
+                      font-size: 1.5rem;
+                      color: var(--accent-primary);
+                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                    "
+                  >
+                    <i class="ri-download-2-line"></i>
+                  </div>
+                  <h4 style="margin-bottom: 0.5rem">Step 3: Download Result</h4>
+                  <p style="font-size: 0.9rem">
+                    Instantly download your processed file directly to your
+                    device with zero waiting time.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="feature-item">
-              <i class="ri-money-dollar-circle-line feature-icon"></i>
-              <h3>Completely Free</h3>
-              <p>
-                No subscriptions, no hidden fees, no limits. All tools are free
-                to use forever.
-              </p>
-            </div>
-            <div class="feature-item">
-              <i class="ri-wifi-off-line feature-icon"></i>
-              <h3>Works Offline</h3>
-              <p>
-                Once loaded, you can use all our tools without an internet
-                connection.
-              </p>
+
+            <div>
+              <h2
+                style="
+                  font-size: 2rem;
+                  margin-bottom: 1.5rem;
+                  color: var(--text-primary);
+                "
+              >
+                Who Is ToolzGarden For?
+              </h2>
+              <ul
+                style="
+                  list-style-type: none;
+                  padding: 0;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 1rem;
+                  font-size: 1.05rem;
+                "
+              >
+                <li>
+                  <i
+                    class="ri-checkbox-circle-fill"
+                    style="color: #16a34a; margin-right: 8px"
+                  ></i>
+                  <strong>Students</strong> who need to rapidly compress images
+                  for school assignments or presentations without hitting file
+                  size limits.
+                </li>
+                <li>
+                  <i
+                    class="ri-checkbox-circle-fill"
+                    style="color: #16a34a; margin-right: 8px"
+                  ></i>
+                  <strong>Freelancers & Professionals</strong> who regularly
+                  work with PDF documents, needing to merge invoices or split
+                  contracts securely.
+                </li>
+                <li>
+                  <i
+                    class="ri-checkbox-circle-fill"
+                    style="color: #16a34a; margin-right: 8px"
+                  ></i>
+                  <strong>Developers & Programmers</strong> who require quick
+                  access to utilities like JSON formatting, minifying, and
+                  Base64 encoding.
+                </li>
+                <li>
+                  <i
+                    class="ri-checkbox-circle-fill"
+                    style="color: #16a34a; margin-right: 8px"
+                  ></i>
+                  <strong>Anyone</strong> who needs fast, reliable, and secure
+                  file conversions without the hassle of downloading and
+                  installing bloated desktop software.
+                </li>
+              </ul>
             </div>
           </div>
+        </section>
+      </main>
+
+      <!-- RIGHT AD SIDEBAR -->
+      <aside class="side-ad-container right-side-ad">
+        <div id="right-ad" class="modern-ad-placeholder">
+          <span class="ad-label">ADVERTISEMENT</span>
+          <!-- Paste right ad unit ID here later -->
         </div>
-      </section>
-    </main>
+      </aside>
+    </div>
+    <!-- End of full-page-wrapper -->
 
     <footer>
       <div class="container">
@@ -475,25 +788,26 @@
               >
             </div>
             <p>
-              Professional grade image tools, privacy-focused, and 100% free.
-              Built for developers and designers.
+              Free online tools for everyone. Professional grade,
+              privacy-focused, and 100% free.
             </p>
           </div>
           <div class="footer-links">
-            <h4>Conversion</h4>
-            <ul>
-              <li><a href="tools/image-to-png.html">To PNG</a></li>
-              <li><a href="tools/image-to-jpg.html">To JPG</a></li>
-              <li><a href="tools/image-to-webp.html">To WebP</a></li>
-              <li><a href="tools/image-to-base64.html">To Base64</a></li>
-            </ul>
-          </div>
-          <div class="footer-links">
-            <h4>Optimization</h4>
+            <h4>Image Tools</h4>
             <ul>
               <li><a href="tools/image-compressor.html">Compress Image</a></li>
               <li><a href="tools/image-resizer.html">Resize Image</a></li>
               <li><a href="tools/image-cropper.html">Crop Image</a></li>
+              <li><a href="tools/image-to-png.html">Image to PNG</a></li>
+              <li><a href="tools/image-to-jpg.html">Image to JPG</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Other Tools</h4>
+            <ul>
+              <li><a href="tools/pdf-compress.html">PDF Tools</a></li>
+              <li><a href="tools/word-counter.html">Text Tools</a></li>
+              <li><a href="tools/json-formatter.html">File Tools</a></li>
               <li><a href="tools/bulk-downloader.html">Bulk Tools</a></li>
             </ul>
           </div>
@@ -501,14 +815,16 @@
             <h4>Company</h4>
             <ul>
               <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
               <li><a href="privacy.html">Privacy Policy</a></li>
-              <li><a href="mailto:hello@pixtools.com">Contact Us</a></li>
-              <li><a href="#" id="feedback-btn">Give Feedback</a></li>
+              <li><a href="terms.html">Terms of Service</a></li>
             </ul>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2024 ToolzGarden. All rights reserved. Processed in-browser.</p>
+          <p>
+            &copy; 2025 ToolzGarden. All rights reserved. Processed in-browser.
+          </p>
         </div>
       </div>
     </footer>

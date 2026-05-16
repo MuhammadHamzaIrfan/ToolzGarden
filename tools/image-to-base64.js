@@ -1,5 +1,5 @@
 /* 
-  Resizur - Image to Base64 Logic
+  ToolzGarden - Image to Base64 Logic
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     downloadTxtBtn.addEventListener('click', () => {
         const blob = new Blob([base64Output.value], { type: 'text/plain' });
-        const fileName = `resizur-base64-${Date.now()}.txt`;
+        const fileName = `toolzgarden-base64-${Date.now()}.txt`;
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = fileName;

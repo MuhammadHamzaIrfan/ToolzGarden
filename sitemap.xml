@@ -130,4 +130,19 @@
         <lastmod>2024-05-14</lastmod>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://toolzgarden.com/about.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://toolzgarden.com/contact.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://toolzgarden.com/terms.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.4</priority>
+    </url>
 </urlset>

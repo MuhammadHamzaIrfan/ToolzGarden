@@ -1,5 +1,5 @@
 /* 
-  Resizur - Image to JPG Logic
+  ToolzGarden - Image to JPG Logic
 */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners ---
 
     downloadBtn.addEventListener('click', () => {
-        const fileName = `resizur-converted-${Date.now()}.jpg`;
+        const fileName = `toolzgarden-converted-${Date.now()}.jpg`;
         const link = document.createElement('a');
         link.href = outputPreview.src;
         link.download = fileName;

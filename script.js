@@ -1,5 +1,5 @@
 /* 
-  PixTools - Global Scripts
+  ToolzGarden - Global Scripts
   Shared utilities for dark mode, navigation, and SEO optimization.
 */
 
@@ -8,8 +8,38 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initSearch();
     initAnimations();
-    initCategories(); // ADD THIS LINE
+    initCategories(); 
+    initAds(); // Initialize Ads Configuration
 });
+
+/**
+ * ==========================================
+ * ADVERTISEMENT CONFIGURATION
+ * ==========================================
+ * Easily replace the empty strings below with your ad network codes.
+ * Example: 
+ * adTopBanner: '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXX" crossorigin="anonymous"></script><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-XXX" data-ad-slot="YYY"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>'
+ */
+const AdConfig = {
+    leftAd: '',           // Code for Left Sidebar (e.g., 160x600)
+    rightAd: ''           // Code for Right Sidebar (e.g., 160x600)
+};
+
+function initAds() {
+    const renderAd = (id, htmlContent) => {
+        const adContainer = document.getElementById(id);
+        if (adContainer && htmlContent.trim() !== '') {
+            // Clean up placeholder styling to let the ad render naturally
+            adContainer.classList.remove('modern-ad-placeholder');
+            adContainer.style.border = 'none';
+            adContainer.style.background = 'transparent';
+            adContainer.innerHTML = htmlContent;
+        }
+    };
+
+    renderAd('left-ad', AdConfig.leftAd);
+    renderAd('right-ad', AdConfig.rightAd);
+}
 
 /* Animation Logic */
 
@@ -105,6 +135,15 @@ function initNavigation() {
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
     */
+
+    // Highlight active nav link
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        }
+    });
 }
 
 /**
