@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -112,23 +112,33 @@
 </head>
 <body>
         <header>
-        <nav class="container">
-            <a href="../index.html" class="logo">
-                <img src="../Images/logo.png" alt="ToolzGarden Logo" style="height:48px; width:48px; object-fit:contain;" />
-                ToolzGarden
-            </a>
-            <ul class="nav-links">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../about.html">About</a></li>
-                <li><a href="../contact.html">Contact</a></li>
-            </ul>
-            <div class="nav-actions">
-                <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
-                    <i class="ri-moon-line"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
+  <nav class="container">
+    <a href="../index.html" class="logo">
+      <img src="../Images/logo.png" alt="ToolzGarden Logo" style="height:40px;width:40px;object-fit:contain;" />
+      ToolzGarden
+    </a>
+
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Nav Links -->
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
+        <i class="ri-moon-line"></i>
+      </button>
+    </div>
+  </nav>
+</header>
 
     
 <div class="full-page-wrapper">
@@ -143,8 +153,8 @@
 
   <main class="center-main-content">
         <section style="padding: 2rem 0;">
-            <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
-            <h1>Free Online Base64 Encoder Decoder - No Signup Required</h1>
+            <span class="badge-private hero-animate hero-animate-2"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
+            <h1 class="hero-animate hero-animate-1">Free Online Base64 Encoder Decoder - No Signup Required</h1>
             <p style="color: var(--text-secondary);">Encode text or files to Base64, or decode back.</p>
         </section>
 

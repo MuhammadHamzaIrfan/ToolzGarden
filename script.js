@@ -9,7 +9,101 @@ document.addEventListener('DOMContentLoaded', () => {
     initSearch();
     initAnimations();
     initCategories(); 
-    initAds(); // Initialize Ads Configuration
+
+    // Hamburger Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('open');
+      });
+
+      // Close menu when link clicked
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('open');
+        });
+      });
+
+      // Close menu when clicked outside
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('open');
+        }
+      });
+    }
+
+    // ===== SCROLL REVEAL ANIMATION =====
+    function initScrollReveal() {
+
+      // Add reveal class to all target elements
+      const selectors = [
+        '.tool-card',
+        '.feature-item',
+        '.faq-item',
+        '.category-tabs',
+        '.section-title',
+        '.footer-brand',
+        '.footer-links',
+        '.tool-description',
+        '.related-tools',
+        '.preview-container',
+        '.controls-card',
+        '.upload-area',
+        '.why-section',
+        '.stats-section',
+        'h2',
+        '.badge-private'
+      ];
+
+      selectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach(el => {
+          if (!el.classList.contains('hero-animate')) {
+            el.classList.add('reveal');
+          }
+        });
+      });
+
+      // Add stagger delays to tool cards
+      document.querySelectorAll('.tool-card').forEach((card, i) => {
+        const delay = (i % 3) * 0.1;
+        card.style.transitionDelay = `${delay}s`;
+      });
+
+      // Add stagger delays to feature items
+      document.querySelectorAll('.feature-item').forEach((item, i) => {
+        item.style.transitionDelay = `${i * 0.1}s`;
+      });
+
+      // Add stagger delays to footer links
+      document.querySelectorAll('.footer-links').forEach((item, i) => {
+        item.style.transitionDelay = `${i * 0.1}s`;
+      });
+
+      // IntersectionObserver for scroll reveal
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      // Observe all reveal elements
+      document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    initScrollReveal();
 });
 
 /**
@@ -21,25 +115,99 @@ document.addEventListener('DOMContentLoaded', () => {
  * adTopBanner: '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXX" crossorigin="anonymous"></script><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-XXX" data-ad-slot="YYY"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>'
  */
 const AdConfig = {
-    leftAd: '',           // Code for Left Sidebar (e.g., 160x600)
-    rightAd: ''           // Code for Right Sidebar (e.g., 160x600)
+    leftAd: `<script>
+  atOptions = {
+    'key' : 'e6057e5f17147ecf971a199d41a59d5c',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script type="text/javascript" src="https://www.highperformanceformat.com/e6057e5f17147ecf971a199d41a59d5c/invoke.js"></script>`,           
+    rightAd: `<script>
+  atOptions = {
+    'key' : 'dcabf3789cf9222520aa0becfc0802f8',
+    'format' : 'iframe',
+    'height' : 300,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script type="text/javascript" src="https://www.highperformanceformat.com/dcabf3789cf9222520aa0becfc0802f8/invoke.js"></script>`,          
+    nativeAd: `<script async="async" data-cfasync="false" src="https://pl29466896.effectivecpmnetwork.com/c9d45fde88457f3b282a3791a75b5290/invoke.js"></script>
+<div id="container-c9d45fde88457f3b282a3791a75b5290"></div>`
 };
 
-function initAds() {
-    const renderAd = (id, htmlContent) => {
-        const adContainer = document.getElementById(id);
-        if (adContainer && htmlContent.trim() !== '') {
-            // Clean up placeholder styling to let the ad render naturally
-            adContainer.classList.remove('modern-ad-placeholder');
-            adContainer.style.border = 'none';
-            adContainer.style.background = 'transparent';
-            adContainer.innerHTML = htmlContent;
+async function initAds() {
+    // Helper to safely execute scripts injected via innerHTML sequentially
+    const injectHTMLWithScripts = async (container, htmlString) => {
+        container.innerHTML = '';
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlString;
+        
+        for (const node of Array.from(tempDiv.childNodes)) {
+            if (node.tagName && node.tagName.toLowerCase() === 'script') {
+                await new Promise(resolve => {
+                    const newScript = document.createElement('script');
+                    Array.from(node.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.text = node.textContent; // Use textContent for scripts
+                    
+                    if (newScript.src) {
+                        newScript.onload = newScript.onerror = resolve;
+                    } else {
+                        setTimeout(resolve, 0);
+                    }
+                    container.appendChild(newScript);
+                });
+            } else {
+                container.appendChild(node.cloneNode(true));
+            }
         }
     };
 
-    renderAd('left-ad', AdConfig.leftAd);
-    renderAd('right-ad', AdConfig.rightAd);
+    // 1. Sidebar Ads
+    const renderSidebarAd = async (sideClass, htmlContent) => {
+        const adContainers = document.querySelectorAll(sideClass + ' .modern-ad-placeholder, ' + sideClass + ' [id^="left-ad"], ' + sideClass + ' [id^="right-ad"]');
+        for (const adContainer of Array.from(adContainers)) {
+            if (htmlContent.trim() !== '' && !htmlContent.includes('Paste Adsterra')) {
+                adContainer.classList.remove('modern-ad-placeholder');
+                adContainer.style.border = 'none';
+                adContainer.style.background = 'transparent';
+                await injectHTMLWithScripts(adContainer, htmlContent);
+            } else {
+                // Graceful collapse if blocked or empty
+                adContainer.style.minHeight = '0';
+            }
+        }
+    };
+
+    await renderSidebarAd('.left-side-ad', AdConfig.leftAd);
+    await renderSidebarAd('.right-side-ad', AdConfig.rightAd);
+
+    // 2. Native Ad (Homepage, About, Contact)
+    let nativeTarget = document.querySelector('.category-tabs'); // Homepage
+    let insertMethod = 'afterend';
+
+    // Target About and Contact pages specifically
+    if (!nativeTarget) {
+        const path = window.location.pathname.toLowerCase();
+        if (path.includes('about') || path.includes('contact')) {
+            nativeTarget = document.querySelector('main.center-main-content');
+            insertMethod = 'beforeend';
+        }
+    }
+
+    if (nativeTarget && AdConfig.nativeAd.trim() !== '' && !AdConfig.nativeAd.includes('Paste Adsterra')) {
+        const nativeWrapper = document.createElement('div');
+        nativeWrapper.className = 'native-ad-wrapper';
+        nativeTarget.insertAdjacentElement(insertMethod, nativeWrapper);
+        await injectHTMLWithScripts(nativeWrapper, AdConfig.nativeAd);
+    }
 }
+
+// Performance Safety: Delay ad injection until entire page and resources have loaded
+window.addEventListener('load', initAds);
 
 /* Animation Logic */
 
@@ -320,3 +488,59 @@ function initCategories() {
   });
 }
 
+// Responsive Code
+
+/* ===== SCROLL REVEAL ANIMATION FIX ===== */
+/* Paste this at the bottom of your script.js file */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Add reveal class directly to all target elements
+  const revealSelectors = [
+    '.tool-card',
+    '.feature-item', 
+    '.faq-item',
+    '.category-tabs',
+    '.section-title',
+    '.footer-brand',
+    '.footer-links',
+    '.controls-card',
+    '.tool-description',
+    '.coming-soon-panel'
+  ];
+
+  revealSelectors.forEach(selector => {
+    document.querySelectorAll(selector).forEach((el, i) => {
+      el.classList.add('reveal');
+      // Stagger delay for cards
+      if (selector === '.tool-card') {
+        el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+      }
+      if (selector === '.feature-item') {
+        el.style.transitionDelay = `${i * 0.1}s`;
+      }
+      if (selector === '.footer-links' || selector === '.footer-brand') {
+        el.style.transitionDelay = `${i * 0.1}s`;
+      }
+    });
+  });
+
+  // IntersectionObserver
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.05,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  // Observe all reveal elements
+  document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+});

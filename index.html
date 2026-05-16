@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
-    <meta name="monetag" content="d46bd40402d818087fa1cf861eae8c44" />
-    <script
+    <!-- <meta name="monetag" content="d46bd40402d818087fa1cf861eae8c44" /> -->
+    <!-- <script
       src="https://quge5.com/88/tag.min.js"
       data-zone="239812"
       async
       data-cfasync="false"
-    ></script>
+    ></script> -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
@@ -125,67 +125,40 @@
   </head>
   <body>
     <header>
-      <div class="container">
-        <nav>
-          <div class="scroll-progress" id="scrollProgress"></div>
-          <a
-            href="index.html"
-            style="
-              display: flex;
-              align-items: center;
-              gap: 12px;
-              text-decoration: none;
-            "
+      <nav class="container">
+        <a href="index.html" class="logo">
+          <img
+            src="Images/logo.png"
+            alt="ToolzGarden Logo"
+            style="height: 40px; width: 40px; object-fit: contain"
+          />
+          ToolzGarden
+        </a>
+
+        <!-- Hamburger Button -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Nav Links -->
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            title="Toggle Dark Mode"
           >
-            <img
-              src="./Images/logo.png"
-              alt="ToolzGarden Logo"
-              style="height: 48px; width: 48px; object-fit: contain"
-            />
-            <span style="font-weight: 700; font-size: 1.8rem; color: #2563eb"
-              >ToolzGarden</span
-            >
-          </a>
-          <div
-            class="nav-links"
-            style="
-              display: flex;
-              gap: 1rem;
-              align-items: center;
-              margin-right: auto;
-              margin-left: 2rem;
-            "
-          >
-            <a
-              href="about.html"
-              style="
-                text-decoration: none;
-                font-weight: 500;
-                color: var(--text-primary);
-              "
-              >About</a
-            >
-            <a
-              href="contact.html"
-              style="
-                text-decoration: none;
-                font-weight: 500;
-                color: var(--text-primary);
-              "
-              >Contact</a
-            >
-          </div>
-          <div class="nav-actions">
-            <button
-              id="theme-toggle"
-              class="theme-toggle"
-              title="Toggle Dark Mode"
-            >
-              <i class="ri-moon-line"></i>
-            </button>
-          </div>
-        </nav>
-      </div>
+            <i class="ri-moon-line"></i>
+          </button>
+        </div>
+      </nav>
     </header>
 
     <div class="full-page-wrapper">
@@ -200,20 +173,20 @@
       <main class="center-main-content">
         <section class="hero">
           <div class="container">
-            <span class="badge-private"
+            <span class="badge-private hero-animate hero-animate-1"
               ><i class="ri-shield-check-fill"></i> 100% Private, No
               Upload</span
             >
-            <h1>
+            <h1 class="hero-animate hero-animate-2">
               Powerful Image Tools,
               <span style="color: var(--accent-primary)">Offline First</span>
             </h1>
-            <p>
+            <p class="hero-animate hero-animate-3">
               Simple, fast, and secure. All image processing happens directly in
               your browser. Your data never leaves your device.
             </p>
 
-            <div class="search-container">
+            <div class="search-container hero-animate hero-animate-4">
               <i class="ri-search-line search-icon"></i>
               <input
                 type="text"
@@ -586,8 +559,8 @@
                 completely free with no hidden costs. We don't believe in
                 holding your converted files hostage behind paywalls,
                 subscription models, or annoying watermarks. What you see is
-                exactly what you get—a comprehensive suite of professional-grade
-                tools accessible to everyone at zero cost.
+                exactly what you getâ€”a comprehensive suite of
+                professional-grade tools accessible to everyone at zero cost.
               </p>
               <p style="margin-bottom: 1rem; line-height: 1.7">
                 Our platform offers an extensive variety of tools to cover all

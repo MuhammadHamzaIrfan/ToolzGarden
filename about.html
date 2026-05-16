@@ -17,26 +17,45 @@
 </head>
 <body>
     <header>
-      <nav class="container">
-        <a href="index.html" class="logo">
-          <img src="./Images/logo.png" alt="ToolzGarden Logo" style="height: 48px; width: 48px; object-fit: contain;" />
-          ToolzGarden
-        </a>
-        <div class="nav-actions">
-          <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-          <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
-            <i class="ri-moon-line"></i>
-          </button>
-        </div>
-      </nav>
-    </header>
+  <nav class="container">
+    <a href="index.html" class="logo">
+      <img src="Images/logo.png" alt="ToolzGarden Logo" style="height:40px;width:40px;object-fit:contain;" />
+      ToolzGarden
+    </a>
 
-    <main class="container" style="padding: 2rem 0;">
-        <div class="center-main-content" style="margin: 0 auto;">
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Nav Links -->
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
+        <i class="ri-moon-line"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+
+    <div class="full-page-wrapper">
+      <!-- LEFT AD SIDEBAR -->
+      <aside class="side-ad-container left-side-ad">
+        <div id="left-ad" class="modern-ad-placeholder">
+          <span class="ad-label">ADVERTISEMENT</span>
+        </div>
+      </aside>
+
+      <main class="center-main-content">
+        <div style="padding: 2rem 0; width: 100%;">
+            <div class="center-main-content" style="margin: 0 auto;">
             <!-- Hero Section -->
             <section class="hero" style="padding: 3rem 0 2rem;">
               <div class="container">
@@ -87,8 +106,17 @@
                 </div>
               </div>
             </section>
+            </div>
         </div>
-    </main>
+      </main>
+
+      <!-- RIGHT AD SIDEBAR -->
+      <aside class="side-ad-container right-side-ad">
+        <div id="right-ad" class="modern-ad-placeholder">
+          <span class="ad-label">ADVERTISEMENT</span>
+        </div>
+      </aside>
+    </div>
 
     <footer>
       <div class="container">
