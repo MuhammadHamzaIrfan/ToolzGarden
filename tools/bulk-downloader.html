@@ -1,87 +1,114 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bulk Downloader - Process Multiple Images | ToolzGarden</title>
-    <meta name="description" content="Process and download multiple images at once as a ZIP file. Fast, free, and 100% private. All processing happens in your browser.">
-    <link rel="canonical" href="https://toolzgarden.com/tools/bulk-downloader.html">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://toolzgarden.com/tools/bulk-downloader.html">
-    <meta property="og:title" content="Bulk Image Downloader - Online Tool">
-    <meta property="og:description" content="Download multiple images in a single ZIP file after processing. Secure and browser-based.">
-    <meta property="og:image" content="https://toolzgarden.com/assets/og-bulk.jpg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png">
-    <link rel="manifest" href="../Favicon-Images/site.webmanifest">
-    <link rel="shortcut icon" href="../Favicon-Images/favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+  <!-- Primary SEO -->
+  <title>Bulk Image Downloader - Free Online Download Tool | ToolzGarden</title>
+  <meta name="description" content="Process and download multiple images at once as a ZIP file. Free online bulk image tool. No signup required." />
+  <meta name="keywords" content="bulk image download, download images zip, multiple image download, batch image tool" />
+  <meta name="author" content="ToolzGarden" />
+  <meta name="robots" content="index, follow" />
 
-    <style>
-        .file-list {
-            list-style: none;
-            margin-top: 1.5rem;
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            padding: 0;
-        }
-        .file-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid var(--border-color);
-            background: var(--bg-primary);
-        }
-        .file-item:last-child {
-            border-bottom: none;
-        }
-        .file-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-        .file-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .file-size {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-        .file-status {
-            font-size: 0.8rem;
-            color: #10b981;
-        }
-    </style>
+  <!-- Canonical -->
+  <link rel="canonical" href="https://toolzgarden.com/tools/bulk-downloader.html" />
 
-    <!-- WebApplication Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "ToolzGarden Bulk Downloader",
-      "url": "https://toolzgarden.com/tools/bulk-downloader.html",
-      "description": "An online tool to bulk process and download multiple images as a ZIP file.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Bulk Image Downloader - Free Online Tool | ToolzGarden" />
+  <meta property="og:description" content="Process and download multiple images at once as a ZIP file. Free online bulk image tool. No signup required." />
+  <meta property="og:url" content="https://toolzgarden.com/tools/bulk-downloader.html" />
+  <meta property="og:site_name" content="ToolzGarden" />
+  <meta property="og:image" content="https://toolzgarden.com/Images/og-image.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bulk Image Downloader - Free Online Tool | ToolzGarden" />
+  <meta name="twitter:description" content="Process and download multiple images at once as a ZIP file. Free online bulk image tool. No signup required." />
+  <meta name="twitter:image" content="https://toolzgarden.com/Images/og-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png" />
+
+  <!-- Styles -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+
+  <!-- JSON-LD WebApplication Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Bulk Image Downloader",
+    "url": "https://toolzgarden.com/tools/bulk-downloader.html",
+    "description": "Process and download multiple images at once as a ZIP file. Free online bulk image tool. No signup required.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "ToolzGarden",
+      "url": "https://toolzgarden.com"
     }
-    </script>
+  }
+  </script>
 
-    <!-- JSZip Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Bulk Image Downloader free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Bulk Image Downloader on ToolzGarden is completely free. No signup or payment required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you store my files?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All processing happens in your browser. Your files never leave your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What formats are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multiple images in any common format"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to install anything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No installation needed. Open the tool in any browser and use it instantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a file size limit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no strict limit. Very large files above 50MB may process slowly depending on your device."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
         <header>
@@ -117,7 +144,7 @@
   <main class="center-main-content">
         <section style="padding: 2rem 0;">
             <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
-            <h1>Bulk Downloader</h1>
+            <h1>Free Online Bulk Image Downloader - No Signup Required</h1>
             <p style="color: var(--text-secondary);">Upload multiple images, convert them, and download everything in one ZIP file.</p>
         </section>
 
@@ -159,45 +186,58 @@
             </aside>
         </div>
 
-        <section class="faq-section">
-            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
-            <div class="faq-item">
-                <h3>Is there a limit on how many images I can upload?</h3>
-                <p>There is no strict limit, but uploading hundreds of high-resolution images at once may consume a lot of your device's memory.</p>
+        
+
+        
+      
+        <section style="padding:3rem 0;">
+          <div class="container">
+            <h2 style="margin-bottom:1.5rem;">Related Tools</h2>
+            <div class="tool-grid" style="padding:0;">
+              
+              <a href="image-compressor.html" class="tool-card" style="text-decoration:none;">
+                <div class="tool-icon"><i class="ri-file-zip-line"></i></div>
+                <h3>Image Compressor</h3>
+                <p>Compress JPG, PNG and WebP images online for free.</p>
+              </a>
+              <a href="image-resizer.html" class="tool-card" style="text-decoration:none;">
+                <div class="tool-icon"><i class="ri-aspect-ratio-line"></i></div>
+                <h3>Image Resizer</h3>
+                <p>Resize images online for free.</p>
+              </a>
+              <a href="image-to-jpg.html" class="tool-card" style="text-decoration:none;">
+                <div class="tool-icon"><i class="ri-file-image-line"></i></div>
+                <h3>Image to JPG Converter</h3>
+                <p>Convert PNG, WebP, GIF to JPG format free online.</p>
+              </a>
             </div>
-            <div class="faq-item">
-                <h3>How does the conversion work?</h3>
-                <p>Each image is processed individually in your browser's memory and then added to a virtual ZIP file.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Is it secure?</h3>
-                <p>Yes, your images never leave your computer. The ZIP file is generated locally.</p>
-            </div>
-            <div class="faq-item">
-                <h3>What is JSZip?</h3>
-                <p>JSZip is a popular JavaScript library we use to create ZIP files directly in your web browser.</p>
-            </div>
+          </div>
         </section>
 
-        <section style="padding: 4rem 0; border-top: 1px solid var(--border-color);">
-            <h3>Related Tools</h3>
-            <div class="tool-grid" style="padding-top: 2rem;">
-                <a href="image-compressor.html" class="tool-card">
-                    <div class="tool-icon"><i class="ri-contract-up-down-line"></i></div>
-                    <h4>Image Compressor</h4>
-                    <p>Reduce image sizes easily.</p>
-                </a>
-                <a href="image-resizer.html" class="tool-card">
-                    <div class="tool-icon"><i class="ri-aspect-ratio-line"></i></div>
-                    <h4>Image Resizer</h4>
-                    <p>Batch resize coming soon!</p>
-                </a>
-                <a href="image-to-png.html" class="tool-card">
-                    <div class="tool-icon"><i class="ri-file-image-line"></i></div>
-                    <h4>Image to PNG</h4>
-                    <p>Single file conversion.</p>
-                </a>
+        <section class="faq-section">
+          <div class="container">
+            <h2 style="text-align:center; margin-bottom:2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+              <h3>Is Bulk Image Downloader completely free?</h3>
+              <p>Yes. Bulk Image Downloader on ToolzGarden is 100% free. No account, no payment, no limits.</p>
             </div>
+            <div class="faq-item">
+              <h3>Are my files safe?</h3>
+              <p>Completely. All processing happens in your browser using JavaScript. Your files never leave your device and are never uploaded to any server.</p>
+            </div>
+            <div class="faq-item">
+              <h3>What file formats does this tool support?</h3>
+              <p>Multiple images in any common format</p>
+            </div>
+            <div class="faq-item">
+              <h3>Do I need to install any software?</h3>
+              <p>No. This tool works directly in your browser. No installation, no plugins, no extensions required.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Is there a file size limit?</h3>
+              <p>There is no strict file size limit. Very large files above 50MB may take longer depending on your device speed.</p>
+            </div>
+          </div>
         </section>
       </main>
 

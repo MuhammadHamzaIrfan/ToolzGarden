@@ -1,38 +1,114 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Merge - Free Online Tool | ToolzGarden</title>
-    <meta name="description" content="Merge multiple PDFs.">
-    <link rel="canonical" href="https://toolzgarden.com/tools/pdf-merge.html">
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- PDF.js for reading PDFs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <!-- jsPDF for creating PDFs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- PDF-lib for merging/splitting -->
-    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-    
-    <!-- FAQPage Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Is it private?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% private." } },
-        { "@type": "Question", "name": "Is it free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely free." } },
-        { "@type": "Question", "name": "Does it work offline?", "acceptedAnswer": { "@type": "Answer", "text": "Yes." } },
-        { "@type": "Question", "name": "Any uploads needed?", "acceptedAnswer": { "@type": "Answer", "text": "No uploads needed." } }
-      ]
+  <!-- Primary SEO -->
+  <title>PDF Merger - Free Online Merge Tool | ToolzGarden</title>
+  <meta name="description" content="Merge multiple PDF files into one online for free. Easy drag to reorder pages. No signup. Works in browser." />
+  <meta name="keywords" content="pdf merger, merge pdf online, combine pdf files, join pdf free" />
+  <meta name="author" content="ToolzGarden" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://toolzgarden.com/tools/pdf-merge.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="PDF Merger - Free Online Tool | ToolzGarden" />
+  <meta property="og:description" content="Merge multiple PDF files into one online for free. Easy drag to reorder pages. No signup. Works in browser." />
+  <meta property="og:url" content="https://toolzgarden.com/tools/pdf-merge.html" />
+  <meta property="og:site_name" content="ToolzGarden" />
+  <meta property="og:image" content="https://toolzgarden.com/Images/og-image.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PDF Merger - Free Online Tool | ToolzGarden" />
+  <meta name="twitter:description" content="Merge multiple PDF files into one online for free. Easy drag to reorder pages. No signup. Works in browser." />
+  <meta name="twitter:image" content="https://toolzgarden.com/Images/og-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../Favicon-Images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png" />
+
+  <!-- Styles -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+
+  <!-- JSON-LD WebApplication Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PDF Merger",
+    "url": "https://toolzgarden.com/tools/pdf-merge.html",
+    "description": "Merge multiple PDF files into one online for free. Easy drag to reorder pages. No signup. Works in browser.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "ToolzGarden",
+      "url": "https://toolzgarden.com"
     }
-    </script>
+  }
+  </script>
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is PDF Merger free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, PDF Merger on ToolzGarden is completely free. No signup or payment required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you store my files?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All processing happens in your browser. Your files never leave your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What formats are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two or more PDF files"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to install anything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No installation needed. Open the tool in any browser and use it instantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a file size limit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no strict limit. Very large files above 50MB may process slowly depending on your device."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
         <header>
@@ -68,7 +144,7 @@
   <main class="center-main-content">
         <section style="padding: 2rem 0;">
             <span class="badge-private"><i class="ri-shield-check-fill"></i> 100% Private, No Upload</span>
-            <h1>PDF Merger</h1>
+            <h1>Free Online PDF Merger - No Signup Required</h1>
             <p style="color: var(--text-secondary);">Merge multiple PDFs into one.</p>
         </section>
 
@@ -86,21 +162,58 @@
             </aside>
         </div>
 
-        <section class="faq-section">
-            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
-            <div class="faq-item"><h3>Is it private?</h3><p>Yes, 100% private. Processing happens in your browser.</p></div>
-            <div class="faq-item"><h3>Is it free?</h3><p>Yes, completely free to use without limits.</p></div>
-            <div class="faq-item"><h3>Does it work offline?</h3><p>Yes, once loaded you can use it without internet.</p></div>
-            <div class="faq-item"><h3>Any uploads needed?</h3><p>No, your files stay on your device.</p></div>
+        
+
+        
+      
+        <section style="padding:3rem 0;">
+          <div class="container">
+            <h2 style="margin-bottom:1.5rem;">Related Tools</h2>
+            <div class="tool-grid" style="padding:0;">
+              
+              <a href="pdf-split.html" class="tool-card" style="text-decoration:none;">
+                <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
+                <h3>PDF Splitter</h3>
+                <p>Split PDF files online for free.</p>
+              </a>
+              <a href="pdf-compress.html" class="tool-card" style="text-decoration:none;">
+                <div class="tool-icon"><i class="ri-file-pdf-line"></i></div>
+                <h3>PDF Compressor</h3>
+                <p>Compress PDF files online for free.</p>
+              </a>
+              <a href="pdf-page-remover.html" class="tool-card" style="text-decoration:none;">
+                <div class="tool-icon"><i class="ri-delete-bin-7-line"></i></div>
+                <h3>PDF Page Remover</h3>
+                <p>Remove specific pages from PDF files online for free.</p>
+              </a>
+            </div>
+          </div>
         </section>
 
-        <section style="padding: 4rem 0; border-top: 1px solid var(--border-color);">
-            <h3>Related Tools</h3>
-            <div class="tool-grid" style="padding-top: 2rem;">
-                <a href="pdf-compress.html" class="tool-card"><div class="tool-icon"><i class="ri-file-pdf-line"></i></div><h4>PDF Compress</h4><p>Reduce PDF size.</p></a>
-                <a href="word-counter.html" class="tool-card"><div class="tool-icon"><i class="ri-text"></i></div><h4>Word Counter</h4><p>Count words.</p></a>
-                <a href="json-formatter.html" class="tool-card"><div class="tool-icon"><i class="ri-braces-line"></i></div><h4>JSON Formatter</h4><p>Format JSON.</p></a>
+        <section class="faq-section">
+          <div class="container">
+            <h2 style="text-align:center; margin-bottom:2rem;">Frequently Asked Questions</h2>
+            <div class="faq-item">
+              <h3>Is PDF Merger completely free?</h3>
+              <p>Yes. PDF Merger on ToolzGarden is 100% free. No account, no payment, no limits.</p>
             </div>
+            <div class="faq-item">
+              <h3>Are my files safe?</h3>
+              <p>Completely. All processing happens in your browser using JavaScript. Your files never leave your device and are never uploaded to any server.</p>
+            </div>
+            <div class="faq-item">
+              <h3>What file formats does this tool support?</h3>
+              <p>Two or more PDF files</p>
+            </div>
+            <div class="faq-item">
+              <h3>Do I need to install any software?</h3>
+              <p>No. This tool works directly in your browser. No installation, no plugins, no extensions required.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Is there a file size limit?</h3>
+              <p>There is no strict file size limit. Very large files above 50MB may take longer depending on your device speed.</p>
+            </div>
+          </div>
         </section>
       </main>
 
