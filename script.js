@@ -64,35 +64,35 @@ function initAnimations() {
 
   // Tool Cards Fade Up on Scroll
   const cards = document.querySelectorAll('.tool-card');
-  if (cards.length === 0) return;
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.05 });
-
-  cards.forEach(card => observer.observe(card));
+  if (cards.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    cards.forEach(card => observer.observe(card));
+  }
 
   // Feature Items Fade Up
   const features = document.querySelectorAll('.feature-item');
-  const featureObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 100);
-        featureObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.05 });
-
-  features.forEach(f => featureObserver.observe(f));
+  if (features.length > 0) {
+    const featureObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 100);
+          featureObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+    features.forEach(f => featureObserver.observe(f));
+  }
 }
 
 /**
