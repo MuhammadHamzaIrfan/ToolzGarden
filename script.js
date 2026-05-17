@@ -127,14 +127,14 @@ const AdConfig = {
 <script type="text/javascript" src="https://www.highperformanceformat.com/e6057e5f17147ecf971a199d41a59d5c/invoke.js"></script>`,           
     rightAd: `<script>
   atOptions = {
-    'key' : 'dcabf3789cf9222520aa0becfc0802f8',
+    'key' : 'e6057e5f17147ecf971a199d41a59d5c',
     'format' : 'iframe',
-    'height' : 300,
+    'height' : 600,
     'width' : 160,
     'params' : {}
   };
 </script>
-<script type="text/javascript" src="https://www.highperformanceformat.com/dcabf3789cf9222520aa0becfc0802f8/invoke.js"></script>`,          
+<script type="text/javascript" src="https://www.highperformanceformat.com/e6057e5f17147ecf971a199d41a59d5c/invoke.js"></script>`,          
     nativeAd: `<script async="async" data-cfasync="false" src="https://pl29466896.effectivecpmnetwork.com/c9d45fde88457f3b282a3791a75b5290/invoke.js"></script>
 <div id="container-c9d45fde88457f3b282a3791a75b5290"></div>`
 };
@@ -189,12 +189,15 @@ async function initAds() {
     let nativeTarget = document.querySelector('.category-tabs'); // Homepage
     let insertMethod = 'afterend';
 
-    // Target About and Contact pages specifically
+    // Target About, Contact, and Tool pages specifically
     if (!nativeTarget) {
         const path = window.location.pathname.toLowerCase();
         if (path.includes('about') || path.includes('contact')) {
             nativeTarget = document.querySelector('main.center-main-content');
             insertMethod = 'beforeend';
+        } else if (path.includes('/tools/')) {
+            nativeTarget = document.querySelector('.tool-layout');
+            insertMethod = 'afterend';
         }
     }
 
