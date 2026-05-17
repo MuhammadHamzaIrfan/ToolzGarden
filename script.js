@@ -7,41 +7,84 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initNavigation();
     initSearch();
-    initAnimations();
-    initCategories(); 
+    initCategories();
+    initScrollReveal();
+    initScrollAndHeader();
+    initHamburgerMenu();
+    initUtilityListeners();
+});
 
-    // Hamburger Menu Toggle
+/**
+ * Throttled scroll handling to prevent layout thrashing and forced reflows.
+ */
+function initScrollAndHeader() {
+    const bar = document.getElementById('scrollProgress');
+    const header = document.querySelector('header');
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                // 1. Scroll Progress Bar
+                if (bar) {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+                    bar.style.width = scrolled + '%';
+                }
+
+                // 2. Header Shadow
+                if (header) {
+                    if (window.scrollY > 10) {
+                        header.style.boxShadow = '0 1px 20px rgba(0,0,0,0.2)';
+                    } else {
+                        header.style.boxShadow = 'none';
+                    }
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+}
+
+/**
+ * Hamburger Mobile Navigation Trigger
+ */
+function initHamburgerMenu() {
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
 
     if (hamburger && navLinks) {
-      hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('open');
-      });
-
-      // Close menu when link clicked
-      navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          hamburger.classList.remove('active');
-          navLinks.classList.remove('open');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
         });
-      });
 
-      // Close menu when clicked outside
-      document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-          hamburger.classList.remove('active');
-          navLinks.classList.remove('open');
-        }
-      });
+        // Close menu when link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            }
+        });
     }
+}
 
-    // ===== SCROLL REVEAL ANIMATION =====
-    function initScrollReveal() {
-
-      // Add reveal class to all target elements
-      const selectors = [
+/**
+ * Unified, high-performance IntersectionObserver for scroll-reveal animations.
+ * Eliminates duplicate observers and multiple document-wide reflows.
+ */
+function initScrollReveal() {
+    const revealSelectors = [
         '.tool-card',
         '.feature-item',
         '.faq-item',
@@ -49,117 +92,47 @@ document.addEventListener('DOMContentLoaded', () => {
         '.section-title',
         '.footer-brand',
         '.footer-links',
-        '.tool-description',
-        '.related-tools',
-        '.preview-container',
         '.controls-card',
-        '.upload-area',
+        '.tool-description',
+        '.coming-soon-panel',
+        '.badge-private',
+        'h2',
         '.why-section',
         '.stats-section',
-        'h2',
-        '.badge-private'
-      ];
+        '.preview-container',
+        '.upload-area'
+    ];
 
-      selectors.forEach(selector => {
-        document.querySelectorAll(selector).forEach(el => {
-          if (!el.classList.contains('hero-animate')) {
-            el.classList.add('reveal');
-          }
+    // Add CSS reveal class and configure stagger delays in bulk
+    revealSelectors.forEach(selector => {
+        document.querySelectorAll(selector).forEach((el, i) => {
+            if (!el.classList.contains('hero-animate')) {
+                el.classList.add('reveal');
+            }
+            if (selector === '.tool-card') {
+                el.style.transitionDelay = `${(i % 3) * 0.08}s`;
+            } else if (selector === '.feature-item') {
+                el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+            } else if (selector === '.footer-links' || selector === '.footer-brand') {
+                el.style.transitionDelay = `${(i % 3) * 0.08}s`;
+            }
         });
-      });
+    });
 
-      // Add stagger delays to tool cards
-      document.querySelectorAll('.tool-card').forEach((card, i) => {
-        const delay = (i % 3) * 0.1;
-        card.style.transitionDelay = `${delay}s`;
-      });
-
-      // Add stagger delays to feature items
-      document.querySelectorAll('.feature-item').forEach((item, i) => {
-        item.style.transitionDelay = `${i * 0.1}s`;
-      });
-
-      // Add stagger delays to footer links
-      document.querySelectorAll('.footer-links').forEach((item, i) => {
-        item.style.transitionDelay = `${i * 0.1}s`;
-      });
-
-      // IntersectionObserver for scroll reveal
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.08,
-        rootMargin: '0px 0px -40px 0px'
-      });
-
-      // Observe all reveal elements
-      document.querySelectorAll('.reveal').forEach(el => {
-        observer.observe(el);
-      });
-    }
-
-    initScrollReveal();
-});
-
-
-
-/* Animation Logic */
-
-function initAnimations() {
-  // Scroll Progress Bar
-  window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    const bar = document.getElementById('scrollProgress');
-    if (bar) bar.style.width = scrolled + '%';
-  }, { passive: true });
-
-  // Navbar Shadow on Scroll
-  const header = document.querySelector('header');
-  window.addEventListener('scroll', () => {
-    if (!header) return;
-    header.style.boxShadow = window.scrollY > 10
-      ? '0 1px 20px rgba(0,0,0,0.2)'
-      : 'none';
-  }, { passive: true });
-
-  // Tool Cards Fade Up on Scroll
-  const cards = document.querySelectorAll('.tool-card');
-  if (cards.length > 0) {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05 });
-    cards.forEach(card => observer.observe(card));
-  }
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.05,
+        rootMargin: '0px 0px -20px 0px'
+    });
 
-  // Feature Items Fade Up
-  const features = document.querySelectorAll('.feature-item');
-  if (features.length > 0) {
-    const featureObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 100);
-          featureObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05 });
-    features.forEach(f => featureObserver.observe(f));
-  }
+    // Observe elements
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
 /**
@@ -192,18 +165,9 @@ function updateThemeIcon(theme) {
 }
 
 /**
- * Mobile navigation and other header interactions
+ * Navigation setups (e.g. highlighting current page)
  */
 function initNavigation() {
-    // Analytics placeholder
-    /* 
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-    */
-
-    // Highlight active nav link
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav-links a').forEach(link => {
         const linkPage = link.getAttribute('href').split('/').pop();
@@ -239,6 +203,80 @@ function initSearch() {
 }
 
 /**
+ * Category Filtering Setup for the Homepage Grid
+ */
+function initCategories() {
+    const tabs = document.querySelectorAll('.cat-tab');
+    const toolCards = document.querySelectorAll('.tool-card');
+    const comingSoonPanel = document.getElementById('coming-soon-panel');
+    const initialPanel = document.getElementById('initial-placeholder-panel');
+    const toolGrid = document.querySelector('.tool-grid');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const category = tab.getAttribute('data-category');
+            const isComingSoon = tab.classList.contains('coming-soon');
+
+            if (initialPanel) initialPanel.style.display = 'none';
+
+            if (isComingSoon) {
+                if (toolGrid) toolGrid.style.display = 'none';
+                if (comingSoonPanel) comingSoonPanel.style.display = 'flex';
+            } else {
+                if (comingSoonPanel) comingSoonPanel.style.display = 'none';
+                if (toolGrid) toolGrid.style.display = 'grid';
+
+                toolCards.forEach(card => {
+                    if (card.getAttribute('data-category') === category) {
+                        card.style.display = 'flex';
+                        card.classList.remove('visible');
+                        setTimeout(() => card.classList.add('visible'), 30);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        });
+    });
+}
+
+/**
+ * Drag and drop and success states event delegators
+ */
+function initUtilityListeners() {
+    // Upload Zone Drag Effects
+    document.querySelectorAll('.upload-zone').forEach(zone => {
+        zone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            zone.classList.add('drag-over');
+        });
+        zone.addEventListener('dragleave', () => {
+            zone.classList.remove('drag-over');
+        });
+        zone.addEventListener('drop', () => {
+            zone.classList.remove('drag-over');
+        });
+    });
+
+    // Download Button Success State
+    document.querySelectorAll('.download-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const original = this.textContent;
+            this.textContent = 'Downloaded!';
+            this.style.background = '#16a34a';
+            this.style.transition = 'background 0.3s ease';
+            setTimeout(() => {
+                this.textContent = original;
+                this.style.background = '';
+            }, 2000);
+        });
+    });
+}
+
+/**
  * Utility: Format bytes to human readable format
  */
 function formatBytes(bytes, decimals = 2) {
@@ -268,9 +306,6 @@ function downloadBlob(blob, fileName) {
  * Shared Image processing utility
  */
 const PixUtils = {
-    /**
-     * Get image dimensions
-     */
     getImageDimensions: (file) => {
         return new Promise((resolve) => {
             const img = new Image();
@@ -278,10 +313,6 @@ const PixUtils = {
             img.src = URL.createObjectURL(file);
         });
     },
-
-    /**
-     * File to DataURL
-     */
     fileToDataURL: (file) => {
         return new Promise((resolve) => {
             const reader = new FileReader();
@@ -290,156 +321,3 @@ const PixUtils = {
         });
     }
 };
-
-
-
-// Scroll Progress Bar
-window.onscroll = function () {
-  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  var scrolled = (winScroll / height) * 100;
-  var bar = document.getElementById("scrollProgress");
-  if (bar) bar.style.width = scrolled + "%";
-};
-
-// Navbar Shadow on Scroll
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  if (nav) {
-    if (window.scrollY > 10) {
-      nav.style.boxShadow = '0 1px 20px rgba(0,0,0,0.2)';
-    } else {
-      nav.style.boxShadow = 'none';
-    }
-  }
-});
-
-// Upload Zone Drag Effects
-document.querySelectorAll('.upload-zone').forEach(zone => {
-  zone.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    zone.classList.add('drag-over');
-  });
-  zone.addEventListener('dragleave', () => {
-    zone.classList.remove('drag-over');
-  });
-  zone.addEventListener('drop', () => {
-    zone.classList.remove('drag-over');
-  });
-});
-
-// Download Button Success State
-document.querySelectorAll('.download-btn').forEach(btn => {
-  btn.addEventListener('click', function () {
-    const original = this.textContent;
-    this.textContent = 'Downloaded!';
-    this.style.background = '#16a34a';
-    this.style.transition = 'background 0.3s ease';
-    setTimeout(() => {
-      this.textContent = original;
-      this.style.background = '';
-    }, 2000);
-  });
-});
-
-function initCategories() {
-  const tabs = document.querySelectorAll('.cat-tab');
-  const toolCards = document.querySelectorAll('.tool-card');
-  const comingSoonPanel = document.getElementById('coming-soon-panel');
-  const initialPanel = document.getElementById('initial-placeholder-panel');
-  const toolGrid = document.querySelector('.tool-grid');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-
-      // Remove active from all tabs
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const category = tab.getAttribute('data-category');
-      const isComingSoon = tab.classList.contains('coming-soon');
-
-      // Hide initial panel forever once a tab is clicked
-      if (initialPanel) initialPanel.style.display = 'none';
-
-      if (isComingSoon) {
-        // Hide tool grid, show coming soon panel
-        toolGrid.style.display = 'none';
-        comingSoonPanel.style.display = 'flex';
-      } else {
-        // Show tool grid, hide coming soon panel
-        comingSoonPanel.style.display = 'none';
-        toolGrid.style.display = 'grid';
-
-        // Filter cards by category
-        toolCards.forEach(card => {
-          if (card.getAttribute('data-category') === category) {
-            card.style.display = 'flex';
-            // Re-trigger animation by resetting the class
-            card.classList.remove('visible');
-            setTimeout(() => card.classList.add('visible'), 50);
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      }
-    });
-  });
-}
-
-// Responsive Code
-
-/* ===== SCROLL REVEAL ANIMATION FIX ===== */
-/* Paste this at the bottom of your script.js file */
-
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Add reveal class directly to all target elements
-  const revealSelectors = [
-    '.tool-card',
-    '.feature-item', 
-    '.faq-item',
-    '.category-tabs',
-    '.section-title',
-    '.footer-brand',
-    '.footer-links',
-    '.controls-card',
-    '.tool-description',
-    '.coming-soon-panel'
-  ];
-
-  revealSelectors.forEach(selector => {
-    document.querySelectorAll(selector).forEach((el, i) => {
-      el.classList.add('reveal');
-      // Stagger delay for cards
-      if (selector === '.tool-card') {
-        el.style.transitionDelay = `${(i % 4) * 0.08}s`;
-      }
-      if (selector === '.feature-item') {
-        el.style.transitionDelay = `${i * 0.1}s`;
-      }
-      if (selector === '.footer-links' || selector === '.footer-brand') {
-        el.style.transitionDelay = `${i * 0.1}s`;
-      }
-    });
-  });
-
-  // IntersectionObserver
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.05,
-    rootMargin: '0px 0px -30px 0px'
-  });
-
-  // Observe all reveal elements
-  document.querySelectorAll('.reveal').forEach(el => {
-    revealObserver.observe(el);
-  });
-
-});

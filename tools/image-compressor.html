@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -115,7 +117,7 @@
         <header>
   <nav class="container">
     <a href="../index.html" class="logo">
-      <img src="../Images/logo.png" alt="ToolzGarden Logo" style="height:40px;width:40px;object-fit:contain;" />
+      <img src="../Images/logo.png" alt="ToolzGarden Logo" width="40" height="40" decoding="async" style="height:40px;width:40px;object-fit:contain;" />
       ToolzGarden
     </a>
 
@@ -283,7 +285,7 @@
         </div>
     </footer>
 
-    <script src="../script.js"></script>
-    <script src="image-compressor.js"></script>
+    <script src="../script.js" defer></script>
+    <script src="image-compressor.js" defer></script>
 </body>
 </html>
