@@ -74,11 +74,11 @@ button {
 
 /* Header & Navigation */
 header {
-    background-color: var(--bg-primary);
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
 }
 
 nav {
@@ -1054,10 +1054,11 @@ header {
   /* Navbar */
   nav {
     flex-wrap: wrap;
-    padding: 0;
+    padding: 0 1rem;
     height: auto;
     min-height: 4rem;
     position: relative;
+    width: 100%;
   }
 
   .logo {
@@ -1070,17 +1071,17 @@ header {
 
   .nav-links {
     display: none;
-    width: 100vw;
+    width: 100%;
     flex-direction: column;
     gap: 0;
     background: var(--bg-primary);
     border-top: 1px solid var(--border-color);
     padding: 0.5rem 0;
-    position: fixed;
-    top: 4rem;
+    position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
-    z-index: 999;
+    z-index: 200;
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   }
 
@@ -1340,11 +1341,12 @@ header {
 
   /* Navbar fix */
   nav {
+    flex-wrap: wrap;
     padding: 0 1rem;
     height: auto;
     min-height: 4rem;
-    flex-wrap: wrap;
     position: relative;
+    width: 100%;
   }
 
   .logo {
