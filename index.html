@@ -98,10 +98,6 @@
   .theme-toggle{background:#1e293b;color:#f8fafc;padding:0.5rem;border-radius:0.5rem;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;width:36px;height:36px}
   .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:0.5rem}
   .hamburger span{display:block;width:24px;height:2px;background:#f8fafc;border-radius:2px;transition:all 0.3s ease}
-  .full-page-wrapper{display:flex;width:100%;min-height:100vh;align-items:flex-start;overflow-x:hidden}
-  .center-main-content{flex:1;min-width:0;width:100%;overflow-x:hidden}
-  .side-ad-container{width:200px;flex-shrink:0}
-  @media(max-width:1200px){.side-ad-container{display:none}.full-page-wrapper{padding:0}}
   @media(max-width:768px){
     .hero{padding:2rem 0 1.5rem}
     .hero h1{font-size:1.75rem;padding:0 0.5rem}
@@ -113,7 +109,6 @@
     .logo{font-size:1.1rem;padding:0.75rem 0}
     .container{padding:0 1rem}
     .search-container{padding:0 0.5rem}
-    .center-main-content{padding:0}
   }
   @media(max-width:400px){.hero h1{font-size:1.5rem}.logo{font-size:1rem}}
 </style>
@@ -193,9 +188,7 @@
       </nav>
     </header>
 
-    <div class="full-page-wrapper">
-
-      <main class="center-main-content">
+    <main class="container">
         <section class="hero">
           <div class="container">
             <span class="badge-private hero-animate hero-animate-1"
@@ -758,9 +751,7 @@
             </div>
           </div>
         </section>
-      </main>
-    </div>
-    <!-- End of full-page-wrapper -->
+    </main>
 
     <footer>
       <div class="container">
