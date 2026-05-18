@@ -76,7 +76,7 @@ button {
 header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
   background-color: var(--bg-primary);
   border-bottom: 1px solid var(--border-color);
 }
@@ -1035,7 +1035,7 @@ html, body {
   header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     width: 100%;
   }
 
@@ -1081,6 +1081,7 @@ html, body {
     left: 0;
     right: 0;
     width: 100%;
+    transform: none;
     flex-direction: column;
     background: var(--bg-primary);
     border-top: 1px solid var(--border-color);
@@ -1262,6 +1263,10 @@ html, body {
   /* Upload Area */
   .upload-area {
     padding: 2rem 1rem;
+  }
+
+  .upload-area h3 {
+    display: none;
   }
 
   /* FAQ */
