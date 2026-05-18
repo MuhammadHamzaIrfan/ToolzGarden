@@ -1153,6 +1153,7 @@ html, body {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: flex-start;
     overflow-x: auto;
     overflow-y: hidden;
     gap: 0.5rem;
