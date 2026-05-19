@@ -1,0 +1,415 @@
+﻿<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Loan &amp; Installment Calculator - Free EMI Calculator Online | ToolzGarden</title>
+<meta name="description" content="Calculate monthly loan installments, total repayment, and interest instantly. Free EMI calculator - no signup, 100% private, runs in your browser."/>
+<link rel="canonical" href="https://toolzgarden.com/tools/loan-calculator.html"/>
+<meta property="og:title" content="Loan &amp; Installment Calculator - Free Online EMI Calculator"/>
+<meta property="og:description" content="Calculate monthly installments, total payment and interest for any loan. Free, instant, no signup required."/>
+<meta property="og:url" content="https://toolzgarden.com/tools/loan-calculator.html"/>
+<meta property="og:type" content="website"/>
+<link rel="icon" type="image/png" href="../Images/logo.png"/>
+<link rel="stylesheet" href="../style.css"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Loan & Installment Calculator","url":"https://toolzgarden.com/tools/loan-calculator.html","applicationCategory":"FinanceApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free browser-based loan EMI calculator. Calculate monthly installment, total payment and interest for any loan."}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is the monthly loan installment calculated?","acceptedAnswer":{"@type":"Answer","text":"EMI = [P x r x (1+r)^n] / [(1+r)^n - 1], where P is principal, r is monthly interest rate (annual/12/100), and n is number of months."}},{"@type":"Question","name":"Is this loan calculator free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free. No signup, no account required. The calculator runs entirely in your browser."}},{"@type":"Question","name":"Does a longer loan term reduce monthly payment?","acceptedAnswer":{"@type":"Answer","text":"Yes, a longer term lowers the monthly payment but increases total interest paid significantly."}},{"@type":"Question","name":"Can I use this for a mortgage or auto loan?","acceptedAnswer":{"@type":"Answer","text":"Yes. This calculator works for any fixed-rate loan including personal loans, auto loans, mortgages, and education loans."}}]}</script>
+<style>
+:root{--calc-gap:1.5rem}
+.calc-hero{padding:2.5rem 0 1rem;text-align:center}
+.calc-hero h1{font-size:2.2rem;font-weight:800;color:var(--text-primary);margin-bottom:.5rem}
+.calc-hero p{color:var(--text-secondary);font-size:1rem;max-width:600px;margin:0 auto 1rem}
+
+
+.calc-layout{display:grid;grid-template-columns:1fr 1fr;gap:var(--calc-gap);margin:1.5rem 0}
+.calc-card{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:1rem;padding:1.75rem}
+.field-group{margin-bottom:1.25rem}
+.field-group label{display:block;font-size:.88rem;font-weight:600;color:var(--text-secondary);margin-bottom:.4rem}
+.field-row{display:flex;align-items:center;gap:.5rem}
+.field-row input[type=number]{flex:0 0 110px;padding:.6rem .75rem;border-radius:.5rem;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-size:.95rem;width:110px}
+.field-row input[type=range]{flex:1;accent-color:var(--accent-primary)}
+.term-toggle{display:flex;border:1px solid var(--border-color);border-radius:.5rem;overflow:hidden}
+.term-toggle button{flex:1;padding:.5rem;background:transparent;color:var(--text-secondary);font-size:.85rem;font-weight:600;border:none;cursor:pointer;transition:all .2s}
+.term-toggle button.active{background:var(--accent-primary);color:#fff}
+.currency-select{width:100%;padding:.6rem .75rem;border-radius:.5rem;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-size:.9rem;margin-bottom:1rem}
+.error-msg{font-size:.8rem;color:#ef4444;margin-top:.25rem;display:none}
+.btn-reset{width:100%;margin-top:.5rem;padding:.65rem;background:var(--bg-tertiary);color:var(--text-secondary);border-radius:.5rem;font-weight:600;font-size:.9rem;border:1px solid var(--border-color);cursor:pointer;transition:all .2s}
+.btn-reset:hover{background:var(--border-color);color:var(--text-primary)}
+.results-card{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:1rem;padding:1.75rem;display:flex;flex-direction:column;gap:1.25rem}
+.result-main{text-align:center;padding:1.25rem;background:var(--bg-primary);border-radius:.75rem;border:1px solid var(--accent-primary)}
+.result-main .r-label{font-size:.82rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.35rem}
+.result-main .r-value{font-size:2rem;font-weight:800;color:var(--accent-primary)}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.result-item{background:var(--bg-primary);border-radius:.75rem;padding:1rem;border:1px solid var(--border-color)}
+.result-item .r-label{font-size:.75rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem}
+.result-item .r-value{font-size:1.2rem;font-weight:700;color:var(--text-primary)}
+.breakdown-bar-wrap{margin-top:.25rem}
+.breakdown-bar-wrap .bar-label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--text-secondary);margin-bottom:.35rem}
+.breakdown-bar{height:12px;border-radius:9999px;background:var(--bg-tertiary);overflow:hidden;display:flex}
+.bar-principal{background:var(--accent-primary);height:100%;transition:width .8s ease}
+.bar-interest{background:#f59e0b;height:100%;transition:width .8s ease}
+.bar-legend{display:flex;gap:1rem;margin-top:.4rem;font-size:.78rem;color:var(--text-secondary)}
+.bar-legend span{display:flex;align-items:center;gap:.3rem}
+.bar-legend .dot{width:10px;height:10px;border-radius:50%}
+.dot-p{background:var(--accent-primary)}.dot-i{background:#f59e0b}
+.btn-copy{width:100%;padding:.7rem;background:var(--accent-primary);color:#fff;border-radius:.5rem;font-weight:600;font-size:.9rem;border:none;cursor:pointer;transition:all .2s}
+.btn-copy:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.amort-toggle{width:100%;padding:.7rem;background:var(--bg-tertiary);color:var(--text-secondary);border-radius:.5rem;font-weight:600;font-size:.9rem;border:1px solid var(--border-color);cursor:pointer;margin:1rem 0 .5rem;transition:all .2s}
+.amort-toggle:hover{background:var(--border-color);color:var(--text-primary)}
+.amort-wrap{display:none;overflow-x:auto;max-height:380px;overflow-y:auto;border:1px solid var(--border-color);border-radius:.75rem}
+.amort-wrap table{width:100%;border-collapse:collapse;font-size:.82rem}
+.amort-wrap thead{background:var(--bg-tertiary);position:sticky;top:0;z-index:1}
+.amort-wrap th{padding:.6rem .75rem;text-align:right;font-weight:700;color:var(--text-secondary);white-space:nowrap}
+.amort-wrap th:first-child{text-align:center}
+.amort-wrap td{padding:.55rem .75rem;text-align:right;border-bottom:1px solid var(--border-color);color:var(--text-primary)}
+.amort-wrap td:first-child{text-align:center;color:var(--text-secondary)}
+.amort-wrap tr:nth-child(even){background:rgba(255,255,255,.02)}
+.amort-wrap tr.total-row{background:var(--bg-tertiary);font-weight:700}
+.seo-section{background:var(--bg-secondary);border-radius:1rem;padding:2rem;margin:2rem 0;border:1px solid var(--border-color)}
+.seo-section h2{font-size:1.35rem;font-weight:700;color:var(--text-primary);margin:1.5rem 0 .75rem}
+.seo-section h2:first-child{margin-top:0}
+.seo-section p,.seo-section li{color:var(--text-secondary);font-size:.95rem;line-height:1.7}
+.seo-section ul{padding-left:1.25rem;margin:.5rem 0}
+.faq-item{border:1px solid var(--border-color);border-radius:.5rem;margin-bottom:.6rem;overflow:hidden}
+.faq-item summary{padding:.9rem 1rem;cursor:pointer;font-weight:600;color:var(--text-primary);font-size:.95rem;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq-item summary::after{content:"+";;font-size:1.2rem;color:var(--accent-primary)}
+.faq-item[open] summary::after{content:"−"}
+.faq-item .faq-body{padding:.75rem 1rem 1rem;color:var(--text-secondary);font-size:.92rem;line-height:1.65;border-top:1px solid var(--border-color)}
+.formula-box{background:var(--bg-primary);border-left:3px solid var(--accent-primary);border-radius:.5rem;padding:.9rem 1.1rem;font-family:monospace;font-size:.9rem;color:var(--accent-primary);margin:.75rem 0}
+.privacy-badge-tool{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .75rem;background:rgba(16,185,129,.1);color:#059669;border-radius:9999px;font-size:.78rem;font-weight:600;margin-bottom:.5rem}
+@media(max-width:768px){
+.calc-layout{grid-template-columns:1fr}
+.calc-hero h1{font-size:1.6rem}
+.result-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<nav class="container">
+<a href="../index.html" class="logo">
+<img src="../Images/logo.png" alt="ToolzGarden Logo" width="36" height="36" style="object-fit:contain"/>
+ToolzGarden
+</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle Menu"><span></span><span></span><span></span></button>
+<ul class="nav-links" id="nav-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="../about.html">About</a></li>
+<li><a href="../contact.html">Contact</a></li>
+</ul>
+<div class="nav-actions">
+<button class="theme-toggle" id="theme-toggle" title="Toggle Theme"><i class="ri-moon-line"></i></button>
+</div>
+</nav>
+</header>
+<div class="container" style="padding-top:1.5rem">
+<div class="calc-hero">
+<span class="privacy-badge-tool"><i class="ri-shield-check-fill"></i> 100% Private — Runs in Your Browser</span>
+<h1>Free Loan &amp; Installment Calculator</h1>
+<p>Calculate your monthly EMI, total repayment, and total interest for any loan. Instant results — no signup, no uploads.</p>
+</div>
+<div class="calc-layout">
+<div class="calc-card">
+<h2 style="font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;color:var(--text-primary)">Loan Details</h2>
+<div class="field-group">
+<label for="currency">Currency</label>
+<select class="currency-select" id="currency">
+<option value="$">USD — $</option>
+<option value="€">EUR — €</option>
+<option value="£">GBP — £</option>
+<option value="₹">INR — ₹</option>
+<option value="₨">PKR — ₨</option>
+</select>
+</div>
+<div class="field-group">
+<label for="amount-num">Loan Amount</label>
+<div class="field-row">
+<input type="number" id="amount-num" min="100" max="10000000" value="10000" step="100" aria-describedby="amount-err"/>
+<input type="range" id="amount-range" min="100" max="1000000" value="10000" step="100" aria-label="Loan amount slider"/>
+</div>
+<div class="error-msg" id="amount-err">Enter an amount between 100 and 10,000,000.</div>
+</div>
+<div class="field-group">
+<label for="rate-num">Annual Interest Rate (%)</label>
+<div class="field-row">
+<input type="number" id="rate-num" min="0" max="50" value="7.5" step="0.1" aria-describedby="rate-err"/>
+<input type="range" id="rate-range" min="0" max="30" value="7.5" step="0.1" aria-label="Interest rate slider"/>
+</div>
+<div class="error-msg" id="rate-err">Enter a rate between 0% and 50%.</div>
+</div>
+<div class="field-group">
+<label for="term-num">Loan Term</label>
+<div class="field-row" style="flex-wrap:wrap;gap:.5rem">
+<input type="number" id="term-num" min="1" max="600" value="36" step="1" style="flex:0 0 80px;width:80px" aria-describedby="term-err"/>
+<div class="term-toggle">
+<button id="btn-months" class="active" aria-pressed="true">Months</button>
+<button id="btn-years" aria-pressed="false">Years</button>
+</div>
+</div>
+<input type="range" id="term-range" min="1" max="360" value="36" step="1" style="width:100%;margin-top:.5rem;accent-color:var(--accent-primary)" aria-label="Loan term slider"/>
+<div class="error-msg" id="term-err">Enter a term between 1 and 600 months.</div>
+</div>
+<button class="btn-reset" id="btn-reset">↺ Reset to Defaults</button>
+</div>
+<div class="results-card" id="results-region" role="region" aria-live="polite" aria-label="Calculation results">
+<div class="result-main">
+<div class="r-label">Monthly Installment (EMI)</div>
+<div class="r-value" id="res-emi">—</div>
+</div>
+<div class="result-grid">
+<div class="result-item">
+<div class="r-label">Total Repayment</div>
+<div class="r-value" id="res-total">—</div>
+</div>
+<div class="result-item">
+<div class="r-label">Total Interest</div>
+<div class="r-value" id="res-interest" style="color:#f59e0b">—</div>
+</div>
+</div>
+<div class="breakdown-bar-wrap">
+<div class="bar-label">
+<span>Principal: <strong id="pct-principal">—</strong></span>
+<span>Interest: <strong id="pct-interest">—</strong></span>
+</div>
+<div class="breakdown-bar" role="img" aria-label="Payment breakdown chart">
+<div class="bar-principal" id="bar-p" style="width:0%"></div>
+<div class="bar-interest" id="bar-i" style="width:0%"></div>
+</div>
+<div class="bar-legend">
+<span><div class="dot dot-p"></div>Principal</span>
+<span><div class="dot dot-i"></div>Interest</span>
+</div>
+</div>
+<button class="btn-copy" id="btn-copy"><i class="ri-file-copy-line"></i> Copy Results</button>
+</div>
+</div>
+<button class="amort-toggle" id="amort-toggle">View Full Repayment Schedule ▼</button>
+<div class="amort-wrap" id="amort-wrap">
+<table>
+<thead><tr><th>Month</th><th>Opening Balance</th><th>EMI</th><th>Principal</th><th>Interest</th><th>Closing Balance</th></tr></thead>
+<tbody id="amort-body"></tbody>
+</table>
+</div>
+<section class="seo-section">
+<h2>How to Use the Loan Calculator</h2>
+<p><strong>Step 1 — Loan Amount:</strong> Enter the total amount you want to borrow.</p>
+<p><strong>Step 2 — Interest Rate:</strong> Enter your lender's annual interest rate (APR).</p>
+<p><strong>Step 3 — Loan Term:</strong> Choose the repayment period in months or years.</p>
+<p>Results update instantly as you type. Toggle the repayment schedule to see a month-by-month breakdown.</p>
+<h2>Understanding Your Results</h2>
+<p>Your <strong>Monthly Installment (EMI)</strong> is the fixed amount payable each month. It covers both principal repayment and interest. The <strong>Total Interest</strong> shows the true cost of borrowing — the shorter the term, the less interest you pay overall.</p>
+<h2>The EMI Formula</h2>
+<div class="formula-box">EMI = [P × r × (1 + r)^n] ÷ [(1 + r)^n − 1]</div>
+<p>Where <strong>P</strong> = Principal, <strong>r</strong> = Monthly rate (annual ÷ 12 ÷ 100), <strong>n</strong> = Number of months.</p>
+<h2>Tips to Reduce Your Loan Cost</h2>
+<ul>
+<li>Choose the shortest term you can comfortably afford — it saves significant interest.</li>
+<li>Improve your credit score before applying to unlock lower rates.</li>
+<li>Compare multiple lenders — even 0.5% difference matters over years.</li>
+<li>Make lump-sum prepayments to reduce the outstanding principal faster.</li>
+</ul>
+<h2>Frequently Asked Questions</h2>
+<details class="faq-item">
+<summary>How is the monthly loan installment calculated?</summary>
+<div class="faq-body">EMI = [P × r × (1+r)^n] ÷ [(1+r)^n − 1], where P is principal, r is the monthly interest rate (annual rate ÷ 12 ÷ 100), and n is the number of monthly payments.</div>
+</details>
+<details class="faq-item">
+<summary>Is this loan calculator free?</summary>
+<div class="faq-body">Yes, completely free. No account, no signup, no payment required. Everything runs in your browser — your data never leaves your device.</div>
+</details>
+<details class="faq-item">
+<summary>Does a longer loan term reduce my monthly payment?</summary>
+<div class="faq-body">Yes — a longer term lowers your monthly EMI but significantly increases the total interest paid. Use the calculator to compare different terms.</div>
+</details>
+<details class="faq-item">
+<summary>Can I use this for a mortgage or auto loan?</summary>
+<div class="faq-body">Yes. This calculator works for any fixed-rate loan — personal loans, auto loans, home loans, and education loans. Actual mortgage costs may include taxes and insurance not captured here.</div>
+</details>
+<details class="faq-item">
+<summary>What is loan amortization?</summary>
+<div class="faq-body">Amortization is the process of paying off a loan through scheduled payments. Early payments have more interest; later payments have more principal. Toggle the repayment schedule above to see month-by-month.</div>
+</details>
+<details class="faq-item">
+<summary>What is the difference between EMI and installment?</summary>
+<div class="faq-body">EMI (Equated Monthly Installment) and installment refer to the same thing — the fixed monthly payment to repay a loan. EMI is the common term in South Asia; "monthly payment" or "installment" is standard elsewhere.</div>
+</details>
+</section>
+</div>
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="footer-logo" href="../index.html">ToolzGarden</a>
+<p>Free online tools for everyone. Professional grade, privacy-focused, and 100% free.</p>
+</div>
+<div class="footer-links"><h4>Tools</h4><ul>
+<li><a href="image-compressor.html">Image Compressor</a></li>
+<li><a href="pdf-compress.html">PDF Compress</a></li>
+<li><a href="word-counter.html">Word Counter</a></li>
+<li><a href="loan-calculator.html">Loan Calculator</a></li>
+</ul></div>
+<div class="footer-links"><h4>Company</h4><ul>
+<li><a href="../about.html">About Us</a></li>
+<li><a href="../contact.html">Contact</a></li>
+<li><a href="../privacy.html">Privacy Policy</a></li>
+<li><a href="../terms.html">Terms of Service</a></li>
+</ul></div>
+</div>
+<div class="footer-bottom"><p>&copy; 2025 ToolzGarden. All rights reserved. Processed in-browser.</p></div>
+</div>
+</footer>
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"></noscript>
+<script src="../script.js"></script>
+<script>
+(function(){
+var sym='$', termInMonths=true;
+var defaults={amount:10000,rate:7.5,term:36};
+var amortOpen=false;
+
+function fmt(n){return sym+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function pct(n){return n.toFixed(1)+'%';}
+
+function getTermMonths(){
+  var t=parseFloat(document.getElementById('term-num').value)||0;
+  return termInMonths?t:Math.round(t*12);
+}
+
+function validate(){
+  var a=parseFloat(document.getElementById('amount-num').value);
+  var r=parseFloat(document.getElementById('rate-num').value);
+  var t=getTermMonths();
+  var ok=true;
+  var aerr=document.getElementById('amount-err');
+  var rerr=document.getElementById('rate-err');
+  var terr=document.getElementById('term-err');
+  aerr.style.display=(isNaN(a)||a<100||a>10000000)?'block':'none';
+  rerr.style.display=(isNaN(r)||r<0||r>50)?'block':'none';
+  terr.style.display=(isNaN(t)||t<1||t>600)?'block':'none';
+  if(isNaN(a)||a<100||a>10000000)ok=false;
+  if(isNaN(r)||r<0||r>50)ok=false;
+  if(isNaN(t)||t<1||t>600)ok=false;
+  return ok;
+}
+
+function calc(){
+  if(!validate())return;
+  var P=parseFloat(document.getElementById('amount-num').value);
+  var ann=parseFloat(document.getElementById('rate-num').value);
+  var n=getTermMonths();
+  var emi,totalPay,totalInt;
+  if(ann===0){emi=P/n;totalPay=P;totalInt=0;}
+  else{var r=ann/12/100;emi=(P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);totalPay=emi*n;totalInt=totalPay-P;}
+  document.getElementById('res-emi').textContent=fmt(emi);
+  document.getElementById('res-total').textContent=fmt(totalPay);
+  document.getElementById('res-interest').textContent=fmt(totalInt);
+  var pp=(P/totalPay*100),ip=(totalInt/totalPay*100);
+  document.getElementById('bar-p').style.width=pp+'%';
+  document.getElementById('bar-i').style.width=ip+'%';
+  document.getElementById('pct-principal').textContent=pct(pp);
+  document.getElementById('pct-interest').textContent=pct(ip);
+  if(amortOpen)buildTable(P,ann,n,emi);
+  window._calcResult={P:P,ann:ann,n:n,emi:emi,totalPay:totalPay,totalInt:totalInt};
+}
+
+function buildTable(P,ann,n,emi){
+  var r=ann===0?0:ann/12/100;
+  var tbody=document.getElementById('amort-body');
+  var rows='';var bal=P;
+  for(var m=1;m<=n;m++){
+    var iP=bal*r,prP=(ann===0?emi:emi-iP),cl=Math.max(bal-prP,0);
+    rows+='<tr><td>'+m+'</td><td>'+fmt(bal)+'</td><td>'+fmt(emi)+'</td><td>'+fmt(prP)+'</td><td>'+fmt(iP)+'</td><td>'+fmt(cl)+'</td></tr>';
+    bal=cl;
+  }
+  tbody.innerHTML=rows;
+}
+
+function syncSliders(){
+  var aN=document.getElementById('amount-num'),aR=document.getElementById('amount-range');
+  var rN=document.getElementById('rate-num'),rR=document.getElementById('rate-range');
+  var tN=document.getElementById('term-num'),tR=document.getElementById('term-range');
+  function bind(num,rng){
+    num.addEventListener('input',function(){rng.value=num.value;calc();});
+    rng.addEventListener('input',function(){num.value=rng.value;calc();});
+  }
+  bind(aN,aR);bind(rN,rR);bind(tN,tR);
+}
+
+document.getElementById('currency').addEventListener('change',function(){
+  sym=this.value;calc();
+});
+
+document.getElementById('btn-months').addEventListener('click',function(){
+  if(termInMonths)return;
+  var t=parseFloat(document.getElementById('term-num').value)||0;
+  termInMonths=true;
+  document.getElementById('term-num').value=Math.round(t*12);
+  document.getElementById('term-range').value=Math.round(t*12);
+  document.getElementById('btn-months').classList.add('active');
+  document.getElementById('btn-years').classList.remove('active');
+  document.getElementById('btn-months').setAttribute('aria-pressed','true');
+  document.getElementById('btn-years').setAttribute('aria-pressed','false');
+  calc();
+});
+
+document.getElementById('btn-years').addEventListener('click',function(){
+  if(!termInMonths)return;
+  var t=parseFloat(document.getElementById('term-num').value)||0;
+  termInMonths=false;
+  document.getElementById('term-num').value=(t/12).toFixed(1);
+  document.getElementById('term-range').value=(t/12).toFixed(1);
+  document.getElementById('btn-years').classList.add('active');
+  document.getElementById('btn-months').classList.remove('active');
+  document.getElementById('btn-years').setAttribute('aria-pressed','true');
+  document.getElementById('btn-months').setAttribute('aria-pressed','false');
+  calc();
+});
+
+document.getElementById('btn-reset').addEventListener('click',function(){
+  document.getElementById('amount-num').value=defaults.amount;
+  document.getElementById('amount-range').value=defaults.amount;
+  document.getElementById('rate-num').value=defaults.rate;
+  document.getElementById('rate-range').value=defaults.rate;
+  if(!termInMonths){
+    termInMonths=true;
+    document.getElementById('btn-months').classList.add('active');
+    document.getElementById('btn-years').classList.remove('active');
+  }
+  document.getElementById('term-num').value=defaults.term;
+  document.getElementById('term-range').value=defaults.term;
+  calc();
+});
+
+document.getElementById('btn-copy').addEventListener('click',function(){
+  var r=window._calcResult;if(!r)return;
+  var n=r.n,t=termInMonths?n+' months':(n/12).toFixed(1)+' years';
+  var txt='Loan Amount: '+fmt(r.P)+'\nInterest Rate: '+r.ann+'% per year\nTerm: '+t+'\nMonthly Installment: '+fmt(r.emi)+'\nTotal Repayment: '+fmt(r.totalPay)+'\nTotal Interest: '+fmt(r.totalInt);
+  navigator.clipboard.writeText(txt).then(function(){
+    var b=document.getElementById('btn-copy');
+    var orig=b.innerHTML;
+    b.innerHTML='<i class="ri-check-line"></i> Copied!';
+    setTimeout(function(){b.innerHTML=orig;},2000);
+  });
+});
+
+document.getElementById('amort-toggle').addEventListener('click',function(){
+  amortOpen=!amortOpen;
+  var w=document.getElementById('amort-wrap');
+  if(amortOpen){
+    w.style.display='block';
+    this.textContent='Hide Repayment Schedule ▲';
+    if(window._calcResult){var r=window._calcResult;buildTable(r.P,r.ann,r.n,r.emi);}
+  }else{
+    w.style.display='none';
+    this.textContent='View Full Repayment Schedule ▼';
+  }
+});
+
+syncSliders();
+calc();
+})();
+</script>
+</body>
+</html>

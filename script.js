@@ -241,6 +241,13 @@ function initCategories() {
             }
         });
     });
+
+    // Auto-select the first non-coming-soon tab on page load
+    // so the "Select a Category" placeholder never shows on initial render.
+    const firstTab = Array.from(tabs).find(tab => !tab.classList.contains('coming-soon'));
+    if (firstTab) {
+        firstTab.click();
+    }
 }
 
 /**
