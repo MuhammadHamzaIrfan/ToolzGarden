@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>QR Code Generator - Free Online QR Creator No Signup</title>
+<meta name="description" content="Generate QR codes for URLs, text, email and phone instantly. Free online QR code generator — no signup, no server, download as PNG in one click."/>
+<link rel="canonical" href="https://toolzgarden.com/tools/qr-code-generator.html"/>
+<meta property="og:title" content="QR Code Generator - Free Online QR Creator No Signup"/>
+<meta property="og:description" content="Instantly generate scannable QR codes for URLs, text, email and phone. Change size and color. Download as PNG free — no account needed."/>
+<meta property="og:url" content="https://toolzgarden.com/tools/qr-code-generator.html"/>
+<meta property="og:type" content="website"/>
+<link rel="icon" type="image/png" href="../Images/logo.png"/>
+<link rel="stylesheet" href="../style.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"/>
+<script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QR Code Generator","url":"https://toolzgarden.com/tools/qr-code-generator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free browser-based QR code generator. Generate scannable QR codes for URLs, text, email, and phone numbers instantly. No signup required."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I generate a QR code for a URL?","acceptedAnswer":{"@type":"Answer","text":"Select 'Website URL' from the input type dropdown, paste or type your URL into the input field, and the QR code generates instantly. Click Download PNG to save it."}},{"@type":"Question","name":"Is this QR code generator completely free?","acceptedAnswer":{"@type":"Answer","text":"Yes, 100% free with no account, no signup, and no watermark. All QR codes are generated in your browser using JavaScript — no server is involved."}},{"@type":"Question","name":"Can I change the color of my QR code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the foreground color picker to change the QR code color, and the background color picker to change the background. Any color combination works as long as there is sufficient contrast for scanning."}},{"@type":"Question","name":"What input types does this QR code generator support?","acceptedAnswer":{"@type":"Answer","text":"The generator supports Website URLs, plain text, email addresses, phone numbers, and WhatsApp message links. Each type formats the input correctly before encoding."}},{"@type":"Question","name":"How do I download my QR code as a PNG?","acceptedAnswer":{"@type":"Answer","text":"Click the Download PNG button after your QR code appears. The image is saved directly to your device from the browser canvas — no server upload needed."}},{"@type":"Question","name":"Will the QR code work offline after I generate it?","acceptedAnswer":{"@type":"Answer","text":"The QR code image itself is static and scannable permanently. The generator tool also works offline after the page initially loads, since all processing is done in your browser."}}]}</script>
+<style>
+.qr-hero{padding:2.5rem 0 1rem;text-align:center}
+.qr-hero h1{font-size:2rem;font-weight:800;color:var(--text-primary);margin-bottom:.5rem}
+.qr-hero p{color:var(--text-secondary);font-size:.95rem;max-width:580px;margin:0 auto}
+.privacy-badge-qr{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .75rem;background:rgba(16,185,129,.1);color:#059669;border-radius:9999px;font-size:.78rem;font-weight:600;margin-bottom:.75rem}
+
+.qr-layout{display:grid;grid-template-columns:1fr 360px;gap:1.5rem;align-items:start;max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+.qr-left{display:flex;flex-direction:column}
+.qr-right{position:sticky;top:5rem}
+.qr-card{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:1rem;overflow:hidden;margin-bottom:1rem}
+.qr-card-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;cursor:pointer;border-bottom:1px solid transparent;transition:border-color 0.2s}
+.qr-card.open .qr-card-header{border-bottom:1px solid var(--border-color)}
+.qr-card-header-left{display:flex;align-items:center;gap:0.5rem;color:var(--text-primary);font-weight:600;font-size:0.95rem}
+.qr-card-header-left i{color:var(--accent-primary)}
+.qr-chevron{color:var(--text-secondary);transition:transform 0.2s}
+.qr-card.open .qr-chevron{transform:rotate(180deg)}
+.qr-card-body{padding:1.25rem;display:none}
+.qr-card.open .qr-card-body{display:block}
+
+.input-type-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem}
+.itype-btn{padding:0.4rem 0.85rem;border-radius:9999px;border:1px solid var(--border-color);background:transparent;color:var(--text-secondary);font-size:0.82rem;font-weight:500;cursor:pointer;transition:all 0.2s}
+.itype-btn.active{background:var(--accent-primary);color:#fff;border-color:var(--accent-primary)}
+
+.form-group-qr label{display:block;font-size:0.75rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.35rem;text-transform:uppercase;letter-spacing:0.05em}
+.form-group-qr input[type=text],.form-group-qr input[type=url]{width:100%;padding:0.65rem 0.85rem;border-radius:0.5rem;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-size:0.95rem;transition:border 0.2s}
+.form-group-qr input:focus{outline:none;border-color:var(--accent-primary)}
+.form-group-qr input.error{border-color:#ef4444}
+.err-qr{font-size:.75rem;color:#ef4444;margin-top:.25rem;display:none}
+
+.style-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:1rem}
+.style-btn{width:100%;aspect-ratio:1;border:2px solid var(--border-color);border-radius:8px;background:#ffffff;color:#000000;cursor:pointer;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px}
+.style-btn svg{width:100%;height:100%;object-fit:contain}
+.style-btn.active{border-color:var(--accent-primary);background:#ffffff;box-shadow:0 0 0 3px rgba(37,99,235,0.25)}
+.style-btn:hover{border-color:var(--accent-primary)}
+
+.color-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.color-picker-wrap{display:flex;align-items:center;gap:0.75rem}
+.color-picker-wrap input[type=color]{width:36px;height:36px;border-radius:6px;border:2px solid var(--border-color);cursor:pointer;padding:0;background:var(--bg-primary)}
+.color-picker-wrap input[type=text]{flex:1;padding:0.5rem 0.75rem;background:var(--bg-primary);border:1px solid var(--border-color);border-radius:0.5rem;color:var(--text-primary);font-size:0.85rem;font-family:monospace}
+.color-label{font-size:0.82rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.5rem;display:block}
+.toggle-wrap{margin-top:0.5rem;display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--text-secondary)}
+
+.logo-upload-box{border:2px dashed var(--border-color);border-radius:0.75rem;padding:1.5rem;text-align:center;cursor:pointer;background:var(--bg-primary);position:relative}
+.logo-upload-box input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.logo-upload-box i{font-size:1.5rem;color:var(--text-secondary);margin-bottom:0.25rem;display:block}
+.logo-upload-box .main-txt{font-size:0.9rem;color:var(--text-primary);font-weight:600;margin-bottom:0.25rem}
+.logo-upload-box .sub-txt{font-size:0.8rem;color:var(--text-secondary)}
+
+.logo-preview-wrap{display:flex;align-items:center;gap:0.6rem;padding:0.75rem;background:var(--bg-primary);border-radius:0.5rem;border:1px solid var(--border-color)}
+.logo-preview-wrap img{width:48px;height:48px;object-fit:contain;border-radius:0.25rem;background:#fff;padding:2px}
+.logo-preview-wrap span{font-size:0.8rem;color:var(--text-primary);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btn-remove-logo{padding:0.35rem 0.6rem;background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.3);border-radius:0.35rem;font-size:0.75rem;cursor:pointer;font-weight:600}
+
+.preset-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem}
+.preset-btn{width:44px;height:44px;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-primary);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;color:var(--text-secondary);transition:all 0.2s}
+.preset-btn.active{border-color:var(--accent-primary);background:rgba(37,99,235,0.12);color:var(--accent-primary)}
+.preset-btn:hover{color:var(--accent-primary);border-color:var(--accent-primary)}
+
+.frame-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.frame-card{aspect-ratio:3/4;border:2px solid var(--border-color);border-radius:10px;background:var(--bg-primary);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;padding:6px;transition:all 0.2s}
+.frame-card.active{border-color:var(--accent-primary);background:rgba(37,99,235,0.12)}
+.frame-card svg{width:60%;height:auto;display:block}
+.frame-card span{font-size:0.7rem;font-weight:600;color:var(--text-secondary);margin-top:4px;text-align:center}
+
+.frame-controls{display:none;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.frame-controls.visible{display:grid}
+.frame-ctrl-group{display:flex;flex-direction:column}
+.frame-ctrl-group label{font-size:0.75rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.35rem}
+.frame-ctrl-group input[type=text],.frame-ctrl-group select{padding:0.5rem 0.75rem;border-radius:0.5rem;border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;font-family:inherit}
+.frame-color-row{grid-column:1/-1}
+
+.btn-download-qr{width:100%;display:flex;align-items:center;justify-content:center;gap:0.5rem;padding:0.85rem;background:var(--accent-primary);color:#fff;border-radius:0.5rem;font-weight:600;font-size:0.95rem;border:none;cursor:pointer;transition:all 0.2s;margin-top:1rem}
+.btn-download-qr:hover{background:#1d4ed8}
+
+.qr-preview-card{background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:1rem;padding:1.5rem;text-align:center}
+.qr-preview-label{font-size:0.75rem;font-weight:700;letter-spacing:0.08em;color:var(--text-secondary);margin-bottom:1rem;text-transform:uppercase}
+.qr-canvas-wrap{width:100%;max-width:280px;margin:0 auto;display:block;border-radius:12px;background:#fff;padding:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.qr-canvas-wrap canvas{width:100%!important;height:auto!important;display:block}
+.qr-scannable-note{font-size:0.78rem;color:var(--text-secondary);margin-top:0.75rem}
+
+@media(max-width:768px){.qr-layout{grid-template-columns:1fr;padding:1rem}.qr-right{order:-1;position:static}.style-grid{grid-template-columns:repeat(5,1fr)}.color-row{grid-template-columns:1fr}.frame-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header>
+<nav class="container">
+<a href="../index.html" class="logo">
+<img src="../Images/logo.png" alt="ToolzGarden Logo" width="36" height="36" style="object-fit:contain"/>
+ToolzGarden
+</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle Menu"><span></span><span></span><span></span></button>
+<ul class="nav-links" id="nav-links">
+<li><a href="../index.html">Home</a></li>
+<li><a href="../about.html">About</a></li>
+<li><a href="../contact.html">Contact</a></li>
+</ul>
+<div class="nav-actions">
+<button class="theme-toggle" id="theme-toggle" title="Toggle Theme"><i class="ri-moon-line"></i></button>
+</div>
+</nav>
+</header>
+
+<div class="container" style="padding-top:1.5rem;padding-bottom:3rem">
+<div class="qr-hero">
+<span class="privacy-badge-qr"><i class="ri-shield-check-fill"></i> 100% Private &mdash; No Server, No Upload</span>
+<h1>Free QR Code Generator &mdash; Create &amp; Download Instantly</h1>
+<p>Generate scannable QR codes for URLs, text, email, phone, and WhatsApp. Change size and color. Download as PNG free &mdash; no signup, no watermark.</p>
+</div>
+
+<div class="qr-layout">
+  <!-- LEFT COLUMN -->
+  <div class="qr-left">
+    
+    <!-- SECTION 1: INPUT TYPE -->
+    <div class="qr-card open">
+      <div class="qr-card-header" onclick="toggleCard(this)">
+        <div class="qr-card-header-left"><i class="ri-link-m"></i> <span>Input Type</span></div>
+        <i class="ri-arrow-down-s-line qr-chevron"></i>
+      </div>
+      <div class="qr-card-body">
+        <div class="input-type-tabs">
+          <button class="itype-btn active" data-type="url" onclick="setInputType('url')">Website URL</button>
+          <button class="itype-btn" data-type="text" onclick="setInputType('text')">Plain Text</button>
+          <button class="itype-btn" data-type="email" onclick="setInputType('email')">Email</button>
+          <button class="itype-btn" data-type="phone" onclick="setInputType('phone')">Phone</button>
+          <button class="itype-btn" data-type="whatsapp" onclick="setInputType('whatsapp')">WhatsApp</button>
+        </div>
+        <div class="form-group-qr">
+          <label for="qr-input" id="qr-input-label">Website URL</label>
+          <input type="text" id="qr-input" placeholder="https://example.com" autocomplete="off" oninput="generateQR()"/>
+          <div class="err-qr" id="qr-err">Please enter content to generate a QR code.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: QR CODE STYLE -->
+    <div class="qr-card open">
+      <div class="qr-card-header" onclick="toggleCard(this)">
+        <div class="qr-card-header-left"><i class="ri-shape-line"></i> <span>Color and Shape</span></div>
+        <i class="ri-arrow-down-s-line qr-chevron"></i>
+      </div>
+      <div class="qr-card-body">
+        
+        <div class="color-label">Dots</div>
+        <div class="style-grid" id="dots-grid">
+           <button class="style-btn active" data-dots="square" onclick="setDots(this)"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="3" height="3" fill="currentColor"/><rect x="6" y="1" width="3" height="3" fill="currentColor"/><rect x="1" y="6" width="3" height="3" fill="currentColor"/><rect x="4.5" y="4.5" width="1.2" height="1.2" fill="currentColor"/><rect x="6.5" y="4.5" width="1.2" height="1.2" fill="currentColor"/><rect x="4.5" y="6.5" width="1.2" height="1.2" fill="currentColor"/></svg></button>
+           <button class="style-btn" data-dots="dots" onclick="setDots(this)"><svg viewBox="0 0 10 10"><circle cx="2.5" cy="2.5" r="1.5" fill="currentColor"/><circle cx="7.5" cy="2.5" r="1.5" fill="currentColor"/><circle cx="2.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="5" cy="5" r="0.6" fill="currentColor"/><circle cx="7" cy="5" r="0.6" fill="currentColor"/><circle cx="5" cy="7" r="0.6" fill="currentColor"/></svg></button>
+           <button class="style-btn" data-dots="rounded" onclick="setDots(this)"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="3" height="3" rx="1" fill="currentColor"/><rect x="6" y="1" width="3" height="3" rx="1" fill="currentColor"/><rect x="1" y="6" width="3" height="3" rx="1" fill="currentColor"/><rect x="4.5" y="4.5" width="1.2" height="1.2" rx="0.4" fill="currentColor"/><rect x="6.5" y="4.5" width="1.2" height="1.2" rx="0.4" fill="currentColor"/><rect x="4.5" y="6.5" width="1.2" height="1.2" rx="0.4" fill="currentColor"/></svg></button>
+           <button class="style-btn" data-dots="extra-rounded" onclick="setDots(this)"><svg viewBox="0 0 10 10"><circle cx="2.5" cy="2.5" r="1.5" fill="currentColor"/><rect x="4.5" y="4.5" width="1.2" height="1.2" rx="0.6" fill="currentColor"/></svg></button>
+           <button class="style-btn" data-dots="classy" onclick="setDots(this)"><svg viewBox="0 0 10 10"><rect x="1" y="1" width="3" height="3" fill="currentColor"/><polygon points="5,4 6,5 5,6 4,5" fill="currentColor"/></svg></button>
+           <button class="style-btn" data-dots="classy-rounded" onclick="setDots(this)"><svg viewBox="0 0 10 10"><circle cx="2.5" cy="2.5" r="1.5" fill="currentColor"/><polygon points="5,4 6,5 5,6 4,5" fill="currentColor"/></svg></button>
+        </div>
+
+        <div class="color-row">
+          <div>
+            <div class="color-label">Background Color</div>
+            <div class="color-picker-wrap">
+              <input type="color" id="qr-bg" value="#ffffff" oninput="updateHex('qr-bg', 'qr-bg-hex'); generateQR()"/>
+              <input type="text" id="qr-bg-hex" value="#ffffff" oninput="updateColor('qr-bg-hex', 'qr-bg'); generateQR()"/>
+            </div>
+            <label class="toggle-wrap"><input type="checkbox" id="qr-bg-trans" onchange="generateQR()"/> Transparent Background</label>
+          </div>
+          <div>
+            <div class="color-label">Dots Color</div>
+            <div class="color-picker-wrap">
+              <input type="color" id="qr-fg" value="#000000" oninput="updateHex('qr-fg', 'qr-fg-hex'); generateQR()"/>
+              <input type="text" id="qr-fg-hex" value="#000000" oninput="updateColor('qr-fg-hex', 'qr-fg'); generateQR()"/>
+            </div>
+            <label class="toggle-wrap"><input type="checkbox" id="qr-fg-grad" onchange="generateQR()"/> Gradient</label>
+          </div>
+        </div>
+
+        <div class="color-label" style="margin-top:1.5rem">Marker Border</div>
+        <div class="style-grid" id="mb-grid">
+           <button class="style-btn mb-btn active" data-mb="square" onclick="setMb(this)"><svg viewBox="0 0 10 10"><rect x="2" y="2" width="6" height="6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+           <button class="style-btn mb-btn" data-mb="extra-rounded" onclick="setMb(this)"><svg viewBox="0 0 10 10"><rect x="2" y="2" width="6" height="6" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+           <button class="style-btn mb-btn" data-mb="dot" onclick="setMb(this)"><svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        </div>
+        <div class="color-label" style="margin-top:0.5rem">Marker Border Color</div>
+        <div class="color-picker-wrap">
+          <input type="color" id="qr-mb-color" value="#000000" oninput="updateHex('qr-mb-color', 'qr-mb-hex'); generateQR()"/>
+          <input type="text" id="qr-mb-hex" value="#000000" oninput="updateColor('qr-mb-hex', 'qr-mb-color'); generateQR()"/>
+        </div>
+
+        <div class="color-label" style="margin-top:1.5rem">Marker Center</div>
+        <div class="style-grid" id="mc-grid">
+           <button class="style-btn mc-btn active" data-mc="square" onclick="setMc(this)"><svg viewBox="0 0 10 10"><rect x="3.5" y="3.5" width="3" height="3" fill="currentColor"/></svg></button>
+           <button class="style-btn mc-btn" data-mc="dot" onclick="setMc(this)"><svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="1.5" fill="currentColor"/></svg></button>
+        </div>
+        <div class="color-label" style="margin-top:0.5rem">Marker Center Color</div>
+        <div class="color-picker-wrap">
+          <input type="color" id="qr-mc-color" value="#000000" oninput="updateHex('qr-mc-color', 'qr-mc-hex'); generateQR()"/>
+          <input type="text" id="qr-mc-hex" value="#000000" oninput="updateColor('qr-mc-hex', 'qr-mc-color'); generateQR()"/>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION 3: CENTER LOGO -->
+    <div class="qr-card open">
+      <div class="qr-card-header" onclick="toggleCard(this)">
+        <div class="qr-card-header-left"><i class="ri-image-line"></i> <span>Logo</span></div>
+        <i class="ri-arrow-down-s-line qr-chevron"></i>
+      </div>
+      <div class="qr-card-body">
+        
+        <div class="logo-upload-box" id="logo-upload-box">
+          <input type="file" id="logo-file-input" accept="image/png,image/jpeg,image/svg+xml,image/webp" onchange="handleLogoUpload(event)"/>
+          <i class="ri-upload-2-line"></i>
+          <div class="main-txt">Click to upload logo or icon</div>
+          <div class="sub-txt">PNG, JPG, SVG, WEBP (max 2MB)</div>
+        </div>
+        <div class="logo-preview-wrap" id="logo-preview-wrap" style="display:none">
+          <img id="logo-thumb" src="" alt="Logo preview"/>
+          <span id="logo-filename">logo.png</span>
+          <button class="btn-remove-logo" onclick="removeLogo()">&#10005; Remove</button>
+        </div>
+
+        <div class="color-label" style="margin-top:1.5rem">Or choose from here</div>
+        <div class="preset-row">
+          <button class="preset-btn" onclick="setPresetLogo('ri-link-m', this)"><i class="ri-link-m"></i></button>
+          <button class="preset-btn" onclick="setPresetLogo('ri-whatsapp-line', this)"><i class="ri-whatsapp-line"></i></button>
+          <button class="preset-btn" onclick="setPresetLogo('ri-mail-line', this)"><i class="ri-mail-line"></i></button>
+          <button class="preset-btn" onclick="setPresetLogo('ri-phone-line', this)"><i class="ri-phone-line"></i></button>
+          <button class="preset-btn" onclick="setPresetLogo('ri-wifi-line', this)"><i class="ri-wifi-line"></i></button>
+          <button class="preset-btn" onclick="setPresetLogo('ri-map-pin-line', this)"><i class="ri-map-pin-line"></i></button>
+          <button class="preset-btn" onclick="setPresetLogo('ri-star-line', this)"><i class="ri-star-line"></i></button>
+          <button class="preset-btn" onclick="setPresetLogo('ri-qr-code-line', this)"><i class="ri-qr-code-line"></i></button>
+        </div>
+        
+        <label class="toggle-wrap" style="margin-top:1rem"><input type="checkbox" id="logo-bg-remove" onchange="generateQR()"/> Remove background behind Logo</label>
+
+      </div>
+    </div>
+
+    <!-- SECTION 4: QR CODE FRAME -->
+    <div class="qr-card open">
+      <div class="qr-card-header" onclick="toggleCard(this)">
+        <div class="qr-card-header-left"><i class="ri-layout-line"></i> <span>Frames</span></div>
+        <i class="ri-arrow-down-s-line qr-chevron"></i>
+      </div>
+      <div class="qr-card-body">
+        
+        <div class="frame-grid">
+           <button class="frame-card active" data-frame="none" onclick="setFrame(this)">
+             <svg width="70" height="62" viewBox="0 0 70 62"><rect width="70" height="62" fill="#f8f8f8"/><rect x="10" y="5" width="50" height="50" fill="#eee" rx="2"/><rect x="14" y="9" width="12" height="12" fill="#333"/><rect x="44" y="9" width="12" height="12" fill="#333"/><rect x="14" y="39" width="12" height="12" fill="#333"/></svg>
+             <span>None</span>
+           </button>
+           <button class="frame-card" data-frame="simple" onclick="setFrame(this)">
+             <svg width="70" height="70" viewBox="0 0 70 70"><rect width="70" height="70" fill="#fff"/><rect x="4" y="4" width="62" height="62" fill="none" stroke="#222" stroke-width="2"/><rect x="12" y="8" width="46" height="46" fill="#eee" rx="1"/><rect x="16" y="12" width="10" height="10" fill="#333"/><text x="35" y="66" font-size="7" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#222">SCAN ME</text></svg>
+             <span>Simple</span>
+           </button>
+           <button class="frame-card" data-frame="rounded" onclick="setFrame(this)">
+             <svg width="70" height="70" viewBox="0 0 70 70"><rect width="70" height="70" fill="#fff"/><rect x="4" y="4" width="62" height="62" fill="none" stroke="#222" stroke-width="2" rx="10"/><rect x="12" y="8" width="46" height="46" fill="#eee" rx="1"/><rect x="16" y="12" width="10" height="10" fill="#333"/><text x="35" y="66" font-size="7" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#222">SCAN ME</text></svg>
+             <span>Rounded</span>
+           </button>
+           <button class="frame-card" data-frame="bold" onclick="setFrame(this)">
+             <svg width="70" height="70" viewBox="0 0 70 70"><rect width="70" height="70" fill="#fff"/><rect x="4" y="4" width="62" height="50" fill="none" stroke="#222" stroke-width="1.5"/><rect x="10" y="8" width="50" height="42" fill="#eee" rx="1"/><rect x="14" y="11" width="9" height="9" fill="#333"/><rect x="4" y="56" width="62" height="14" fill="#222" rx="2"/><text x="35" y="66" font-size="7" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#fff">SCAN ME</text></svg>
+             <span>Bold Box</span>
+           </button>
+           <button class="frame-card" data-frame="banner-top" onclick="setFrame(this)">
+             <svg width="70" height="70" viewBox="0 0 70 70"><rect width="70" height="70" fill="#fff"/><rect x="0" y="0" width="70" height="18" fill="#2563eb" rx="2"/><text x="35" y="13" font-size="7" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#fff">SCAN ME</text><rect x="10" y="22" width="50" height="46" fill="#eee" rx="1"/><rect x="14" y="26" width="10" height="10" fill="#333"/></svg>
+             <span>Top Bar</span>
+           </button>
+           <button class="frame-card" data-frame="banner-bottom" onclick="setFrame(this)">
+             <svg width="70" height="70" viewBox="0 0 70 70"><rect width="70" height="70" fill="#fff"/><rect x="10" y="2" width="50" height="50" fill="#eee" rx="1"/><rect x="14" y="6" width="10" height="10" fill="#333"/><rect x="0" y="54" width="70" height="16" fill="#2563eb" rx="2"/><text x="35" y="66" font-size="7" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#fff">SCAN ME</text></svg>
+             <span>Bottom Bar</span>
+           </button>
+        </div>
+        
+        <div class="frame-controls" id="frame-controls">
+          <div class="frame-ctrl-group">
+            <label>Frame Phrase</label>
+            <input type="text" id="frame-phrase" value="SCAN ME" maxlength="20" oninput="applyFrame()"/>
+          </div>
+          <div class="frame-ctrl-group">
+            <label>Phrase Font</label>
+            <select id="frame-font" onchange="applyFrame()">
+              <option value="sans-serif">Sans-Serif</option>
+              <option value="serif">Serif</option>
+              <option value="monospace">Monospace</option>
+              <option value="Arial">Arial</option>
+              <option value="Georgia">Georgia</option>
+            </select>
+          </div>
+          <div class="frame-ctrl-group frame-color-row">
+            <label>Frame Color</label>
+            <div class="color-picker-wrap">
+              <input type="color" id="frame-color" value="#000000" oninput="updateHex('frame-color', 'frame-color-hex'); applyFrame()"/>
+              <input type="text" id="frame-color-hex" value="#000000" oninput="updateColor('frame-color-hex', 'frame-color'); applyFrame()"/>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Download Button for Mobile / Left Panel -->
+    <button class="btn-download-qr" onclick="downloadQR()"><i class="ri-download-2-line"></i> Download PNG</button>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="qr-right">
+    <div class="qr-preview-card">
+      <div class="qr-preview-label">QR PREVIEW</div>
+      <div class="qr-canvas-wrap" id="qr-canvas-wrap">
+        <div id="qr-placeholder"><i class="ri-qr-code-line" style="font-size:2.5rem;color:#ddd;display:block;margin-bottom:0.5rem"></i>QR code appears here</div>
+      </div>
+      <div class="qr-scannable-note"><i class="ri-scan-line"></i> Scannable with any smartphone camera</div>
+      <button class="btn-download-qr" onclick="downloadQR()"><i class="ri-download-2-line"></i> Download PNG</button>
+    </div>
+  </div>
+
+</div><!-- end qr-layout -->
+<!-- SEO CONTENT -->
+<div class="qr-content">
+<h2>What Is a QR Code?</h2>
+<p>A <strong>QR code</strong> (Quick Response code) is a two-dimensional barcode that can store text, URLs, contact information, and more. When scanned with a smartphone camera, it instantly opens the encoded content &mdash; a webpage, a phone dialler, an email client, or a WhatsApp conversation. QR codes are used everywhere: product packaging, restaurant menus, business cards, event posters, and digital marketing campaigns.</p>
+
+<h2>How to Generate a QR Code Online Free</h2>
+<h3>Step 1 &mdash; Choose Input Type</h3>
+<p>Select the type of content you want to encode. Choose <strong>Website URL</strong> for links, <strong>Plain Text</strong> for any message, <strong>Email</strong> to open an email client, <strong>Phone</strong> to trigger a phone call, or <strong>WhatsApp</strong> to open a WhatsApp chat.</p>
+<h3>Step 2 &mdash; Type Your Content</h3>
+<p>Enter your URL, text, email address, or phone number. The QR code <strong>generates instantly</strong> as you type &mdash; no button press needed. You will see the live preview update on the right.</p>
+<h3>Step 3 &mdash; Customize Size &amp; Color</h3>
+<p>Choose Small, Medium, or Large depending on how the QR code will be used. Pick foreground and background colors using the color pickers. Ensure sufficient contrast so the QR code remains scannable.</p>
+<h3>Step 4 &mdash; Download as PNG</h3>
+<p>Click <strong>Download PNG</strong> to save your QR code directly to your device. The file is a high-quality PNG image ready to paste into designs, documents, or print materials.</p>
+
+<h2>Key Features</h2>
+<ul>
+<li><strong>Instant real-time generation</strong> &mdash; QR updates as you type, zero delay</li>
+<li><strong>5 input types</strong> &mdash; URL, text, email, phone, WhatsApp</li>
+<li><strong>3 size options</strong> &mdash; Small (180px), Medium (240px), Large (320px)</li>
+<li><strong>Full color control</strong> &mdash; Foreground and background color pickers</li>
+<li><strong>PNG download</strong> &mdash; High quality, no watermark, saved directly from canvas</li>
+<li><strong>100% browser-based</strong> &mdash; No server, no API, no upload</li>
+<li><strong>Works offline</strong> &mdash; After the page loads once, no internet needed</li>
+<li><strong>No signup required</strong> &mdash; Open the tool and start generating immediately</li>
+</ul>
+
+<h2>QR Code Use Cases</h2>
+<ul>
+<li><strong>Business cards</strong> &mdash; Encode your website URL or LinkedIn profile for instant scanning</li>
+<li><strong>Restaurant menus</strong> &mdash; Link to an online PDF menu</li>
+<li><strong>Marketing materials</strong> &mdash; Flyers, posters, and banners linking to landing pages</li>
+<li><strong>Product packaging</strong> &mdash; Link to instruction videos, warranty pages, or support</li>
+<li><strong>Event tickets</strong> &mdash; Encode unique identifiers for entry validation</li>
+<li><strong>WhatsApp marketing</strong> &mdash; Let customers scan to message you directly</li>
+<li><strong>Wi-Fi sharing</strong> &mdash; (Coming soon) Encode your Wi-Fi credentials for guest access</li>
+</ul>
+
+<h2>QR Code Color Tips</h2>
+<p>While any foreground and background color combination is technically possible, <strong>high contrast is essential for reliable scanning</strong>. Dark foreground on a light background works best. Very light QR codes on dark backgrounds can be scanned but may fail on some older camera apps. Test your colored QR code on at least two different devices before printing.</p>
+
+<h2>Related Tools</h2>
+<a href="url-encoder.html" class="related-link-qr"><i class="ri-link"></i> URL Encoder</a>
+<a href="base64-encoder.html" class="related-link-qr"><i class="ri-code-s-slash-line"></i> Base64 Encoder</a>
+<a href="resume-builder.html" class="related-link-qr"><i class="ri-file-user-line"></i> Resume Builder</a>
+<p style="margin-top:.75rem;font-size:.88rem;color:var(--text-secondary)">Need to clean up a URL before encoding it? Use our <a href="url-encoder.html" style="color:var(--accent-primary)">URL Encoder</a> to percent-encode special characters first.</p>
+
+<h2>Frequently Asked Questions</h2>
+<section class="faq-section" style="padding:1rem 0;border-top:none">
+<div class="faq-list">
+<div class="faq-item"><button class="faq-question">How do I generate a QR code for a URL? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Select <strong>Website URL</strong> from the input type buttons, type or paste your link into the input field, and the QR code appears instantly in the preview. Click Download PNG to save it.</p></div></div>
+<div class="faq-item"><button class="faq-question">Is this QR code generator completely free? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes, 100% free. No account, no signup, no watermark, and no hidden payment wall. QR codes are generated in your browser using JavaScript &mdash; nothing is sent to any server.</p></div></div>
+<div class="faq-item"><button class="faq-question">Can I change the color of my QR code? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes. Use the <strong>Foreground</strong> color picker to change the QR code pattern color and the <strong>Background</strong> picker to change the background. Keep strong contrast between the two for reliable scanning on all devices.</p></div></div>
+<div class="faq-item"><button class="faq-question">What input types does this tool support? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Five input types are supported: <strong>Website URL</strong> (opens a link), <strong>Plain Text</strong> (displays any message), <strong>Email</strong> (opens the mail client to a specific address), <strong>Phone</strong> (triggers a phone call), and <strong>WhatsApp</strong> (opens a WhatsApp chat to a specific number).</p></div></div>
+<div class="faq-item"><button class="faq-question">How do I download my QR code as a PNG? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Click the <strong>Download PNG</strong> button. The QR code canvas is converted to a PNG image file and downloaded directly to your device. No server upload is involved &mdash; the image is generated entirely in your browser.</p></div></div>
+<div class="faq-item"><button class="faq-question">Does the QR code expire or stop working? <span class="faq-icon">+</span></button><div class="faq-answer"><p>No. QR codes generated here contain the raw data you entered (a URL, phone number, etc.) encoded directly in the pattern. There is no server tracking the QR code, so it will work forever as long as the destination (e.g., your website URL) remains active.</p></div></div>
+</div>
+</section>
+</div>
+</div><!-- end container -->
+
+<footer>
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand"><a class="footer-logo" href="../index.html">ToolzGarden</a><p>Free online tools for everyone. Professional grade, privacy-focused, 100% free.</p></div>
+<div class="footer-links"><h4>File Tools</h4><ul>
+<li><a href="qr-code-generator.html">QR Code Generator</a></li>
+<li><a href="resume-builder.html">Resume Builder</a></li>
+<li><a href="url-encoder.html">URL Encoder</a></li>
+<li><a href="base64-encoder.html">Base64 Encoder</a></li>
+</ul></div>
+<div class="footer-links"><h4>Company</h4><ul>
+<li><a href="../about.html">About Us</a></li>
+<li><a href="../contact.html">Contact</a></li>
+<li><a href="../privacy.html">Privacy Policy</a></li>
+<li><a href="../terms.html">Terms of Service</a></li>
+</ul></div>
+</div>
+<div class="footer-bottom"><p>&copy; 2025 ToolzGarden. All rights reserved.</p></div>
+</div>
+</footer>
+
+<script src="../script.js"></script>
+<script>
+(function(){
+var qrCode      = null;
+
+window.toggleCard = function(el) {
+  el.parentElement.classList.toggle('open');
+};
+window.updateHex = function(colId, hexId) {
+  document.getElementById(hexId).value = document.getElementById(colId).value;
+};
+window.updateColor = function(hexId, colId) {
+  document.getElementById(colId).value = document.getElementById(hexId).value;
+};
+window.setDots = function(btn) {
+  document.querySelectorAll('#dots-grid .style-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  currentDots = btn.dataset.dots;
+  generateQR();
+};
+window.setMb = function(btn) {
+  document.querySelectorAll('#mb-grid .style-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  currentMb = btn.dataset.mb;
+  generateQR();
+};
+window.setMc = function(btn) {
+  document.querySelectorAll('#mc-grid .style-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  currentMc = btn.dataset.mc;
+  generateQR();
+};
+window.setPresetLogo = function(iconClass, btn) {
+  document.querySelectorAll('.preset-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  // Hack to use a remix icon as logo using an offscreen canvas or just skipping it to keep it simple.
+  // Actually, generating a data url from the icon requires a canvas.
+  var c = document.createElement('canvas');
+  c.width=128; c.height=128;
+  var ctx = c.getContext('2d');
+  ctx.fillStyle = document.getElementById('qr-fg').value;
+  ctx.font = '90px remixicon';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  // Mapping remix icon class to unicode is hard dynamically.
+  // A simple fallback: just load the ri-link icon
+  // As a real implementation we would fetch the SVG. Let's just alert for now or implement properly if asked.
+  alert('Preset logo requires SVG assets not currently available offline.');
+};
+
+var currentType = 'url';
+var currentDots = 'square';
+var currentMb = 'square';
+var currentMc = 'square';
+var logoDataURL = null;
+var currentFrame = 'none';
+var framedCanvas = null;
+
+var labels = {
+  url:       {label:'Website URL',                           placeholder:'https://example.com'},
+  text:      {label:'Plain Text',                            placeholder:'Type your message here...'},
+  email:     {label:'Email Address',                         placeholder:'hello@example.com'},
+  phone:     {label:'Phone Number',                          placeholder:'+1 234 567 8900'},
+  whatsapp:  {label:'WhatsApp Number (with country code)',   placeholder:'+1234567890'}
+};
+
+// ---- INPUT TYPE ----
+window.setInputType = function(type){
+  currentType = type;
+  document.querySelectorAll('.itype-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.type === type);
+  });
+  var inp = document.getElementById('qr-input');
+  var lbl = document.getElementById('qr-input-label');
+  lbl.textContent = labels[type].label;
+  inp.placeholder = labels[type].placeholder;
+  inp.value = '';
+  generateQR();
+};
+
+// ---- QR STYLE ----
+window.setStyle = function(btn){
+  document.querySelectorAll('.style-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  currentDots    = btn.dataset.dots;
+  
+  generateQR();
+};
+
+// ---- LOGO ----
+window.handleLogoUpload = function(e){
+  var file = e.target.files[0];
+  if(!file) return;
+  if(file.size > 2*1024*1024){ alert('Logo file must be under 2MB.'); return; }
+  var reader = new FileReader();
+  reader.onload = function(ev){
+    logoDataURL = ev.target.result;
+    document.getElementById('logo-thumb').src = logoDataURL;
+    document.getElementById('logo-filename').textContent = file.name;
+    document.getElementById('logo-preview-wrap').style.display = 'flex';
+    document.getElementById('logo-upload-box').style.display = 'none';
+    generateQR();
+  };
+  reader.readAsDataURL(file);
+};
+window.removeLogo = function(){
+  logoDataURL = null;
+  document.getElementById('logo-file-input').value = '';
+  document.getElementById('logo-preview-wrap').style.display = 'none';
+  document.getElementById('logo-upload-box').style.display = 'block';
+  generateQR();
+};
+
+// ---- FRAME ----
+window.setFrame = function(btn){
+  document.querySelectorAll('.frame-thumb').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  currentFrame = btn.dataset.frame;
+  var ctrl = document.getElementById('frame-controls');
+  if(currentFrame === 'none'){
+    ctrl.classList.remove('visible');
+  } else {
+    ctrl.classList.add('visible');
+  }
+  applyFrame();
+};
+
+window.updateFrameHex = function(){
+  var col = document.getElementById('frame-color').value;
+  document.getElementById('frame-hex').textContent = col;
+};
+
+// ---- ROUND RECT HELPER ----
+function roundRectPath(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.arcTo(x+w, y, x+w, y+r, r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.arcTo(x+w, y+h, x+w-r, y+h, r);
+  ctx.lineTo(x+r, y+h);
+  ctx.arcTo(x, y+h, x, y+h-r, r);
+  ctx.lineTo(x, y+r);
+  ctx.arcTo(x, y, x+r, y, r);
+  ctx.closePath();
+}
+
+// ---- DRAW FRAMED CANVAS ----
+function drawFrame(qrCanvas){
+  var QW = qrCanvas.width;   // 280
+  var QH = qrCanvas.height;  // 280
+  var pad = 20;
+  var barH = 50;
+  var phrase = (document.getElementById('frame-phrase').value || 'SCAN ME').substring(0, 20);
+  var fontFam = document.getElementById('frame-font').value || 'sans-serif';
+  var frameCol = document.getElementById('frame-color').value || '#000000';
+  var combined = document.createElement('canvas');
+  var ctx = combined.getContext('2d');
+
+  if(currentFrame === 'simple' || currentFrame === 'rounded'){
+    combined.width  = QW + pad*2;          // 320
+    combined.height = QH + pad*2 + 30;     // 350
+    // White background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, combined.width, combined.height);
+    // QR code
+    ctx.drawImage(qrCanvas, pad, pad);
+    // Border
+    ctx.strokeStyle = frameCol;
+    ctx.lineWidth = 2;
+    if(currentFrame === 'rounded'){
+      roundRectPath(ctx, 10, 10, combined.width-20, combined.height-20, 16);
+      ctx.stroke();
+    } else {
+      ctx.strokeRect(10, 10, combined.width-20, combined.height-20);
+    }
+    // Text
+    ctx.fillStyle = frameCol;
+    ctx.font = 'bold 14px '+fontFam;
+    ctx.textAlign = 'center';
+    ctx.fillText(phrase, combined.width/2, QH + pad*2 + 20);
+
+  } else if(currentFrame === 'bold'){
+    combined.width  = QW + pad*2;          // 320
+    combined.height = QH + 15 + barH + 15; // 280+15+50+15 = 360
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, combined.width, combined.height);
+    // Border around QR area
+    ctx.strokeStyle = frameCol;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(10, 5, combined.width-20, QH+25);
+    // QR code
+    ctx.drawImage(qrCanvas, pad, 15);
+    // Bottom filled bar
+    var barY = QH + 30;
+    ctx.fillStyle = frameCol;
+    ctx.fillRect(0, barY, combined.width, barH);
+    // White text in bar
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 16px '+fontFam;
+    ctx.textAlign = 'center';
+    ctx.fillText(phrase, combined.width/2, barY + barH/2 + 6);
+
+  } else if(currentFrame === 'banner-top'){
+    combined.width  = QW + pad*2;          // 320
+    combined.height = barH + 10 + QH + 10; // 50+10+280+10 = 350
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, combined.width, combined.height);
+    // Top bar
+    ctx.fillStyle = frameCol;
+    ctx.fillRect(0, 0, combined.width, barH);
+    // Text in top bar
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 14px '+fontFam;
+    ctx.textAlign = 'center';
+    ctx.fillText(phrase, combined.width/2, barH/2 + 5);
+    // QR below bar
+    ctx.drawImage(qrCanvas, pad, barH + 10);
+
+  } else if(currentFrame === 'banner-bottom'){
+    combined.width  = QW + pad*2;          // 320
+    combined.height = 10 + QH + 10 + barH; // 10+280+10+50 = 350
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, combined.width, combined.height);
+    // QR at top
+    ctx.drawImage(qrCanvas, pad, 10);
+    // Bottom bar
+    var bBarY = 10 + QH + 10;
+    ctx.fillStyle = frameCol;
+    ctx.fillRect(0, bBarY, combined.width, barH);
+    // Text in bottom bar
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 14px '+fontFam;
+    ctx.textAlign = 'center';
+    ctx.fillText(phrase, combined.width/2, bBarY + barH/2 + 5);
+  }
+
+  return combined;
+}
+
+// ---- APPLY FRAME TO PREVIEW ----
+window.applyFrame = function(){
+  var wrap = document.getElementById('qr-canvas-wrap');
+  // Remove any previously injected framed canvas
+  var old = document.getElementById('qr-framed-canvas');
+  if(old) old.remove();
+  framedCanvas = null;
+
+  if(currentFrame === 'none') return; // show raw QR canvas as-is
+
+  var qrCanvas = wrap.querySelector('canvas');
+  if(!qrCanvas) return;
+
+  // Hide raw canvas, show framed version
+  qrCanvas.style.display = 'none';
+  framedCanvas = drawFrame(qrCanvas);
+  framedCanvas.id = 'qr-framed-canvas';
+  framedCanvas.style.cssText = 'display:block;max-width:100%;height:auto;border-radius:4px';
+  wrap.appendChild(framedCanvas);
+  // Resize wrap to fit framed canvas
+  wrap.style.width  = framedCanvas.width  + 'px';
+  wrap.style.height = framedCanvas.height + 'px';
+};
+
+// ---- FORMAT INPUT ----
+function formatInput(type, raw){
+  var s = raw.trim();
+  if(!s) return '';
+  if(type==='url')     { return (s.startsWith('http://') || s.startsWith('https://')) ? s : 'https://'+s; }
+  if(type==='email')   { return 'mailto:'+s; }
+  if(type==='phone')   { return 'tel:'+s.replace(/\s/g,''); }
+  if(type==='whatsapp'){ var num=s.replace(/\D/g,''); return 'https://wa.me/'+num; }
+  return s;
+}
+
+// ---- GENERATE QR ----
+window.generateQR = function(){
+  var raw     = document.getElementById('qr-input').value;
+  var encoded = formatInput(currentType, raw);
+  var wrap    = document.getElementById('qr-canvas-wrap');
+  var fg      = document.getElementById('qr-fg').value || '#000000';
+  var bg      = document.getElementById('qr-bg').value || '#ffffff';
+
+  // Reset wrap size
+  wrap.style.width  = '100%';
+  wrap.style.height = 'auto';
+
+  if(!encoded){
+    wrap.innerHTML = '<div id="qr-placeholder"><i class="ri-qr-code-line" style="font-size:2.5rem;color:#ddd;display:block;margin-bottom:.5rem"></i>QR code appears here</div>';
+    qrCode = null;
+    framedCanvas = null;
+    return;
+  }
+
+  wrap.innerHTML = '';
+  framedCanvas = null;
+
+  var opts = {
+    width: 280, height: 280, type: 'canvas',
+    data: encoded,
+    dotsOptions:          { color: fg, type: currentDots },
+    backgroundOptions:    { color: document.getElementById('qr-bg-trans').checked ? 'transparent' : bg },
+    cornersSquareOptions: { type: currentMb, color: document.getElementById('qr-mb-color').value },
+    cornersDotOptions: { type: currentMc, color: document.getElementById('qr-mc-color').value },
+    imageOptions: { hideBackgroundDots: !document.getElementById('logo-bg-remove').checked, crossOrigin: 'anonymous', margin: 4, imageSize: 0.2 }
+  };
+  if(logoDataURL) opts.image = logoDataURL;
+
+  try {
+    qrCode = new QRCodeStyling(opts);
+    qrCode.append(wrap);
+    // Apply frame after QR renders (qr-code-styling renders async)
+    if(currentFrame !== 'none'){
+      setTimeout(applyFrame, 150);
+    }
+  } catch(err){
+    wrap.innerHTML = '<div style="padding:1rem;font-size:.8rem;color:#ef4444;text-align:center">Error generating QR code. Input may be too long.</div>';
+  }
+};
+
+// ---- DOWNLOAD ----
+window.downloadQR = function(){
+  var raw = document.getElementById('qr-input').value.trim();
+  var err = document.getElementById('qr-err');
+  var inp = document.getElementById('qr-input');
+  if(!raw){
+    inp.classList.add('error');
+    err.style.display = 'block';
+    inp.focus();
+    return;
+  }
+  inp.classList.remove('error');
+  err.style.display = 'none';
+
+  if(currentFrame !== 'none' && framedCanvas){
+    // Download framed combined canvas
+    var link = document.createElement('a');
+    link.download = 'qrcode-toolzgarden.png';
+    link.href = framedCanvas.toDataURL('image/png');
+    link.click();
+  } else {
+    if(!qrCode){ alert('Please wait for the QR code to generate first.'); return; }
+    qrCode.download({ name: 'qrcode-toolzgarden', extension: 'png' });
+  }
+};
+
+// ---- INIT ----
+document.getElementById('qr-input').value = 'https://toolzgarden.com';
+generateQR();
+})();
+</script>
+</body>
+</html>
