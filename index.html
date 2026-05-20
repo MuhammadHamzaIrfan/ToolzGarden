@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en" data-theme="light">
   <head>
     
@@ -76,15 +76,84 @@
   /* Critical CSS - Above the fold */
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Inter',sans-serif;background-color:#0f172a;color:#f8fafc;overflow-x:hidden}
+  <link rel="icon" type="image/png" href="Images/logo.webp" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="Favicon-Images/android-chrome-512x512.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="Favicon-Images/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="Favicon-Images/favicon-32x32.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="Favicon-Images/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="Favicon-Images/site.webmanifest" />
+    <link rel="shortcut icon" href="Favicon-Images/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta
+      name="description"
+      content="ToolzGarden offers free online tools for images, PDFs, text and files. Compress, convert, merge, format and more. No signup. No upload. 100% private."
+    />
+    <link rel="canonical" href="https://toolzgarden.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://toolzgarden.com/" />
+    <meta property="og:title" content="ToolzGarden - Free Online Image Tools" />
+    <meta
+      property="og:description"
+      content="Process your images directly in your browser. Fast, free, and 100% private. No uploads required."
+    />
+    <meta
+      property="og:image"
+      content="https://toolzgarden.com/assets/og-image.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://toolzgarden.com/" />
+    <meta
+      property="twitter:title"
+      content="ToolzGarden - Free Online Image Tools"
+    />
+    <meta
+      property="twitter:description"
+      content="Process your images directly in your browser. Fast, free, and 100% private. No uploads required."
+    />
+    <meta
+      property="twitter:image"
+      content="https://toolzgarden.com/assets/og-image.jpg"
+    />
+
+    <!-- Remix Icon for aesthetics (Standard practice for premium feel) -->
+    
+    <style>
+  /* Critical CSS - Above the fold */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background-color:#0f172a;color:#f8fafc;overflow-x:hidden}
   header{background-color:#0f172a;border-bottom:1px solid #334155;position:sticky;top:0;z-index:100}
   nav{display:flex;justify-content:space-between;align-items:center;height:4.5rem;max-width:1200px;margin:0 auto;padding:0 1.5rem}
   .logo{font-size:1.5rem;font-weight:700;color:#3b82f6;display:flex;align-items:center;gap:0.5rem;text-decoration:none}
   .logo img{height:40px;width:40px;object-fit:contain}
   .hero{padding:4rem 0;text-align:center;background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%)}
   .hero h1{font-size:3rem;font-weight:800;margin-bottom:1rem;color:#f8fafc}
-  .hero p{font-size:1.25rem;color:#94a3b8;max-width:700px;margin:0 auto 2rem}
+  .hero p{font-size:1.25rem;color:#cbd5e1;max-width:700px;margin:0 auto 2rem}
   .container{max-width:1200px;margin:0 auto;padding:0 1.5rem;width:100%}
-  .badge-private{display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.75rem;background:rgba(16,185,129,0.1);color:#059669;border-radius:9999px;font-size:0.75rem;font-weight:600;margin-bottom:1rem}
+  .badge-private{display:inline-flex;align-items:center;gap:0.25rem;padding:0.25rem 0.75rem;background:rgba(16,185,129,0.1);color:#34d399;border-radius:9999px;font-size:0.75rem;font-weight:600;margin-bottom:1rem}
   .search-container{max-width:600px;margin:0 auto;position:relative}
   .search-input{width:100%;padding:1rem 1.5rem 1rem 3rem;border-radius:9999px;border:2px solid #334155;background:#0f172a;color:#f8fafc;font-size:1rem}
   .hamburger{display:none}
@@ -112,7 +181,8 @@
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"></noscript>
 
   <!-- Main stylesheet -->
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="preload" href="./style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="./style.css"></noscript>
 
     <!-- Google AdSense -->
     <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
@@ -158,7 +228,7 @@
     <header>
       <nav class="container">
         <a href="index.html" class="logo">
-          <img src="Images/logo.png" alt="ToolzGarden Logo" fetchpriority="high" decoding="async" width="40" height="40" style="object-fit:contain" />
+          <img src="Images/logo.webp" alt="ToolzGarden Logo" fetchpriority="high" decoding="async" width="40" height="40" style="object-fit:contain" />
           ToolzGarden
         </a>
 
@@ -220,6 +290,7 @@
 
         <div class="container">
           <section class="content-section">
+            <h2 class="sr-only" style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;">Our Tools Collection</h2>
             <!-- Category Tabs -->
             <div class="category-tabs">
               <button class="cat-tab" data-category="image">
@@ -593,276 +664,6 @@
                   and phone numbers instantly. Free, no signup,
                   download as PNG in one click.
                 </p>
-              </a>
-            </div>
-          </section>
-        </div>
-        <!-- End of container -->
-
-        <section
-          class="seo-content-section"
-          style="
-            padding: 4rem 1.5rem;
-            background: var(--bg-secondary);
-            border-radius: 16px;
-            margin-bottom: 2rem;
-          "
-        >
-          <div class="container" style="max-width: 800px; margin: 0 auto">
-            <div style="margin-bottom: 3rem">
-              <h2
-                style="
-                  font-size: 2rem;
-                  margin-bottom: 1.5rem;
-                  color: var(--text-primary);
-                "
-              >
-                Why Use ToolzGarden?
-              </h2>
-              <p style="margin-bottom: 1rem; line-height: 1.7">
-                In an era where data privacy is paramount, ToolzGarden was built
-                with a core philosophy: your files belong to you. We utilize
-                modern browser-based processing technologies, meaning that when
-                you use our image compressors, PDF splitters, or JSON
-                formatters, the computations happen locally on your own machine.
-                Your sensitive documents, personal photos, and proprietary code
-                snippets are never uploaded to any remote server, guaranteeing
-                absolute privacy and security.
-              </p>
-              <p style="margin-bottom: 1rem; line-height: 1.7">
-                Beyond unmatched privacy, ToolzGarden is committed to being
-                completely free with no hidden costs. We don't believe in
-                holding your converted files hostage behind paywalls,
-                subscription models, or annoying watermarks. What you see is
-                exactly what you getâ€”a comprehensive suite of
-                professional-grade tools accessible to everyone at zero cost.
-              </p>
-              <p style="margin-bottom: 1rem; line-height: 1.7">
-                Our platform offers an extensive variety of tools to cover all
-                your digital needs. From image optimization (like compressing,
-                resizing, and converting to WebP) to document manipulation (such
-                as merging PDFs or extracting pages) and developer utilities
-                (JSON minifying, Base64 encoding), ToolzGarden functions as a
-                Swiss Army knife for your daily digital workflows.
-              </p>
-              <p style="margin-bottom: 1rem; line-height: 1.7">
-                Finally, speed and ease of use are at the forefront of the
-                ToolzGarden experience. Because no files are uploaded to or
-                downloaded from a server, the processing speed is practically
-                instantaneous, limited only by your own device's hardware. The
-                intuitive, dark-mode-friendly interface ensures that you can
-                complete your tasks efficiently without navigating through
-                cluttered menus or intrusive pop-ups.
-              </p>
-            </div>
-
-            <div style="margin-bottom: 3rem">
-              <h2
-                style="
-                  font-size: 2rem;
-                  margin-bottom: 1.5rem;
-                  color: var(--text-primary);
-                "
-              >
-                How It Works
-              </h2>
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                  gap: 2rem;
-                "
-              >
-                <div style="text-align: center">
-                  <div
-                    style="
-                      height: 60px;
-                      width: 60px;
-                      background: var(--bg-primary);
-                      border-radius: 50%;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      margin: 0 auto 1rem;
-                      font-size: 1.5rem;
-                      color: var(--accent-primary);
-                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-                    "
-                  >
-                    <i class="ri-upload-cloud-2-line"></i>
-                  </div>
-                  <h4 style="margin-bottom: 0.5rem">Step 1: Upload or Paste</h4>
-                  <p style="font-size: 0.9rem">
-                    Select your file, drag and drop it, or simply paste your
-                    text directly into the tool interface.
-                  </p>
-                </div>
-                <div style="text-align: center">
-                  <div
-                    style="
-                      height: 60px;
-                      width: 60px;
-                      background: var(--bg-primary);
-                      border-radius: 50%;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      margin: 0 auto 1rem;
-                      font-size: 1.5rem;
-                      color: var(--accent-primary);
-                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-                    "
-                  >
-                    <i class="ri-settings-4-line"></i>
-                  </div>
-                  <h4 style="margin-bottom: 0.5rem">Step 2: Choose Settings</h4>
-                  <p style="font-size: 0.9rem">
-                    Configure your preferences such as compression level,
-                    dimensions, or specific format requirements.
-                  </p>
-                </div>
-                <div style="text-align: center">
-                  <div
-                    style="
-                      height: 60px;
-                      width: 60px;
-                      background: var(--bg-primary);
-                      border-radius: 50%;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      margin: 0 auto 1rem;
-                      font-size: 1.5rem;
-                      color: var(--accent-primary);
-                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-                    "
-                  >
-                    <i class="ri-download-2-line"></i>
-                  </div>
-                  <h4 style="margin-bottom: 0.5rem">Step 3: Download Result</h4>
-                  <p style="font-size: 0.9rem">
-                    Instantly download your processed file directly to your
-                    device with zero waiting time.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h2
-                style="
-                  font-size: 2rem;
-                  margin-bottom: 1.5rem;
-                  color: var(--text-primary);
-                "
-              >
-                Who Is ToolzGarden For?
-              </h2>
-              <ul
-                style="
-                  list-style-type: none;
-                  padding: 0;
-                  display: flex;
-                  flex-direction: column;
-                  gap: 1rem;
-                  font-size: 1.05rem;
-                "
-              >
-                <li>
-                  <i
-                    class="ri-checkbox-circle-fill"
-                    style="color: #16a34a; margin-right: 8px"
-                  ></i>
-                  <strong>Students</strong> who need to rapidly compress images
-                  for school assignments or presentations without hitting file
-                  size limits.
-                </li>
-                <li>
-                  <i
-                    class="ri-checkbox-circle-fill"
-                    style="color: #16a34a; margin-right: 8px"
-                  ></i>
-                  <strong>Freelancers & Professionals</strong> who regularly
-                  work with PDF documents, needing to merge invoices or split
-                  contracts securely.
-                </li>
-                <li>
-                  <i
-                    class="ri-checkbox-circle-fill"
-                    style="color: #16a34a; margin-right: 8px"
-                  ></i>
-                  <strong>Developers & Programmers</strong> who require quick
-                  access to utilities like JSON formatting, minifying, and
-                  Base64 encoding.
-                </li>
-                <li>
-                  <i
-                    class="ri-checkbox-circle-fill"
-                    style="color: #16a34a; margin-right: 8px"
-                  ></i>
-                  <strong>Anyone</strong> who needs fast, reliable, and secure
-                  file conversions without the hassle of downloading and
-                  installing bloated desktop software.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-    <!-- End of full-page-wrapper -->
-
-    <footer>
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                margin-bottom: 12px;
-              "
-            >
-              <img src="./Images/logo.png" alt="ToolzGarden Logo" loading="lazy" style="height: 40px; width: 40px; object-fit: contain" />
-              <span style="font-weight: 700; font-size: 1.3rem; color: #2563eb"
-                >ToolzGarden</span
-              >
-            </div>
-            <p>
-              Free online tools for everyone. Professional grade,
-              privacy-focused, and 100% free.
-            </p>
-          </div>
-          <div class="footer-links">
-            <h4>Image Tools</h4>
-            <ul>
-              <li><a href="tools/image-compressor.html">Compress Image</a></li>
-              <li><a href="tools/image-resizer.html">Resize Image</a></li>
-              <li><a href="tools/image-cropper.html">Crop Image</a></li>
-              <li><a href="tools/image-to-png.html">Image to PNG</a></li>
-              <li><a href="tools/image-to-jpg.html">Image to JPG</a></li>
-            </ul>
-          </div>
-          <div class="footer-links">
-            <h4>Other Tools</h4>
-            <ul>
-              <li><a href="tools/pdf-compress.html">PDF Tools</a></li>
-              <li><a href="tools/word-counter.html">Text Tools</a></li>
-              <li><a href="tools/json-formatter.html">File Tools</a></li>
-              <li><a href="tools/bulk-downloader.html">Bulk Tools</a></li>
-            </ul>
-          </div>
-          <div class="footer-links">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="contact.html">Contact Us</a></li>
-              <li><a href="privacy.html">Privacy Policy</a></li>
-              <li><a href="terms.html">Terms of Service</a></li>
-            </ul>
-          </div>
-        </div>
         <div class="footer-bottom">
           <p>
             &copy; 2025 ToolzGarden. All rights reserved. Processed in-browser.
