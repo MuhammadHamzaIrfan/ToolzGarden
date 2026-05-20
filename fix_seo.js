@@ -301,8 +301,23 @@ Object.keys(toolData).forEach(filename => {
   <link rel="icon" type="image/png" sizes="32x32" href="../Favicon-Images/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="../Favicon-Images/favicon-16x16.png" />
 
-  <!-- Styles -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <!-- DNS Prefetch & Preconnect for High-Speed Asset Loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+  <!-- Asynchronous Non-blocking Google Fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+
+  <!-- Asynchronous Non-blocking Remix Icon stylesheet -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"></noscript>
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="../style.css" />
 
   <!-- JSON-LD WebApplication Schema -->

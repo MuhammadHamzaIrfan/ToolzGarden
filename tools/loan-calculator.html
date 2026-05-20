@@ -11,7 +11,24 @@
 <meta property="og:url" content="https://toolzgarden.com/tools/loan-calculator.html"/>
 <meta property="og:type" content="website"/>
 <link rel="icon" type="image/png" href="../Images/logo.png"/>
-<link rel="stylesheet" href="../style.css"/>
+  <!-- DNS Prefetch & Preconnect for High-Speed Asset Loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+  <!-- Asynchronous Non-blocking Google Fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+
+  <!-- Asynchronous Non-blocking Remix Icon stylesheet -->
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"></noscript>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="../style.css" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Loan & Installment Calculator","url":"https://toolzgarden.com/tools/loan-calculator.html","applicationCategory":"FinanceApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free browser-based loan EMI calculator. Calculate monthly installment, total payment and interest for any loan."}</script>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is the monthly loan installment calculated?","acceptedAnswer":{"@type":"Answer","text":"EMI = [P x r x (1+r)^n] / [(1+r)^n - 1], where P is principal, r is monthly interest rate (annual/12/100), and n is number of months."}},{"@type":"Question","name":"Is this loan calculator free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free. No signup, no account required. The calculator runs entirely in your browser."}},{"@type":"Question","name":"Does a longer loan term reduce monthly payment?","acceptedAnswer":{"@type":"Answer","text":"Yes, a longer term lowers the monthly payment but increases total interest paid significantly."}},{"@type":"Question","name":"Can I use this for a mortgage or auto loan?","acceptedAnswer":{"@type":"Answer","text":"Yes. This calculator works for any fixed-rate loan including personal loans, auto loans, mortgages, and education loans."}}]}</script>
@@ -261,8 +278,8 @@ ToolzGarden
 <div class="footer-bottom"><p>&copy; 2025 ToolzGarden. All rights reserved. Processed in-browser.</p></div>
 </div>
 </footer>
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"></noscript>
+
+<noscript></noscript>
 <script src="../script.js"></script>
 <script>
 (function(){
