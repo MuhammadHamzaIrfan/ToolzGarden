@@ -80,6 +80,16 @@ function initHamburgerMenu() {
     }
 
     if (hamburger && navLinks) {
+        // Auto-inject close button on pages where it is missing in HTML
+        if (!document.getElementById('nav-close-btn')) {
+            const autoCloseBtn = document.createElement('button');
+            autoCloseBtn.id = 'nav-close-btn';
+            autoCloseBtn.className = 'nav-close-btn';
+            autoCloseBtn.setAttribute('aria-label', 'Close Menu');
+            autoCloseBtn.innerHTML = '&times;';
+            navLinks.insertBefore(autoCloseBtn, navLinks.firstChild);
+        }
+
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
             if (navLinks.classList.contains('open')) {

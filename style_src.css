@@ -1169,24 +1169,27 @@ html, body {
   .nav-links {
     display: none;
     position: fixed !important;
-    top: 0 !important;
+    top: 4rem !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    height: 100vh !important;
+    height: auto !important;
+    max-height: calc(100vh - 4rem) !important;
     flex-direction: column !important;
     background: var(--bg-primary) !important;
     z-index: 9999 !important;
-    padding-top: 5rem !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 1rem !important;
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
     overflow-y: auto !important;
-    box-shadow: none !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2) !important;
+    border-bottom: 1px solid var(--border-color) !important;
     transform: none !important;
     margin: 0 !important;
     list-style: none !important;
     gap: 0 !important;
-    border: none !important;
+    border-top: none !important;
   }
 
   .nav-links.open {
@@ -1504,23 +1507,7 @@ html, body {
 
 /* Mobile Nav Close and Lock Styles */
 .nav-close-btn {
-  position: absolute !important;
-  top: 1rem !important;
-  right: 1rem !important;
-  background: none !important;
-  border: none !important;
-  color: var(--text-primary) !important;
-  font-size: 1.5rem !important;
-  cursor: pointer !important;
-  padding: 0.5rem !important;
-  z-index: 10000 !important;
   display: none !important;
-}
-
-@media (max-width: 768px) {
-  .nav-close-btn {
-    display: block !important;
-  }
 }
 
 body.nav-open {
@@ -1536,24 +1523,27 @@ body.nav-open {
   .nav-links {
     display: none;
     position: fixed !important;
-    top: 0 !important;
+    top: 4rem !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    height: 100vh !important;
+    height: auto !important;
+    max-height: calc(100vh - 4rem) !important;
     flex-direction: column !important;
     background: var(--bg-primary) !important;
     z-index: 9999 !important;
-    padding-top: 5rem !important;
+    padding-top: 0.75rem !important;
+    padding-bottom: 1rem !important;
     padding-left: 1.5rem !important;
     padding-right: 1.5rem !important;
     overflow-y: auto !important;
-    box-shadow: none !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2) !important;
+    border-bottom: 1px solid var(--border-color) !important;
     transform: none !important;
     margin: 0 !important;
     list-style: none !important;
     gap: 0 !important;
-    border: none !important;
+    border-top: none !important;
   }
   
   .nav-links.open {
