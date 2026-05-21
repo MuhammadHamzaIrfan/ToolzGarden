@@ -1132,15 +1132,15 @@ html, body {
   }
 
   nav {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0 1rem;
-    height: auto;
-    min-height: 4rem;
-    width: 100%;
+    position: relative !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    padding: 0 1rem !important;
+    height: auto !important;
+    min-height: 4rem !important;
+    width: 100% !important;
   }
 
   .logo {
@@ -1168,24 +1168,29 @@ html, body {
   /* Dropdown Menu */
   .nav-links {
     display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    width: 100%;
-    transform: none;
-    flex-direction: column;
-    background: var(--bg-primary);
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-    z-index: 999;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    padding: 0;
-    margin: 0;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    flex-direction: column !important;
+    background: var(--bg-primary) !important;
+    z-index: 9999 !important;
+    padding-top: 5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    overflow-y: auto !important;
+    box-shadow: none !important;
+    transform: none !important;
+    margin: 0 !important;
+    list-style: none !important;
+    gap: 0 !important;
+    border: none !important;
   }
 
   .nav-links.open {
-    display: flex;
+    display: flex !important;
   }
 
   .nav-links li {
@@ -1194,17 +1199,19 @@ html, body {
   }
 
   .nav-links a {
-    display: block;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    font-size: 1rem;
-    color: var(--text-primary);
-    text-align: left;
-    width: 100%;
+    display: block !important;
+    padding: 1.25rem 0 !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    color: var(--text-primary) !important;
+    text-align: left !important;
+    width: 100% !important;
+    text-decoration: none !important;
   }
 
   .nav-links li:last-child a {
-    border-bottom: none;
+    border-bottom: none !important;
   }
 
   /* Hero Section */
@@ -1492,5 +1499,66 @@ html, body {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mobile Nav Close and Lock Styles */
+.nav-close-btn {
+  position: absolute !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  background: none !important;
+  border: none !important;
+  color: var(--text-primary) !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+  padding: 0.5rem !important;
+  z-index: 10000 !important;
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .nav-close-btn {
+    display: block !important;
+  }
+}
+
+body.nav-open {
+  overflow: hidden !important;
+}
+
+/* Mobile Navigation Clipping Fix & Robust Styles */
+@media (max-width: 768px) {
+  header, nav, header .container, nav.container {
+    overflow: visible !important;
+  }
+  
+  .nav-links {
+    display: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    flex-direction: column !important;
+    background: var(--bg-primary) !important;
+    z-index: 9999 !important;
+    padding-top: 5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    overflow-y: auto !important;
+    box-shadow: none !important;
+    transform: none !important;
+    margin: 0 !important;
+    list-style: none !important;
+    gap: 0 !important;
+    border: none !important;
+  }
+  
+  .nav-links.open {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }

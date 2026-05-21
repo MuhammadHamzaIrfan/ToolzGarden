@@ -1,4 +1,4 @@
-﻿/* 
+/* 
   ToolzGarden - Global Scripts
   Shared utilities for dark mode, navigation, and SEO optimization.
 */
@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAndHeader();
     initHamburgerMenu();
     initUtilityListeners();
+
+    // Clean up will-change on above-the-fold animated elements after animations finish
+    setTimeout(() => {
+        document.querySelectorAll('.hero-animate').forEach(el => {
+            el.style.willChange = 'auto';
+        });
+    }, 2000);
 });
 
 /**
@@ -54,26 +61,61 @@ function initScrollAndHeader() {
 function initHamburgerMenu() {
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
+    const body = document.body;
+
+    function openMenu() {
+        navLinks.classList.add('open');
+        hamburger.classList.add('active');
+        body.classList.add('nav-open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        hamburger.setAttribute('aria-label', 'Close Menu');
+    }
+
+    function closeMenu() {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+        body.classList.remove('nav-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open Menu');
+    }
 
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('open');
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (navLinks.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
 
-        // Close menu when link is clicked
+        const closeBtn = document.getElementById('nav-close-btn') || document.querySelector('.nav-close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeMenu();
+            });
+        }
+
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('open');
+                closeMenu();
             });
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('open');
+            if (
+                navLinks.classList.contains('open') &&
+                !navLinks.contains(e.target) &&
+                !hamburger.contains(e.target)
+            ) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+                closeMenu();
             }
         });
     }
@@ -120,11 +162,13 @@ function initScrollReveal() {
     });
 
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
+        requestAnimationFrame(() => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
         });
     }, {
         threshold: 0.05,
@@ -170,9 +214,12 @@ function updateThemeIcon(theme) {
 function initNavigation() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav-links a').forEach(link => {
-        const linkPage = link.getAttribute('href').split('/').pop();
-        if (linkPage === currentPage) {
-            link.classList.add('active');
+        const href = link.getAttribute('href');
+        if (href) {
+            const linkPage = href.split('/').pop();
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+            }
         }
     });
 }
@@ -214,31 +261,33 @@ function initCategories() {
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-
             const category = tab.getAttribute('data-category');
             const isComingSoon = tab.classList.contains('coming-soon');
 
-            if (initialPanel) initialPanel.style.display = 'none';
+            requestAnimationFrame(() => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
 
-            if (isComingSoon) {
-                if (toolGrid) toolGrid.style.display = 'none';
-                if (comingSoonPanel) comingSoonPanel.style.display = 'flex';
-            } else {
-                if (comingSoonPanel) comingSoonPanel.style.display = 'none';
-                if (toolGrid) toolGrid.style.display = 'grid';
+                if (initialPanel) initialPanel.style.display = 'none';
 
-                toolCards.forEach(card => {
-                    if (card.getAttribute('data-category') === category) {
-                        card.style.display = 'flex';
-                        card.classList.remove('visible');
-                        setTimeout(() => card.classList.add('visible'), 30);
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            }
+                if (isComingSoon) {
+                    if (toolGrid) toolGrid.style.display = 'none';
+                    if (comingSoonPanel) comingSoonPanel.style.display = 'flex';
+                } else {
+                    if (comingSoonPanel) comingSoonPanel.style.display = 'none';
+                    if (toolGrid) toolGrid.style.display = 'grid';
+
+                    toolCards.forEach(card => {
+                        if (card.getAttribute('data-category') === category) {
+                            card.style.display = 'flex';
+                            card.classList.remove('visible');
+                            setTimeout(() => card.classList.add('visible'), 30);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+            });
         });
     });
 
