@@ -874,7 +874,8 @@ header {
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  z-index: 200;
+  z-index: 10001;
+  position: relative;
 }
 
 .hamburger span {
@@ -1029,6 +1030,11 @@ html, body {
     position: sticky !important;
     top: 0 !important;
     z-index: 1000 !important;
+    /* CRITICAL: backdrop-filter creates a stacking context that traps
+       position:fixed children (the mobile nav menu). Remove it on mobile. */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    overflow: visible !important;
   }
 
   /* Safe top spacing after sticky navbar to ensure content starts cleanly below */
@@ -1162,7 +1168,11 @@ html, body {
   }
 
   .hamburger {
-    display: flex;
+    display: flex !important;
+    z-index: 10001 !important;
+    position: relative !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
   }
 
   /* Dropdown Menu */
@@ -1516,7 +1526,12 @@ body.nav-open {
 
 /* Mobile Navigation Clipping Fix & Robust Styles */
 @media (max-width: 768px) {
-  header, nav, header .container, nav.container {
+  header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    overflow: visible !important;
+  }
+  nav, header .container, nav.container {
     overflow: visible !important;
   }
   
